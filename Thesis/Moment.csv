@@ -1,0 +1,117 @@
+,Unnamed: 0,QId,QPostTypeId,QAcceptedAnswerId,QOwnerUserId,QAnswerCount,QCommentCount,QFavoriteCount,QCommunityOwnedDate,QCreationDate,QScore,QViewCount,QTitle,QBody,QTags,QStackTrace,Webpack,React,Express,Vue,Jest,Moment
+20551,20551,51276406,1,51387489,6940117,1.0,0.0,0.0,0.0,2018-07-11T02:33:22.443,5.0,10552.0,"Vue modules, moment-timezone - How to load moment-timezone correctly and how to use the 2012-2022 data","<p>I'm using the webpack template from vue-cli for my Vue project and I have both moment and moment-timezone installed in npm.</p>
+
+<p>In my single file components, I've been able to get moment to work with moment-timezone by including the following import lines:</p>
+
+<pre><code>import moment from 'moment'
+import moment_timezone from 'moment-timezone'
+</code></pre>
+
+<p>The moment_timezone object isn't ever used, but it seems to need to be there for moment.tz functions to work.</p>
+
+<p>My questions are:</p>
+
+<ol>
+<li>Is this the proper way to load moment and moment-timezone in my setup?</li>
+<li>How do I load only the data from moment-timezone-with-data-2012-2022.min.js? I see it in the moment-timezone package's builds directory, but I'm unclear how to specify that that is the data that I would like to use.</li>
+</ol>
+",<npm><webpack><vue.js><momentjs><moment-timezone>,0.0,1,0,0,1,0,1
+22786,22463,53044245,1,0,10416894,2.0,1.0,0.0,0.0,2018-10-29T11:11:23.293,4.0,6029.0,How to resolve moment-timezone import issue with meteor npm,"<p>I am trying to use the moment-timezone npm package in my meteor app to no avail. If I use the atmosphere package, everything runs just fine. However I would like to get the npm package running as the atmosphere one is no longer being maintained. I have removed the atmosphere package completely from the app before trying to get it running via npm.</p>
+
+<p>When I run <code>meteor npm list --tree</code>, towards the bottom the moment-timezone package and its dependency appear:</p>
+
+<pre><code>└─┬ moment-timezone@0.5.23
+  └── moment@2.22.2
+</code></pre>
+
+<p>and <code>meteor npm install</code> gives:</p>
+
+<pre><code>audited 107 packages in 1.913s
+found 0 vulnerabilities
+</code></pre>
+
+<p>In the file where I'm using moment-timezone I have</p>
+
+<pre><code>import moment from 'moment-timezone';
+</code></pre>
+
+<p>But the javascript console shows it is failing on the import of both moment and moment-timezone:</p>
+
+<pre><code>SyntaxError: Unexpected identifier 'moment'. import call expects
+exactly one argument.
+</code></pre>
+
+<p>Following the console error, these two lines in two separate files are highlighted in red</p>
+
+<pre><code>import moment from 'moment';
+import moment from 'moment-timezone';
+</code></pre>
+
+<p>So it looks to me that it isn't able to resolve the packages, but it appears as if they have been installed correctly and meteor npm install has worked fine.</p>
+
+<p>The app is meteor 1.8</p>
+
+<p>I'm out of ideas - any help would be greatly appreciated!</p>
+
+<p>Cheers</p>
+",<javascript><meteor><npm><momentjs><moment-timezone>,0.0,0,0,0,0,0,1
+26005,25682,56074707,1,56090944,475727,1.0,4.0,0.0,0.0,2019-05-10T09:31:43.667,5.0,1700.0,How to load momentjs timezones data asynchronously in Angular,"<p>I have just installed the package:</p>
+
+<pre><code>npm install moment-timezone --save
+</code></pre>
+
+<p>And in angular component I use it like this:</p>
+
+<pre><code>import * as moment from 'moment-timezone';
+moment().tz('America/New York');
+</code></pre>
+
+<p>I guess this adds all timezone data (900+kB) to the vendors bundle and slows down application startup.</p>
+
+<p>How to load it asynchronously, on demand only?</p>
+
+<p>I would really like to use NPM solution, so that the database get's updated automatically when updating npm packages. Nobody would ever remember to update the timezones database manually.</p>
+
+<h2>Edit:</h2>
+
+<p>@Dimanoid's answer shows how to import moment-timezone from npm without data:</p>
+
+<pre><code>import * as moment from 'moment-timezone/moment-timezone';
+</code></pre>
+
+<p>And here's how you can include the data as lazy loaded asset:</p>
+
+<ol>
+<li><p>Modify angular.json -> projects -> yourprojects -> architect -> build -> options:</p>
+
+<pre><code>""assets"": [
+    ""src/favicon.ico"",
+    ""src/assets/i18n"",
+    {   //add this
+        ""glob"": ""latest.json"",
+        ""input"": ""node_modules/moment-timezone/data/packed"",
+        ""output"": ""assets/moment-timezone""
+    }
+]
+</code></pre></li>
+<li><p>request it on demand from assets folder:</p>
+
+<pre><code>import * as moment from 'moment-timezone/moment-timezone';
+import { PlatformLocation } from '@angular/common';
+
+export class MyComponent implements OnInit {
+
+  constructor(private platformLocation: PlatformLocation) {
+  }
+  ngOnInit(){
+     //you can use @angular/http instead of fetch
+     fetch(this.platformLocation.getBaseHrefFromDOM() +  'assets/moment-timezone/latest.json')
+      .then(time =&gt; time.json())
+      .then(timeZoneData =&gt; {
+        moment.tz.load(timeZoneData);
+      });
+  }
+}
+</code></pre></li>
+</ol>
+",<angular><npm><ecmascript-6><momentjs><moment-timezone>,0.0,0,0,0,0,0,1

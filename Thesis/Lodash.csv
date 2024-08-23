@@ -1,0 +1,3109 @@
+,Unnamed: 0,QId,QPostTypeId,QAcceptedAnswerId,QOwnerUserId,QAnswerCount,QCommentCount,QFavoriteCount,QCommunityOwnedDate,QCreationDate,QScore,QViewCount,QTitle,QBody,QTags,QStackTrace,Webpack,React,Express,Vue,Jest,Moment,Lodash
+3706,3706,29554526,1,29554727,2084798,1.0,2.0,0.0,0.0,2015-04-10T06:11:33.120,0.0,310.0,Lodash forEach function won't line break yeoman generator integration,"<p>in my yeoman generator's index.js file I have this code snippet</p>
+
+<pre><code>this.fs.copyTpl(
+    this.templatePath('/index2.html'),
+    this.destinationPath('app/index2.html'), {
+        title: [this.templatedata.test1, this.applicationName],
+        h1: this.applicationName
+    }
+);
+</code></pre>
+
+<p>I am trying to run this lodash forEach statement in my html file and it won't line break no matter what I try. </p>
+
+<pre><code>&lt;% _.forEach(title, function(title) { %&gt;&lt;li&gt;&lt;%- title %&gt;&lt;/li&gt;\n&lt;% }); %&gt;
+</code></pre>
+
+<p>The result is: </p>
+
+<pre><code>&lt;li&gt;Star Wars!&lt;/li&gt;\n&lt;li&gt;Foundation5Application&lt;/li&gt;\n
+</code></pre>
+
+<p>What I expect is</p>
+
+<pre><code>&lt;li&gt;Star Wars!&lt;/li&gt;
+&lt;li&gt;Foundation5Application&lt;/li&gt;
+</code></pre>
+
+<p>Is there anything I can do to correct this forEach statement? </p>
+",<node.js><npm><yeoman><lodash><yeoman-generator>,0.0,0,0,0,0,0,0,1
+4084,4084,30638032,1,30655493,305019,1.0,0.0,0.0,0.0,2015-06-04T07:53:08.580,6.0,1684.0,how to integrate a lodash custom build into a project,"<p>lodash supports <a href=""https://lodash.com/custom-builds"" rel=""noreferrer"">custom builds</a> with only a subset of the functionality / size. Creating a custom build is a breeze with <code>lodash-cli</code>.</p>
+
+<p>What's the recommended way to take this custom build and integrate it into the project? (using npm / browserify). </p>
+
+<p>Do I create a custom build command that creates the custom build and places it somewhere? (where?)</p>
+
+<p>Is there a canonical way to specify the dependency and integrate into the project?</p>
+",<npm><browserify><lodash><package.json>,0.0,0,0,0,0,0,0,1
+4160,4160,30808727,1,30816330,116395,1.0,0.0,0.0,0.0,2015-06-12T17:14:43.477,4.0,710.0,lodash npm distribution in browser,"<p>I'm using lodash in my tests, Not using webpack or browserify (don't need to).</p>
+
+<p>I found that the default npm build differs from what's in bower. I could of course use bower version, but I'm curious if I can use npm's instead (it's already there for Gulp).</p>
+
+<p>For bower I could just add this line to karma.conf:</p>
+
+<pre><code>bower_components/lodash/lodash.js
+</code></pre>
+
+<p>but in default npm distro there's no lodash.js. Of course I can always build whatever version I want using lodash cli. But maybe there's even easier way, say maybe I need to add more than just one file from <code>node_modules/lodash</code>?</p>
+",<npm><karma-runner><bower><lodash>,0.0,0,0,0,0,0,0,1
+4499,4499,31569928,1,32534417,2455857,2.0,1.0,0.0,0.0,2015-07-22T17:21:47.477,0.0,1668.0,Where is lodash.js after install via npm?,"<p>I ran npm insall lodash but I can't find the lodash.js file to include in the browser.  I realize I can just download lodash.js but I would prefer to use npm if possible.</p>
+",<javascript><npm><lodash>,0.0,0,0,0,0,0,0,1
+4553,4553,31678426,1,31678546,2961027,1.0,0.0,0.0,0.0,2015-07-28T13:56:03.757,0.0,1029.0,nodejs - npm install dependency if module doesn't exist in parent,"<p>I have a use case where my project has dependency on Lodash, and then there are other node_modules which further have dependency on Lodash.</p>
+
+<p>When I do 'npm install' on my project. Lodash gets installed two times,
+one for my 'project/node_modules/lodash' and second for my dependency 'project/node_modules/dependency-1/node_modules/lodash'.</p>
+
+<p>I am thinking if it is possible to have 'lodash' dependency installed in my project's root only? When that happens, my dependency will try to load parent's node_module/lodash instead of its own. </p>
+
+<p>This should save me some Module loading in memory.</p>
+
+<p>Sine Module caching is based on FilePath, I don't want to keep two instances of Lodash loaded in memory, one for parent directory and one for dependency itself.</p>
+",<node.js><npm><lodash>,0.0,0,0,0,0,0,0,1
+4831,4831,32407862,1,0,5302482,0.0,3.0,0.0,0.0,2015-09-04T23:21:36.797,2.0,468.0,NPM installs older version & doesn't fully installs recursive dependencies,"<p>In a project I inherited, the packages.json looks roughly like this:</p>
+
+<pre><code>{
+  ""name"": ""..."",
+  ""version"": ""..."",
+  ""description"": """",
+  ""author"": ""..."",
+  ""license"": ""ISC"",
+  ""dependencies"": {
+    ""lodash"": ""^3.10.1"",
+    ""assemble"": ""^0.4.37"",
+    ""cheerio"": ""^0.16.0"",
+    ""grunt"": ""^0.4.4"",
+    ""grunt-build-control"": ""^0.1.3"",
+
+  },
+  ""keywords"": [
+    ""handlebars-helper-md"",
+    ""handlebars-helper-rel""
+  ]
+}
+</code></pre>
+
+<p>When I first got it, <code>lodash</code> was <code>~2.4.1</code> and I'm trying to update it to <code>3.10.1</code> (as shown above). However, <code>npm</code> continues to install <code>2.4.1</code> at the top-level (Despite the <code>package.json</code> requesting the newer version) and it does not install the requested versions <code>2.4.1</code> or <code>2.4.2</code> in some of the dependencies (like <code>assemble</code> and <code>cheerio</code>). Thus when I <code>npm install lodash@3.10.1</code> it complains about unmet dependencies. </p>
+
+<p>I've tried removing <code>node_modules</code> and <code>npm clear cache</code> and <code>rm -rf $HOME/.npm</code> in different orders and combinations with no change.</p>
+
+<p>How do I get <code>lodash@3.10.1</code> to install at the top-level and the requested version of <code>lodash</code> in all the dependencies (and not have the dependencies use the top-level copy of <code>lodash</code> -- which I thought was the normal way for <code>npm</code> to work)? </p>
+
+<p>Preferably a solution would not require updating all the dependencies to new versions (assuming that is even possible). That could be a solution, but that would require a lot more validation to make sure nothing broke. </p>
+",<json><node.js><dependencies><npm><lodash>,0.0,0,0,0,0,0,0,1
+4870,4870,32497425,1,0,2178112,1.0,0.0,0.0,0.0,2015-09-10T09:00:40.377,1.0,417.0,How does lodash's modular build work? Or any commonjs modular build work?,"<p>It's my understanding that I can </p>
+
+<p><code>npm install lodash</code></p>
+
+<p>but then call</p>
+
+<p><code>require('lodash/collections/each')</code></p>
+
+<p>and only get that single function without the overhead of loading all of lodash.</p>
+
+<p>How does that work? I can't quite figure it out looking at lodash's package.json. </p>
+",<npm><lodash><commonjs>,0.0,0,0,0,0,0,0,1
+5483,5483,33625209,1,33644772,3811693,2.0,8.0,0.0,0.0,2015-11-10T07:55:55.350,1.0,639.0,How to pass npm package lodash as a DI in angular js for angular-google-maps using browserify?,"<p>I am using <code>npm</code> as a package manager for my angular application and <code>Browserify</code> to include the libraries.
+I am using the angular-google-maps package : <a href=""http://angular-ui.github.io/angular-google-maps"" rel=""nofollow"">http://angular-ui.github.io/angular-google-maps</a></p>
+
+<p>I am getting :</p>
+
+<pre><code>ReferenceError: _ is not defined
+    at o (vendor.js:8)
+    at Object.load (vendor.js:8)
+    at $get (vendor.js:8)
+    at Object.r [as invoke] (vendor.js:1)
+    at vendor.js:1
+    at i (vendor.js:1)
+    at Object.r [as invoke] (vendor.js:1)
+    at p.instance (vendor.js:2)
+    at m (vendor.js:2)
+    at a (vendor.js:1)
+</code></pre>
+
+<p>as error.</p>
+
+<p>Now this how I include the js files :</p>
+
+<pre><code>require('lodash');
+require('angular-simple-logger');
+require('angular-google-maps');
+</code></pre>
+
+<p>And this is how I inject them in the angular.module :</p>
+
+<pre><code>var requires = [
+        /*What to inject here?*/
+        'nemLogging',
+        'uiGmapgoogle-maps',
+];
+
+angular.module('mapApp',requires);
+</code></pre>
+
+<p>What to include in the  controller  :</p>
+
+<pre><code>angular.module('mapApp').controller('mapController', 
+    function($scope, uiGmapGoogleMapApi, /*What to pass here?*/){
+});
+</code></pre>
+
+<p>Please guide as to what to inject in the angular app and what parameter to pass to my angular app to get rid of this error?</p>
+",<angularjs><npm><browserify><lodash><angular-google-maps>,1.0,0,0,0,0,0,0,1
+5692,5692,33974189,1,33974237,3475992,2.0,1.0,0.0,0.0,2015-11-28T17:23:12.547,20.0,22148.0,npm WARN deprecated lodash@2.4.2: lodash@<3.0.0 is no longer maintained,"<p>I'm getting an error when using npm to install grunt-cli globally. It's related to lodash:</p>
+
+<pre><code>npm WARN deprecated lodash@2.4.2:
+lodash@&lt;3.0.0 is no longer maintained. Upgrade to lodash@^3.0.0.
+</code></pre>
+
+<hr>
+
+<p>Here are the versions i'm using, and the list of global packages installed.</p>
+
+<p><strong>node:</strong> v5.1.0</p>
+
+<p><strong>npm:</strong> v3.5.0</p>
+
+<p><strong>npm list -g:</strong> <a href=""http://pastebin.com/NuJU3bY0"">http://pastebin.com/NuJU3bY0</a></p>
+
+<hr>
+
+<p>I've attempted to install the latest version of lodash (v3.10.1) globally, but I still got the error again after uninstalling my grunt-cli global package, and then re-installing my global package. Below is the installation log:</p>
+
+<pre><code>sudo npm install lodash -g
+/usr/local/lib
+└── lodash@3.10.1
+
+sudo npm install grunt-cli -g
+npm WARN deprecated lodash@2.4.2: 
+lodash@&lt;3.0.0 is no longer maintained. Upgrade to lodash@^3.0.0.
+
+/usr/local/bin/grunt -&gt; /usr/local/lib/node_modules/grunt-cli/bin/grunt
+/usr/local/lib
+└─┬ grunt-cli@0.1.13
+  ├─┬ findup-sync@0.1.3
+  │ ├─┬ glob@3.2.11
+  │ │ ├── inherits@2.0.1
+  │ │ └─┬ minimatch@0.3.0
+  │ │   ├── lru-cache@2.7.3
+  │ │   └── sigmund@1.0.1
+  │ └── lodash@2.4.2
+  ├─┬ nopt@1.0.10
+  │ └── abbrev@1.0.7
+  └── resolve@0.3.1
+
+npm WARN In grunt-cli@0.1.13 replacing bundled version of nopt with nopt@1.0.10
+npm WARN In grunt-cli@0.1.13 replacing bundled version of findup-sync with findup-sync@0.1.3
+npm WARN In grunt-cli@0.1.13 replacing bundled version of resolve with resolve@0.3.1
+npm WARN In grunt-cli@0.1.13 replacing bundled version of lodash with lodash@2.4.2
+npm WARN In grunt-cli@0.1.13 replacing bundled version of glob with glob@3.2.11
+npm WARN In grunt-cli@0.1.13 replacing bundled version of inherits with inherits@2.0.1
+npm WARN In grunt-cli@0.1.13 replacing bundled version of minimatch with minimatch@0.3.0
+npm WARN In grunt-cli@0.1.13 replacing bundled version of sigmund with sigmund@1.0.1
+npm WARN In grunt-cli@0.1.13 replacing bundled version of lru-cache with lru-cache@2.7.3
+npm WARN In grunt-cli@0.1.13 replacing bundled version of abbrev with abbrev@1.0.7
+</code></pre>
+
+<hr>
+
+<p>Can anyone tell me what i'm doing wrong, or how to fix this error and get a clean install of grunt-cli?</p>
+",<node.js><gruntjs><npm><lodash><grunt-cli>,0.0,0,0,0,0,0,0,1
+5735,5735,34035682,1,34035779,3858422,2.0,0.0,0.0,0.0,2015-12-02T05:41:12.130,11.0,33943.0,How to update lodash to the latest version,"<p>I am using npm on the debian Linux flavor to install Jpm. But am getting errors about the versions of lodash installed (as follows)</p>
+
+<pre><code>test@localhost:~# npm install jpm --global
+npm WARN deprecated lodash@2.4.1: lodash@&lt;3.0.0 is no longer maintained. Upgrade to lodash@^3.0.0.
+</code></pre>
+
+<p>I have referred to few of the following links but am still unable to update the versions but still the issue persists.</p>
+
+<p><a href=""https://github.com/lodash/lodash/tree/3.10.1-npm"">https://github.com/lodash/lodash/tree/3.10.1-npm</a></p>
+
+<p><a href=""https://github.com/npm/npm/issues/10573"">https://github.com/npm/npm/issues/10573</a></p>
+
+<p>Kindly suggest a solution to update the lodash version.</p>
+",<javascript><node.js><npm><lodash><jpm>,0.0,0,0,0,0,0,0,1
+6286,6286,34897805,1,0,2822744,2.0,1.0,0.0,0.0,2016-01-20T10:43:59.357,3.0,1058.0,'undefined' is not a function (evaluating '_.contains) karma test,"<p>When running my karma tests, I get this error on the jenkins build. So to make it clear, this works fine locally and all my tests pass, but when I run the exact same code on the jenkins box, I get the error: </p>
+
+<pre><code>PhantomJS 1.9.8 (Linux 0.0.0) VisitDataSpec #emailExists should return true if email is already FAILED
+    TypeError: 'undefined' is not a function (evaluating '_.contains(visitEmails,email)')
+        at /home/server/jenkins/workspace/Reception UI Build/src/app/model/VisitData.js:9
+        at /home/server/jenkins/workspace/Reception UI Build/test/app/model/VisitData.spec.js:208
+</code></pre>
+
+<p>I'm smelling buggy version of phantomjs. The version on the server is 1.9.0. I downgraded my version locally to the same version to try to reproduce the problem locally and that doesn't happen.</p>
+
+<p>I already tried to include both underscore and lodash and none of the libraries work.</p>
+
+<p>I get the same error in a test where Restangular tries to use underscore as well:</p>
+
+<pre><code>PhantomJS 1.9.8 (Linux 0.0.0) EmailVisitControllerSpec #signIn should call VisitService to add a new service with scope data FAILED
+    TypeError: 'undefined' is not a function (evaluating '_.contains(safeMethods, operation.toLowerCase())')
+        at /home/server/jenkins/workspace/Reception UI Build/bower_components/restangular/dist/restangular.js:21
+        at elemFunction (/home/server/jenkins/workspace/Reception UI Build/bower_components/restangular/dist/restangular.js:1217)
+        at wrapper (/home/server/jenkins/workspace/Reception UI Build/bower_components/lodash/lodash.js:3949)
+        at postFunction (/home/server/jenkins/workspace/Reception UI Build/bower_components/restangular/dist/restangular.js:1246)
+        at apply (/home/server/jenkins/workspace/Reception UI Build/bower_components/lodash/lodash.js:402)
+        at wrapper (/home/server/jenkins/workspace/Reception UI Build/bower_components/lodash/lodash.js:4254)
+        at /home/server/jenkins/workspace/Reception UI Build/src/app/rest/VisitService.js:9
+        at invoke (/home/server/jenkins/workspace/Reception UI Build/node_modules/karma-sinon-chai/node_modules/sinon/pkg/sinon.js:2583)
+        at addVisit (:1)
+        at /home/server/jenkins/workspace/Reception UI Build/src/app/visits/EmailVisitController.js:9
+        at /home/server/jenkins/workspace/Reception UI Build/test/app/visits/EmailVisitController.spec.js:91
+</code></pre>
+
+<p>Using angular 1.4.2, angular-mocks 1.4.2, mocha 2.3.4 and right now, underscore 1.8.3 or lodash 3.10.1 (tried with either).</p>
+
+<p>By the way, this may be relevant: I'm having four of these when building on Jenkins:</p>
+
+<pre><code>npm WARN install Couldn't install optional dependency: Unsupported
+</code></pre>
+
+<p>Maybe it's not resolving some of the dependencies, but unfortunately I can't see which ones. Using npm 3.3.2.</p>
+
+<p>Does anyone have any thoughts about what I'm missing here? Any known incompatible versions?</p>
+",<angularjs><npm><phantomjs><underscore.js><lodash>,1.0,0,0,0,0,0,0,1
+6448,6448,35160871,1,0,4554305,1.0,8.0,0.0,0.0,2016-02-02T18:13:04.883,9.0,13808.0,node.js Error: Cannot find module 'lodash.assign',"<p>I have installed node.js in windows 64bit and i run into this when runnig gulp on local project.</p>
+
+<p>another note: npm install went good with packages.json</p>
+
+<pre><code>Error: Cannot find module 'lodash.assign'
+        at Function.Module._resolveFilename (module.js:326:15)
+        at Function.Module._load (module.js:277:25)
+        at Module.require (module.js:354:17)
+        at require (internal/module.js:12:17)
+        at Object.&lt;anonymous&gt; (D:\NBCredit_FRTE\RelyToolsSln\RelyTools.Web\node_modules\gulp-jshint\node_modules\lodash.clone\node_modules\lodash._baseclone\index.js:9:14)
+        at Module._compile (module.js:410:26)
+        at Object.Module._extensions..js (module.js:417:10)
+        at Module.load (module.js:344:32)
+        at Function.Module._load (module.js:301:12)
+        at Module.require (module.js:354:17)
+        at require (internal/module.js:12:17)
+     PS D:\NBCredit_FRTE\RelyToolsSln\RelyTools.Web&gt;
+</code></pre>
+
+<p>this is my package.json (i'm trying to setup this project: <a href=""https://github.com/MarlabsInc/webapi-angularjs-spa"" rel=""noreferrer"">https://github.com/MarlabsInc/webapi-angularjs-spa</a>)</p>
+
+<pre><code>{
+  ""name"": ""webapi-angularjs-spa"",
+  ""description"": ""SPA Demo app with AngularJS"",
+  ""author"": ""Shiju Varghese"",
+  ""version"": ""0.5.0"",
+  ""repository"": ""https://github.com/MarlabsInc/webapi-angularjs-spa"",
+  ""devDependencies"": {
+    ""gulp-util"": ""~2.2.14"",
+    ""gulp"": ""~3.9.0"",
+    ""gulp-concat"": ""~2.1.7"",
+    ""gulp-uglify"": ""~0.2.1"",
+    ""jshint"": ""~2.4.3"",
+    ""gulp-jshint"": ""~1.4.2"",
+    ""jshint-stylish"": ""~0.1.5"",
+    ""gulp-cssnano"": ""~2.1.0"",
+    ""gulp-rename"": ""~1.1.0"",
+    ""gulp-size"": ""~0.1.3"",
+    ""gulp-rimraf"": ""~0.2.0"",
+    ""gulp-open"": ""~0.2.8"",
+    ""gulp-connect"": ""~2.0.5""
+  },
+  ""dependencies"": {
+    ""lodash"": ""^4.2.0""
+  }
+}
+</code></pre>
+
+<p>this is my gulp file:</p>
+
+<pre><code>var gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    uglify = require('gulp-uglify'),
+    jshint = require('gulp-jshint'),
+    concat = require('gulp-concat'),
+    jshintreporter = require('jshint-stylish'),
+    minifycss = require('gulp-minify-css'),
+    size = require('gulp-size'),
+    clean = require('gulp-clean'),
+    rename = require('gulp-rename'),
+    open = require('gulp-open'),
+    connect = require('gulp-connect');
+
+var filePath = {
+    appjsminify: { src: './Scripts/app/**/*.js', dest: './Scripts/app' },
+    libsjsminify: { src: ['./Scripts/libs/**/*.js', '!*.min.js', '!/**/*.min.js'], dest: './Scripts/libs/' },
+    jshint: { src: './Scripts/app/**/*.js' },
+    minifycss: { src: ['./Content/themes/**/*.css', '!*.min.css', '!/**/*.min.css'], dest: './Content/themes/' }
+};
+
+
+
+gulp.task('app-js-minify', function () {
+    gulp.src(filePath.appjsminify.src)
+        .pipe(uglify())
+        .pipe(concat('ngscripts.js'))
+        .pipe(size())
+        .pipe(gulp.dest(filePath.appjsminify.dest));
+});
+
+gulp.task('libs-js-minify', function () {
+    /*Excludes already minified files.*/
+    gulp.src(filePath.libsjsminify.src)
+    .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest(filePath.libsjsminify.dest));
+});
+
+
+gulp.task('jshint', function () {
+    gulp.src(filePath.jshint.src)
+      .pipe(jshint())
+      .pipe(jshint.reporter(jshintreporter));
+});
+
+
+gulp.task('minify-css', function () {
+    /*Excludes already minified files.*/
+    gulp.src(filePath.minifycss.src)
+    .pipe(minifycss())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest(filePath.minifycss.dest));
+}); 
+
+gulp.task('clean', function () {
+    gulp.src(
+        [
+            'Scripts/app/ngscripts.js',
+            'Scripts/libs/angular-ui/select2.min.js',
+            'Scripts/libs/select2/select2.min.js',
+            'Scripts/libs/semantic/semantic.min.js',
+            'Scripts/libs/**/*.min.js',
+            'Scripts/libs/jquery-1.9.1.min.js',
+            '!Scripts/libs/jquery-ui-1.10.3.min.js',
+            './Content/themes/semantic/semantic.min.css',
+            './Content/themes/Site.min.css',
+            './Content/themes/select2/select2.min.css'
+        ], { read: false })
+    .pipe(clean({ force: true }));
+});
+gulp.task('build', ['app-js-minify', 'libs-js-minify', 'minify-css']);
+gulp.task('cleanbuild', ['clean']);
+
+gulp.task('tests', function () {
+    connect.server({ 
+        port:8000
+    });
+    var testUrl = ""http://localhost:8000/SpecRunner.html"";
+    gulp.src(""./SpecRunner.html"")
+      .pipe(open("""", { url: testUrl }));
+});
+
+//gulp.watch('./app/**/*.js', ['js']);
+</code></pre>
+",<node.js><npm><gulp><lodash>,1.0,0,0,0,0,0,0,1
+6813,6813,35730408,1,0,986160,0.0,11.0,0.0,0.0,2016-03-01T18:18:49.073,1.0,904.0,"lodash loaded through requirejs and with a script throws ""Mismatched anonymous define"" error","<p>I am working on an application that uses requirejs and loads underscore with it but also loads underscore as a node_module using a script. Since we needed functionality found in lodash I decided to replace underscore with lodash in requirejs and in script tags. While it was working with underscore when I replaced it with lodash I started getting:</p>
+
+<pre><code>Uncaught Error: Mismatched anonymous define() module: function () {
+      return _;
+    }
+http://requirejs.org/docs/errors.html#mismatch
+</code></pre>
+
+<p>I am using the following npm versions:</p>
+
+<p><code>requirejs ""2.1.5""</code>
+<code>underscore: ""1.3.3""</code>
+and I want to install 
+<code>lodash: ""4.5.1""</code></p>
+
+<p>Here is the requirejs config part that I can post:</p>
+
+<pre><code> require.config({
+        waitSeconds: 15,
+        ""paths"": {
+            underscore: ""../../node_modules/lodash/lodash"",
+            jquery: ""lib/jquery-1.7.2"",
+            Backbone: ""lib/backbone"",
+            moment: ""lib/moment-2.0.0"",
+            text: ""lib/text"",
+            alertify: ""lib/alertify"",
+            datatables: ""lib/jquery.dataTables"",
+            datatablesjqueryui: ""lib/dataTables.jqueryui""
+        },
+        ""shim"": {
+           XYZ: [""underscore"",""jquery"", ...]
+           ...
+        }
+    });
+</code></pre>
+
+<ul>
+<li><p>The above is part of a concat file that contains also <code>node_modules/requirejs/require.js</code> before it</p></li>
+<li><p>I also have another concat after it with the rest of the libraries that include lodash in it.</p></li>
+<li><p>Both concat files are added using a <code>&lt;script&gt;</code> tag.</p></li>
+<li><p>In the last concat I have a lot of files that do</p></li>
+</ul>
+
+<p><code>var _ = require(""underscore"");</code>
+or have it in their define dependencies like <code>define([""underscore""],function(_) { ... });</code></p>
+
+<p>so hopefully i won't need to change anything there</p>
+
+<p>I would appreciate if someone can explain why this happens only with lodash and not underscore. And if there is a solution that will let me add lodash in the concatenated file after it was imported/required through requirejs.</p>
+
+<p><strong>Per possible duplicate:</strong> I made sure there are no anonymous defines in the application and I made sure there is no underscore loaded anywhere. So the question is different because I only changed the path from underscore to dash library for the whole application and nothing else.</p>
+
+<p>Thanks!</p>
+",<npm><requirejs><underscore.js><lodash><amd>,0.0,0,0,0,0,0,0,1
+6818,6818,35738327,1,35738350,2740815,2.0,1.0,0.0,0.0,2016-03-02T04:07:28.993,1.0,820.0,Cannot install redux through npm?,"<p>Running npm install redux gives the error:</p>
+
+<p><code>npm ERR! fetch failed https://registry.npmjs.org/lodash-es/-/lodash-es-4.6.0.tgz
+npm WARN retry will retry, error on last attempt: Error: fetch failed with status code 404</code></p>
+
+<p>I'm thinking its something with lodash-es because I can't install that either. Every other package works fine though.</p>
+",<node.js><reactjs><npm><lodash><redux>,0.0,0,0,0,0,0,0,1
+7761,7761,37187687,1,37187952,1654520,1.0,0.0,0.0,0.0,2016-05-12T12:59:43.830,1.0,1530.0,npm WARN deprecated xxx: what should I do?,"<p>I've been using grunt from a couple years now, and it's been like forever i've been seeing warnings like the following:</p>
+
+<pre><code>npm WARN deprecated win-spawn@2.0.0: use [cross-spawn](https://github.com/IndigoUnited/node-cross-spawn) or [cross-spawn-async](https://github.com/IndigoUnited/node-cross-spawn-async) instead.
+npm WARN deprecated lodash@0.9.2: lodash@&lt;2.0.0 is no longer maintained. Upgrade to lodash@^3.0.0
+npm WARN deprecated lodash@1.0.2: lodash@&lt;3.0.0 is no longer maintained. Upgrade to lodash@^4.0.0.
+npm WARN deprecated graceful-fs@1.2.3: graceful-fs v3.0.0 and before will fail on node releases &gt;= v6.0. Please update to graceful-fs@^4.0.0 as soon as possible. Use 'npm ls graceful-fs' to find it in the tree.
+npm WARN deprecated lodash@2.2.1: lodash@&lt;3.0.0 is no longer maintained. Upgrade to lodash@^4.0.0.
+</code></pre>
+
+<p>my projects actually work anyway, even with these warnings. <code>lodash</code>is generally the one always giving me warnings, since day one.</p>
+
+<p>here's the package.json file producing these errors:</p>
+
+<pre><code>{
+  ""name"": ""xxx"",
+  ""version"": ""0.1.1"",
+  ""devDependencies"": {
+    ""autoprefixer"": ""^6.2.3"",
+    ""cssnano"": ""^3.4.0"",
+    ""grunt"": ""^0.4.5"",
+    ""grunt-browser-sync"": ""^1.5.3"",
+    ""grunt-contrib-clean"": ""^1.0.0"",
+    ""grunt-contrib-concat"": ""~0.5.0"",
+    ""grunt-contrib-copy"": ""^1.0.0"",
+    ""grunt-contrib-htmlmin"": ""^0.6.0"",
+    ""grunt-contrib-imagemin"": ""^1.0.0"",
+    ""grunt-contrib-sass"": ""~0.7.4"",
+    ""grunt-contrib-uglify"": ""~0.5.1"",
+    ""grunt-contrib-watch"": ""~0.6.1"",
+    ""grunt-critical"": ""^0.2.0"",
+    ""grunt-delete-sync"": ""0.0.2"",
+    ""grunt-newer"": ""^0.7.0"",
+    ""grunt-postcss"": ""^0.7.1"",
+    ""grunt-processhtml"": ""^0.3.13""
+  }
+}
+</code></pre>
+
+<p>I guess some module or dependency is outdated but...</p>
+
+<p>1) why is it still working? is it safe to ignore the warnings?
+2) how do I know which module is outdated and what should i do about it?</p>
+",<node.js><npm><gruntjs><warnings><lodash>,0.0,0,0,0,0,0,0,1
+7993,7993,37543116,1,0,3605178,1.0,1.0,0.0,0.0,2016-05-31T10:25:17.937,0.0,340.0,Foundationpress npm install deprecated error,"<p>I seem to get npm install errors on both JointsWP and Foundationpress. </p>
+
+<p>running npm install in foundationpress from the command line results in this error:</p>
+
+<pre><code>npm WARN deprecated gulp-minify-css@1.2.4: Please use gulp-clean-css
+npm WARN deprecated graceful-fs@3.0.8: graceful-fs v3.0.0 and before will fail on node release &gt;= v7.0. Please update to graceful-fs@^4.0.0 as soon as possible. Use 'npm ls graceful-fs' to find it in tree.
+npm WARN optional dep failed, continueing fsevents@1.0.12
+npm WARN deprecated lodash@1.0.2: lodash@&lt;3.0.0 is no longer maintained. Upgrade to lodash@^4.0.0.
+</code></pre>
+
+<p>Any ideas?</p>
+",<node.js><npm><zurb-foundation><lodash><deprecated>,0.0,0,0,0,0,0,0,1
+8048,8048,37651866,1,0,2303797,0.0,2.0,0.0,0.0,2016-06-06T07:33:53.573,0.0,70.0,Importing lodash in Angular 2 app,"<p>I am trying to install lodash in my angular 2 app but there is some error telling me skipping failed optional dependency, and not compatible with your operating system or architecture.</p>
+
+<p>I am running on Windows 10 x64. I already run cmd as admin. Here is the screenshot.</p>
+
+<p><a href=""https://i.stack.imgur.com/XINPW.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/XINPW.png"" alt=""enter image description here""></a></p>
+
+<p>Kindly please help me on this. Thanks.</p>
+",<javascript><npm><angular><lodash>,0.0,0,0,0,0,0,0,1
+8092,8092,37712677,1,39665866,5845191,5.0,5.0,0.0,0.0,2016-06-08T20:51:12.907,10.0,15281.0,Angular2 - Angular-CLI installing lodash - Cannot find module,"<p>Mac OSX El capitan | angular-cli: 0.1.0 | node: 5.4.0 | os: darwin x64</p>
+
+<p>I try to install a 3rd party npm module according to the angular-cli wiki: <a href=""https://github.com/angular/angular-cli/wiki/3rd-party-libs"" rel=""noreferrer"">https://github.com/angular/angular-cli/wiki/3rd-party-libs</a> but fail. I've been struggling with this for days now and would greatly appreciate any help.</p>
+
+<p>Steps to get the error:</p>
+
+<p><code>ng new lodashtest3
+cd lodashtest3
+npm install lodash --save
+typings install lodash --ambient --save</code></p>
+
+<p>angular-cli-build.json:</p>
+
+<p><code>module.exports = function(defaults) {
+  return new Angular2App(defaults, {
+    vendorNpmFiles: [
+      ...
+      'lodash/**/*.js'
+    ]
+  });
+};
+</code>
+<code>ng build</code>
+(lodash gets correctly added in dist/vendor)</p>
+
+<p>system-config.ts:</p>
+
+<pre><code>/** Map relative paths to URLs. */
+ const map: any = {
+   'lodash': 'vendor/lodash/lodash.js'
+ };
+
+ /** User packages configuration. */
+ const packages: any = {
+   'lodash': {
+     format: 'cjs'
+   }
+ };
+</code></pre>
+
+<p>(all according to spec in 
+<a href=""https://github.com/angular/angular-cli/wiki/3rd-party-libs"" rel=""noreferrer"">https://github.com/angular/angular-cli/wiki/3rd-party-libs</a>)
+Note - I've tried all config settings I can think of here, all giving the same result.</p>
+
+<p>lodashtest3.component.ts:
+<code>import * as _ from 'lodash';</code></p>
+
+<p><code>ng build</code></p>
+
+<pre><code>Could not start watchman; falling back to NodeWatcher for file system events.
+Visit http://ember-cli.com/user-guide/#watchman for more info.
+Build failed.
+The Broccoli Plugin: [BroccoliTypeScriptCompiler] failed with:
+Error: Typescript found the following errors:
+  /Users/danielmattsson/git/lodashtest3/tmp/broccoli_type_script_compiler-input_base_path-g2lDIaq6.tmp/0/src/app/lodashtest3.component.ts (2, 20): Cannot find module 'lodash'.
+    at BroccoliTypeScriptCompiler._doIncrementalBuild (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/lib/broccoli/broccoli-typescript.js:115:19)
+    at BroccoliTypeScriptCompiler.build (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/lib/broccoli/broccoli-typescript.js:43:10)
+    at /Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/broccoli-caching-writer/index.js:152:21
+    at lib$rsvp$$internal$$tryCatch (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/broccoli-caching-writer/node_modules/rsvp/dist/rsvp.js:1036:16)
+    at lib$rsvp$$internal$$invokeCallback (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/broccoli-caching-writer/node_modules/rsvp/dist/rsvp.js:1048:17)
+    at lib$rsvp$$internal$$publish (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/broccoli-caching-writer/node_modules/rsvp/dist/rsvp.js:1019:11)
+    at lib$rsvp$asap$$flush (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/broccoli-caching-writer/node_modules/rsvp/dist/rsvp.js:1198:9)
+    at nextTickCallbackWith0Args (node.js:456:9)
+    at process._tickCallback (node.js:385:13)
+
+The broccoli plugin was instantiated at:
+    at BroccoliTypeScriptCompiler.Plugin (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/broccoli-caching-writer/node_modules/broccoli-plugin/index.js:10:31)
+    at BroccoliTypeScriptCompiler.CachingWriter [as constructor] (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/broccoli-caching-writer/index.js:21:10)
+    at BroccoliTypeScriptCompiler (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/lib/broccoli/broccoli-typescript.js:26:49)
+    at Angular2App._getTsTree (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/lib/broccoli/angular2-app.js:280:18)
+    at Angular2App._buildTree (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/lib/broccoli/angular2-app.js:101:23)
+    at new Angular2App (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/lib/broccoli/angular2-app.js:42:23)
+    at module.exports (/Users/danielmattsson/git/lodashtest3/angular-cli-build.js:6:10)
+    at Class.module.exports.Task.extend.setupBroccoliBuilder (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/angular-cli/lib/models/builder.js:55:19)
+    at Class.module.exports.Task.extend.init (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/angular-cli/lib/models/builder.js:89:10)
+    at new Class (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/angular-cli/node_modules/core-object/core-object.js:18:12)
+    at Class.module.exports.Task.extend.run (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/angular-cli/lib/tasks/build.js:15:19)
+    at /Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/angular-cli/lib/commands/build.js:32:24
+    at lib$rsvp$$internal$$tryCatch (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/angular-cli/node_modules/rsvp/dist/rsvp.js:1036:16)
+    at lib$rsvp$$internal$$invokeCallback (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/angular-cli/node_modules/rsvp/dist/rsvp.js:1048:17)
+    at /Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/angular-cli/node_modules/rsvp/dist/rsvp.js:331:11
+    at lib$rsvp$asap$$flush (/Users/danielmattsson/git/lodashtest3/node_modules/angular-cli/node_modules/angular-cli/node_modules/rsvp/dist/rsvp.js:1198:9)
+</code></pre>
+
+<p>EDIT: more information according to comments below</p>
+
+<p>dist/index.html:</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=""utf-8""&gt;
+  &lt;title&gt;Lodashtest3&lt;/title&gt;
+  &lt;base href=""/""&gt;
+
+  &lt;link rel=""icon"" type=""image/x-icon"" href=""favicon.ico""&gt;
+  &lt;meta name=""viewport"" content=""width=device-width, initial-scale=1""&gt;
+
+  &lt;!-- Service worker support is disabled by default.
+       Install the worker script and uncomment to enable.
+       Only enable service workers in production.
+  &lt;script type=""text/javascript""&gt;
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/worker.js').catch(function(err) {
+        console.log('Error installing service worker: ', err);
+      });
+    }
+  &lt;/script&gt;
+  --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;lodashtest3-app&gt;Loading...&lt;/lodashtest3-app&gt;
+
+  &lt;script src=""vendor/es6-shim/es6-shim.js""&gt;&lt;/script&gt;
+  &lt;script src=""vendor/reflect-metadata/Reflect.js""&gt;&lt;/script&gt;
+  &lt;script src=""vendor/systemjs/dist/system.src.js""&gt;&lt;/script&gt;
+  &lt;script src=""vendor/zone.js/dist/zone.js""&gt;&lt;/script&gt;
+
+  &lt;script&gt;
+    System.import('system-config.js').then(function () {
+      System.import('main');
+    }).catch(console.error.bind(console));
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+",<angularjs><lodash><systemjs><npm-install><angular-cli>,0.0,0,0,0,0,0,0,1
+8377,8377,38087927,1,38088934,491436,1.0,0.0,0.0,0.0,2016-06-28T23:33:00.957,0.0,91.0,Add Lodash to VS2015 Angular2 Project,"<p>I'm trying to add a dependency to lodash to my project but the VS2015 build keeps blowing up.  With this in the build output ""Build: Cannot find module 'lodash'"".  The build fails because the typescript compiler can't resolve lodash.  Here is my package.json dependancies:</p>
+
+<pre><code>""dependencies"": {
+    ""@angular/common"": ""2.0.0-rc.3"",
+    ""@angular/compiler"": ""2.0.0-rc.3"",
+    ""@angular/core"": ""2.0.0-rc.3"",
+    ""@angular/forms"": ""0.1.1"",
+    ""@angular/http"": ""2.0.0-rc.3"",
+    ""@angular/platform-browser"": ""2.0.0-rc.3"",
+    ""@angular/platform-browser-dynamic"": ""2.0.0-rc.3"",
+    ""@angular/router"": ""3.0.0-alpha.7"",
+    ""@angular/router-deprecated"": ""2.0.0-rc.2"",
+    ""@angular/upgrade"": ""2.0.0-rc.3"",
+
+    ""systemjs"": ""0.19.27"",
+    ""core-js"": ""^2.4.0"",
+    ""reflect-metadata"": ""^0.1.3"",
+    ""rxjs"": ""5.0.0-beta.6"",
+    ""zone.js"": ""^0.6.12"",
+
+    ""lodash"": ""4.13.1"",
+    ""angular2-in-memory-web-api"": ""0.0.12"",
+    ""bootstrap"": ""^3.3.6""
+  },
+  ""devDependencies"": {
+    ""concurrently"": ""^2.0.0"",
+    ""lite-server"": ""^2.2.0"",
+    ""typescript"": ""^1.8.10"",
+    ""typings"":""^1.0.4""
+  }
+</code></pre>
+
+<p>Here is my system.config.js:</p>
+
+<pre><code>/**
+ * System configuration for Angular 2 samples
+ * Adjust as necessary for your application needs.
+ */
+(function (global) {
+    // map tells the System loader where to look for things
+    var map = {
+        'app': 'app', // 'dist',
+        '@angular': 'Scripts/npmlibs/@angular',
+        'angular2-in-memory-web-api': 'Scripts/npmlibs/angular2-in-memory-web-api',
+        'rxjs': 'Scripts/npmlibs/rxjs',
+        'lodash': 'Scripts/npmlibs/lodash/lodash.js'
+    };
+    // packages tells the System loader how to load when no filename and/or no extension
+    var packages = {
+        'app': { main: 'main.js', defaultExtension: 'js' },
+        'rxjs': { defaultExtension: 'js' },
+        'angular2-in-memory-web-api': { defaultExtension: 'js' },
+        'lodash': { defaultExtension: 'js' }
+    };
+    var ngPackageNames = [
+      'common',
+      'compiler',
+      'core',
+      'http',
+      'platform-browser',
+      'platform-browser-dynamic',
+      'router',
+      'router-deprecated',
+      'upgrade',
+      'forms'
+    ];
+
+    // Individual files (~300 requests):
+    function packIndex(pkgName) {
+        packages['@angular/' + pkgName] = { main: 'index.js', defaultExtension: 'js' };
+    }
+    // Bundled (~40 requests):
+    function packUmd(pkgName) {
+        packages['@angular/' + pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+    }
+    // Most environments should use UMD; some (Karma) need the individual index files
+    var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
+    // Add package entries for angular packages
+    ngPackageNames.forEach(setPackageConfig);
+
+    var config = {
+        map: map,
+        packages: packages
+    }
+    System.config(config);
+})(this);
+</code></pre>
+
+<p>Most of the googling around this error has lead me to delete my node_modules folder completely and re run npm install.  I've done this 3 times, restarted VS2015, and restarted my VM but nothing fixes this.  I copy all the needed dependencies from /node_modules to /Scripts/npmlibs so that i don't have to deploy the 20k files npm downloads to our deployment web servers.  I have verified the paths in the system.config.js file.</p>
+
+<p>I'm at a loss for what is wrong with VS/npm for why my build is failing here.</p>
+
+<p>Thanks!</p>
+",<angular><npm><lodash>,0.0,0,0,0,0,0,0,1
+9069,9069,38977946,1,0,4536300,2.0,0.0,0.0,0.0,2016-08-16T14:44:47.393,0.0,100.0,node js on azure - deeply nested node modules cause error,"<p>I'm using a node module called swagger-tools, which internally depends on lodash. When swagger tools is installed, the depth of its node_modules folder is very big, which causes an error on my azure web app (a Windows server). I saw somewhere that this problem can be solved by using npm 3, and while npm 3 is installed on azure server, I can't force it to use it - the error logs indicate that npm 2 is being used. This is how I do it in package.json:</p>
+
+<pre><code>""engineStrict"": true,
+""engines"" : {
+  ""npm"" : ""&gt;=3.0.0""
+}
+</code></pre>
+
+<p>The node version is 4.4.7.
+If anyone knows about a different way to fix the issue I will be glad.</p>
+",<node.js><npm><azure-web-app-service><lodash>,0.0,0,0,0,0,0,0,1
+9758,9758,39817091,1,39836983,1438289,1.0,0.0,0.0,0.0,2016-10-02T12:39:28.060,1.0,1069.0,Heroku Cannot find module 'lodash/object/assign',"<p>I'm having issues deploying to Heroku. Got it running locally after i had the same error by simply rm -f node_modules and then reinstalling them with npm install. But when i deploy to heroku the error keeps occurring. Even went in with bash to perform the same steps.</p>
+
+<p>I then used npm shrinkwrap and noticed aws-sdk has a dependency on lodash vs 3.5.0 &lt;3.6.0. So i set the lodash version in my package.json accordingly.
+It all still runs locally but keeps crashing on heroku.</p>
+
+<p>Node v5.0.0
+NPM v3.3.6</p>
+
+<pre><code>""dependencies"": {
+""aws-sdk"": ""^2.6.6"",
+""bluebird"": ""^3.4.6"",
+""body-parser"": ""^1.15.2"",
+""express"": ""^4.14.0"",
+""goosepage"": ""0.0.1"",
+""lodash"": ""^3.5.0""
+}
+</code></pre>
+
+<p>Additional heroku log</p>
+
+<pre><code>Error: Cannot find module 'lodash/object/assign' 
+Function.Module._resolveFilename (module.js:337:15) 
+Function.Module._load (module.js:287:25) 
+Module.require (module.js:366:17) 
+require (module.js:385:17) 
+Object.&lt;anonymous&gt; (/app/node_modules/xmlbuilder/lib/index.js:5:12) 
+Object.&lt;anonymous&gt; (/app/node_modules/xmlbuilder/lib/index.js:14:4) 
+Module._compile (module.js:425:26) 
+Object.Module._extensions..js (module.js:432:10) 
+Module.load (module.js:356:32) 
+Function.Module._load (module.js:311:12) 
+Module.require (module.js:366:17) 
+require (module.js:385:17) 
+Object.&lt;anonymous&gt; (/app/node_modules/aws-sdk/lib/xml/builder.js:2:15) 
+Module._compile (module.js:425:26) 
+Object.Module._extensions..js (module.js:432:10) 
+Module.load (module.js:356:32) 
+</code></pre>
+",<node.js><heroku><npm><lodash>,0.0,0,0,0,0,0,0,1
+9916,9916,39987518,1,0,0,1.0,1.0,0.0,0.0,2016-10-11T22:04:39.547,0.0,171.0,Do I need n_ when I already installed lodash?,"<p>I'm reading <a href=""https://stackoverflow.com/a/39234812/1525840"">here</a> that I should install <em>lodash</em>. However, at the <a href=""https://lodash.com/"" rel=""nofollow noreferrer"">site of lodash</a>, they say that if I'm using NodeJS I should install <em>n_</em> <a href=""https://www.npmjs.com/package/n_"" rel=""nofollow noreferrer"">here</a>.</p>
+
+<p>So do I need both? Only one? Is one a superset to the other? Do I need <strong>any</strong> of them, really? (The site explains that it makes the life easier when working with JavaScript and arrays, so I guess I want it. But which?</p>
+
+<p>I'm totally lost.</p>
+",<javascript><node.js><npm><lodash>,0.0,0,0,0,0,0,0,1
+10032,10032,40108051,1,40109570,3647991,2.0,2.0,0.0,0.0,2016-10-18T12:17:36.987,3.0,780.0,Where to get @types for single lodash package?,"<p>I need one function from lodash - assignin. I installed <code>lodash.assignin</code> and imported it in my project:</p>
+
+<pre><code>import assignIn = require('lodash.assignin');
+</code></pre>
+
+<p>But after compilation there is an error: ""error TS2307: Cannot find module 'lodash.assignin'"".</p>
+
+<p>I understand that I need typings for <code>lodash.assignin</code> package, but unfortunately there is only <code>lodash/assignin</code> type in <code>@types/lodash</code>.</p>
+
+<p>I don't want install whole lodash package for just one of its function, so does lodash have typings for their single packages?</p>
+",<javascript><typescript><npm><lodash>,0.0,0,0,0,0,0,0,1
+11695,11695,42135360,1,42222293,0,2.0,0.0,0.0,0.0,2017-02-09T11:21:58.670,0.0,386.0,angular2 error in lodash js,"<p>I have tried to use lodash for datatable. Here is what I have tried:</p>
+
+<ul>
+<li><p>npm install lodash - gave cannot find package error</p></li>
+<li><p>searched issue and then tried npm install --save @types/lodash</p></li>
+</ul>
+
+<p>this produced following output:</p>
+
+<pre><code>+-- UNMET DEPENDENCY @angular/common@~2.1.0
++-- UNMET PEER DEPENDENCY @angular/compiler@2.4.6 invalid
++-- UNMET DEPENDENCY @angular/core@~2.1.0
+`-- @types/lodash@4.14.52
+</code></pre>
+
+<p>which I dont understand, since my package.json has following:</p>
+
+<pre><code>""@angular/common"": ""~2.1.0"",
+""@angular/compiler"": ""~2.1.0"",
+""@angular/core"": ""~2.1.0"",
+</code></pre>
+
+<ul>
+<li><p>after this, IDE can find package, but when I run npm start/ng serve I get multiple errors</p>
+
+<p>ERROR in [default] <strong>path</strong>\node_modules\@types\lodash\index.d.ts:192
+81:20 
+Cannot find namespace '_'.</p>
+
+<p>ERROR in [default] <strong>path</strong>\node_modules\@types\lodash\index.d.ts:190
+21:57 
+Cannot find name 'Many'.</p>
+
+<p>ERROR in [default] <strong>path</strong>\node_modules\@types\lodash\index.d.ts:194
+41:0 
+Declaration or statement expected.</p></li>
+</ul>
+
+<p>and first two errors repeat multiple times each, but with different number (i guess line)</p>
+
+<p>What should i do, to solve this issue?</p>
+",<node.js><angular><npm><lodash>,0.0,0,0,0,0,0,0,1
+11868,11868,42333796,1,42334071,1223975,3.0,0.0,0.0,0.0,2017-02-19T22:42:40.903,9.0,12984.0,Importing individual lodash functions instead of whole lodash project,"<p>I see that importing the entire lodash library takes up quite a bit of space on disk:</p>
+
+<pre><code>$ du . | grep lodash
+1696    ./lodash/fp
+5000    ./lodash
+</code></pre>
+
+<p>In my code I am just doing</p>
+
+<pre><code>require('lodash');
+</code></pre>
+
+<p>and my package.json just looks like:</p>
+
+<pre><code>""dependencies"": {
+   ...
+   ""lodash"": ""^4.6.1"",
+   ...
+}
+</code></pre>
+
+<p>Note that this is for a backend project only, not for web, if that makes a difference.</p>
+
+<p>So my question is - what is the latest way of just importing a slice of lodash (just the functions I need) without importing the whole damn thing?</p>
+
+<p>It looks like here are some answers:</p>
+
+<p><a href=""https://gist.github.com/callumlocke/bbfc524eaed6b3556dab"" rel=""noreferrer"">https://gist.github.com/callumlocke/bbfc524eaed6b3556dab</a></p>
+
+<p>My guess is that I should be using the dot syntax for my backend project:</p>
+
+<pre><code>""dependencies"": {
+   ...
+   ""lodash.X"": ""^4.6.1"",
+   ...
+}
+</code></pre>
+
+<p>and then import it like so:</p>
+
+<pre><code> require('lodash.X');
+</code></pre>
+",<node.js><npm><underscore.js><lodash><npm-install>,0.0,0,0,0,0,0,0,1
+11874,11874,42342978,1,42344437,7576144,2.0,2.0,0.0,0.0,2017-02-20T11:09:55.027,3.0,1908.0,NPM - Cannot find name 'Many' and Cannot find namespace '_' from lodash library,"<p>I'm trying to use lodash in my angular2 project.</p>
+
+<pre><code>$ npm install --save lodash
+
+$ npm install --save @types/lodash
+</code></pre>
+
+<p>I got this warning messages from installing lodash
+<a href=""https://i.stack.imgur.com/bz9aN.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/bz9aN.png"" alt=""enter image description here""></a></p>
+
+<p>And this one for the types
+<a href=""https://i.stack.imgur.com/OtkCp.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/OtkCp.png"" alt=""enter image description here""></a></p>
+
+<p>I ignored those warning messages and continue. Now in my component, I added this line..</p>
+
+<pre><code>import * as _ from 'lodash';
+</code></pre>
+
+<p>when the app starts to compile I get this errors in my console:</p>
+
+<pre><code>ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:244:12
+Duplicate identifier '_'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:244:15
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:246:24
+Cannot find name 'Partial'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:248:18
+Duplicate identifier '_'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:366:38
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:2083:23
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5585:43
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5592:43
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5599:43
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5606:43
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5639:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5648:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5655:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5662:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5671:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5678:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5685:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5694:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5701:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5708:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5717:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5724:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:5731:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:8
+A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:9
+Cannot find name 'P'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:14
+Cannot find name 'keyof'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:20
+']' expected.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:20
+Cannot find name 'T'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:21
+';' expected.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:22
+Declaration or statement expected.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:25
+A parameter initializer is only allowed in a function or constructor implementation.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:30
+Cannot find name 'T'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:32
+']' expected.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:33
+')' expected.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:34
+Declaration or statement expected.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:36
+Declaration or statement expected.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11444:39
+Cannot find name 'boolean'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11453:28
+Cannot find name 'ConformsPredicateObject'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:11464:41
+Cannot find name 'ConformsPredicateObject'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15394:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15403:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15436:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15445:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15480:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15489:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15522:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15531:11
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15564:21
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15571:21
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15604:23
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15611:23
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15627:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15636:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15646:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15656:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15666:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15676:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15686:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15696:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15731:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15739:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15746:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15778:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15786:20
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15793:20
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15856:20
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15856:36
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:15872:20
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16533:32
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16543:32
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16553:32
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16622:32
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16631:32
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16640:32
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16700:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16709:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16719:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16729:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16739:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16749:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16759:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16769:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16788:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16797:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16806:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16816:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16824:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16834:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16842:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16864:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16874:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16884:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16895:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16904:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16915:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:16924:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17081:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17089:20
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17096:20
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17112:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17121:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17130:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17139:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17149:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17157:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17167:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17175:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:17926:38
+Cannot find name 'TemplateSettings'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18546:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18554:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18676:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18684:18
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18693:46
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18702:46
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18818:30
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18855:42
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18862:42
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18869:42
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18876:42
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18883:42
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18895:39
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18902:39
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18909:39
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18916:39
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18923:39
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18935:38
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18942:38
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18949:38
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18956:38
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18963:38
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:18974:38
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:19014:52
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:19021:57
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:19028:57
+Cannot find name 'Many'.
+
+    ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:19188:21
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:19212:21
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:19235:22
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:19258:22
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:19281:20
+Cannot find namespace '_'.
+
+ERROR in [default] /path/to/project/node_modules/@types/lodash/index.d.ts:19441:0
+Declaration or statement expected.
+</code></pre>
+
+<p><strong><code>package.json</code></strong></p>
+
+<pre><code>{
+  ""name"": ""final-project"",
+  ""version"": ""0.0.0"",
+  ""license"": ""MIT"",
+  ""angular-cli"": {},
+  ""scripts"": {
+    ""start"": ""ng serve"",
+    ""lint"": ""tslint \""src/**/*.ts\"""",
+    ""test"": ""ng test"",
+    ""pree2e"": ""webdriver-manager update"",
+    ""e2e"": ""protractor"",
+    ""populate-db"": ""./node_modules/.bin/ts-node ./populate-db.ts"",
+    ""batch-server"": ""./node_modules/.bin/ts-node ./batch-server.ts""
+  },
+  ""private"": true,
+  ""dependencies"": {
+    ""@angular/common"": ""2.0.1"",
+    ""@angular/compiler"": ""2.0.1"",
+    ""@angular/core"": ""2.0.1"",
+    ""@angular/forms"": ""2.0.1"",
+    ""@angular/http"": ""2.0.1"",
+    ""@angular/platform-browser"": ""2.0.1"",
+    ""@angular/platform-browser-dynamic"": ""2.0.1"",
+    ""@angular/router"": ""3.0.0"",
+    ""@types/lodash"": ""^4.14.52"",
+    ""@types/request"": ""0.0.30"",
+    ""angularfire2"": ""^2.0.0-beta.8"",
+    ""core-js"": ""^2.4.0"",
+    ""firebase"": ""^3.6.9"",
+    ""firebase-queue"": ""^1.5.0"",
+    ""lodash"": ""^4.17.4"",
+    ""rxjs"": ""5.0.0-beta.12"",
+    ""ts-helpers"": ""^1.1.1"",
+    ""zone.js"": ""^0.6.21""
+  },
+  ""devDependencies"": {
+    ""@types/jasmine"": ""^2.2.30"",
+    ""angular-cli"": ""1.0.0-beta.16"",
+    ""codelyzer"": ""~0.0.26"",
+    ""jasmine-core"": ""2.4.1"",
+    ""jasmine-spec-reporter"": ""2.5.0"",
+    ""karma"": ""0.13.22"",
+    ""karma-chrome-launcher"": ""0.2.3"",
+    ""karma-jasmine"": ""0.3.8"",
+    ""karma-remap-istanbul"": ""^0.2.1"",
+    ""protractor"": ""4.0.3"",
+    ""ts-node"": ""^1.2.1"",
+    ""tslint"": ""3.13.0"",
+    ""typescript"": ""2.0.10""
+  }
+}
+</code></pre>
+
+<p>Am I missing something here? Do I need to meet the PEER DEPENDENCIES? How?</p>
+",<angular><typescript><npm><lodash><npm-install>,0.0,0,0,0,0,0,0,1
+12977,12977,43737780,1,0,2056779,1.0,4.0,0.0,0.0,2017-05-02T12:21:36.893,1.0,422.0,Lodash doesn't work with NPM,"<p>I get an issue using <code>lodash</code> with <code>NPM</code>.</p>
+
+<p>My code :</p>
+
+<pre><code>var _ = require('lodash');
+console.log(_.chunk(['1','2','3','4'], 3));
+</code></pre>
+
+<p>Response : <code>_.chunk is not a function</code></p>
+
+<p>Lodash version : <code>latest : 4.17.4</code></p>
+",<node.js><npm><lodash>,0.0,0,0,0,0,0,0,1
+15019,15019,45916068,1,0,5546613,1.0,4.0,0.0,0.0,2017-08-28T09:44:14.640,0.0,212.0,npm lodash build issues in angular,"<p>Am trying to build my project and getting many issues related to lodash </p>
+
+<p>I have typescript version 2.0.10 and  ""@types/lodash"": ""^4.14.65""</p>
+
+<p>I have tried replacing 4.14.65 to  ""@types/lodash"": ""ts2.0"" as suggested in one of the Git hub issues. Still facing this issue. Any help?  </p>
+
+<p>The following is the screenshot </p>
+
+<p><a href=""https://i.stack.imgur.com/ReFdK.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/ReFdK.png"" alt=""enter image description here""></a></p>
+",<angular><typescript><npm><lodash><node-modules>,0.0,0,0,0,0,0,0,1
+15400,15400,46297777,1,46299612,756439,1.0,2.0,0.0,0.0,2017-09-19T10:12:23.047,1.0,538.0,Why can't I use lodash's remove() function?,"<p>I'm using Laravel 5.5.  I've run <code>npm install</code> and <code>npm run dev</code> and generally I have a good working environment with running Javascript, but I've been caught out while trying to use lodash's <code>remove()</code> function to remove an element from an array.</p>
+
+<pre><code>var array = [1, 2, 3, 4];
+var evens = _.remove(array, function(n) {
+    return n % 2 == 0;
+});
+</code></pre>
+
+<p>The above code produces the following error:</p>
+
+<pre><code>TypeError: _.remove is not a function
+</code></pre>
+
+<p>Lodash is loaded in <code>resources/assets/js/bootstrap.js</code>.</p>
+
+<pre><code>window._ = require('lodash');
+</code></pre>
+
+<p>Other lodash methods works fine.</p>
+
+<pre><code>_.each([1, 2], function(n) {
+    console.log(n);
+});
+</code></pre>
+
+<p>Any idea why I can't use <code>.remove()</code>?</p>
+",<php><npm><lodash><laravel-5.5>,0.0,0,0,0,0,0,0,1
+15536,15536,46440450,1,46452102,467859,1.0,3.0,0.0,0.0,2017-09-27T05:57:32.247,3.0,331.0,How does lodash have a build script that resides in a directory that isn't in the repository?,"<p>I'm trying to discover best practices for building a library and looking through famous library code. I looked at <a href=""https://github.com/lodash/lodash/blob/master/package.json"" rel=""nofollow noreferrer"">lodash</a> and saw that the build scripts all reference a <code>lib</code> directory that doesn't exist. If I clone this repository, how can it build if these files don't exist in the repository?</p>
+",<javascript><npm><lodash>,0.0,0,0,0,0,0,0,1
+16921,16921,47890992,1,47891735,4127551,1.0,0.0,0.0,0.0,2017-12-19T16:16:11.053,0.0,355.0,Why require(lodash) retrieve an out-of-date version?,"<p>I have installed node on my Android phone via Termux and have recently upgraded lodash globally to v4</p>
+
+<pre><code>$ npm -v
+5.6.0
+
+$ node -v
+v8.9.2
+
+$ npm i -g lodash
++ lodash@4.17.4
+
+$ head -1 $NODE_PATH/lodash/README.md
+# lodash v4.17.4 
+</code></pre>
+
+<p>However when I require it, node gives me version 3.</p>
+
+<pre><code>$ node 
+&gt; require('lodash')
+  ...
+  VERSION: '3.10.1'
+</code></pre>
+
+<p>I don't have a node_modules folder where I did that require. Does any one know why this strange behavior occurs and how to fix it? Many thanks</p>
+",<node.js><npm><lodash><termux>,0.0,0,0,0,0,0,0,1
+17481,17481,48437047,1,0,8806908,0.0,8.0,0.0,0.0,2018-01-25T06:43:20.497,1.0,2769.0,Cannot find module 'lodash/isEmpty',"<p>Got an error after doing npm start</p>
+
+<p>Error:- <a href=""https://gist.github.com/anonymous/72b80088aca1e939da5760bee6b39570"" rel=""nofollow noreferrer"">https://gist.github.com/anonymous/72b80088aca1e939da5760bee6b39570</a></p>
+
+<p>Things I did:-
+1- I removed lodash folder from node_modules folder, then I cleared the cache using npm cache clear. After that I did npm install, as lodash was present in package.json. But I am getting the same error</p>
+
+<p>2- Then used node version 8.0.0, got same error</p>
+
+<p>3- I've used 'require' to import lodash/isEmpty. So, I don't there is any spelling mistake.</p>
+
+<p>4- I've already checked the presence of isEmpty.js file inside lodash folder, under node_modules directory. And it's there.</p>
+
+<p>Update:- I removed the node_module folder and then I removed the cache using npm cache clean. After that I did npm install. But I am still getting the same error.</p>
+",<npm><lodash>,0.0,0,0,0,0,0,0,1
+17686,17686,48632763,1,48725900,7325882,2.0,2.0,0.0,0.0,2018-02-05T22:49:11.663,0.0,497.0,Cannot find module 'lodash/_overRest',"<p>I have tried deleting the node_modules folder and downloading it again through npm command but nothing works.</p>
+
+<p>I'm getting:</p>
+
+<blockquote>
+  <p>Cannot find module 'lodash/_overRest'</p>
+</blockquote>
+
+<p>I am using npm ver 5.2 and have uploaded the screenshots of the errors and json file</p>
+
+<p><img src=""https://i.stack.imgur.com/oFq5f.png"" alt=""Screenshot of error"">
+<img src=""https://i.stack.imgur.com/LpCsV.png"" alt=""screenshot of package.json ""></p>
+
+<pre class=""lang-js prettyprint-override""><code>const _ = require('lodash');
+const express = require('express');
+const bodyParser = require('body-parser');
+const {
+  ObjectID
+} = require('mongodb');
+
+var {
+  mongoose
+} = require('./db/mongoose');
+var {
+  Todo
+} = require('./models/todo');
+var {
+  User
+} = require('./models/user');
+
+var app = express();
+
+app.use(bodyParser.json());
+
+app.post('/todos', (req, res) =&gt; {
+  var todo = new Todo({
+    text: req.body.text
+  });
+
+  todo.save().then((doc) =&gt; {
+    res.send(doc);
+  }, (e) =&gt; {
+    res.status(400).send(e);
+  });
+});
+
+app.get('/todos', (req, res) =&gt; {
+  Todo.find().then((todos) =&gt; {
+    res.send({
+      todos
+    });
+  }, (e) =&gt; {
+    res.status(400).send(e);
+  });
+});
+
+app.get('/todos/:id', (req, res) =&gt; {
+  var id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Todo.findById(id).then((todo) =&gt; {
+    if (!todo) {
+      return res.status(404).send();
+    }
+
+    res.send({
+      todo
+    });
+  }).catch((e) =&gt; {
+    res.status(400).send();
+  });
+});
+
+app.delete('/todos/:id', (req, res) =&gt; {
+  var id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Todo.findByIdAndRemove(id).then((todo) =&gt; {
+    if (!todo) {
+      return res.status(404).send();
+    }
+
+    res.send({
+      todo
+    });
+  }).catch((e) =&gt; {
+    res.status(400).send();
+  });
+});
+
+app.patch('/todos/:id', (req, res) =&gt; {
+  var id = req.params.id;
+  var body = _.pick(req.body, ['text', 'completed']);
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  if (_.isBoolean(body.completed) &amp;&amp; body.completed) {
+    body.completedAt = new Date().getTime();
+  } else {
+    body.completed = false;
+    body.completedAt = null;
+  }
+
+  Todo.findByIdAndUpdate(id, {
+    $set: body
+  }, {
+    new: true
+  }).then((todo) =&gt; {
+    if (!todo) {
+      return res.status(404).send();
+    }
+
+    res.send({
+      todo
+    });
+  }).catch((e) =&gt; {
+    res.status(400).send();
+  })
+});
+
+app.listen(port, () =&gt; {
+  console.log(`Started up at port ${port}`);
+});
+
+module.exports = {
+  app
+};
+</code></pre>
+",<npm><lodash>,0.0,0,0,0,0,0,0,1
+18220,18220,49144272,1,0,931247,0.0,5.0,0.0,0.0,2018-03-07T04:42:00.393,0.0,1843.0,Cannot find lodash.js,"<p>I get this error in my browser console:</p>
+
+<blockquote>
+  <p>app.js:26089 Uncaught Error: Module build failed: Error: ENOENT: no
+  such file or directory, open
+  '/Users/me/code/laravel/myproject/node_modules/lodash/lodash.js'</p>
+</blockquote>
+
+<p>It can't find lodash.js while the file exists:</p>
+
+<pre><code>me@macbook:~$ ls -l /Users/me/code/laravel/myproject/node_modules/lodash/lodash.js
+-rw-r--r--  1 me  staff   527K Feb  4 08:30 /Users/me/code/laravel/myproject/node_modules/lodash/lodash.js
+</code></pre>
+
+<p>How should I fix this issue ?</p>
+",<laravel><npm><vue.js><lodash>,0.0,0,0,0,1,0,0,1
+19625,19625,50466582,1,0,676490,1.0,0.0,0.0,0.0,2018-05-22T11:29:59.463,1.0,1106.0,NPM: How to update lodash when depends of jshint,"<p>I have passed an audit in npm and I've got this:</p>
+
+<p><a href=""https://i.stack.imgur.com/ZueZ6.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/ZueZ6.png"" alt=""enter image description here""></a></p>
+
+<p>So, I'm trying to update lodash package but I don't know how can I do it. I have tried to do it with npm -i --save lodash, but this is not correct, because it's create another package with the latest version and not substitute the actual package which has ... version to the actual version. My actual version of lodash is 3.7.0 and I wanto to update to 4.17.5.</p>
+
+<p><a href=""https://i.stack.imgur.com/YPBGO.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/YPBGO.png"" alt=""enter image description here""></a></p>
+
+<p>How can I do it?</p>
+",<javascript><npm><lodash>,0.0,0,0,0,0,0,0,1
+19769,19769,50590664,1,0,676490,0.0,1.0,0.0,0.0,2018-05-29T18:23:51.097,3.0,728.0,NPM: How can update a module which is a dependency of another module,"<p>I need to update lodash to a 4.17.5 or later version. This module is a dependency of jshint module like you can see in the next pic:</p>
+
+<p><a href=""https://i.stack.imgur.com/BNrTf.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/BNrTf.png"" alt=""enter image description here""></a></p>
+
+<p>How can I update lodash from 3.7.0 version to 4.17.5 or later version? </p>
+",<npm><lodash><npm-install><jshint>,0.0,0,0,0,0,0,0,1
+20301,20301,51049642,1,51050897,9320086,1.0,2.0,0.0,0.0,2018-06-26T18:49:26.270,-2.0,59.0,Combine two JSON objects into one based on keys and retain values,"<p>I had the following 2 json objects denoting some data as follows: </p>
+
+<pre><code>passObject = 
+{
+  'Topic One' : 4, 'Topic Two' : 10, 'Topic Three' : 1, 'Topic Four' : 1 
+}
+
+failObject = 
+{
+  'Topic Two' : 3, 'Topic One' : 1 
+}
+</code></pre>
+
+<p>I needed to combine the two objects into one to produce the result: </p>
+
+<pre><code>resultObject = {
+ 'topics': [
+         { 'Topic One' : { 'pass' : 4, 'fail': 1 } },
+         { 'Topic Two' : { 'pass' : 10, 'fail': 3 } },
+         { 'Topic Three' : { 'pass' : 1, 'fail': 0 } },
+         { 'Topic Four' : { 'pass' : 1, 'fail': 0 } }  
+     ]
+}
+</code></pre>
+
+<p>I have looked into 'lodash' functions but have not been able to find the necessary functionality. Would someone be able to suggest a way of how it can be done most efficiently ? </p>
+",<javascript><npm><lodash>,0.0,0,0,0,0,0,0,1
+21004,21004,51699564,1,56473535,9816472,2.0,4.0,0.0,0.0,2018-08-06T01:32:50.473,29.0,65814.0,How to fix npm audit fix issues?,"<pre class=""lang-none prettyprint-override""><code>┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Low           │ Prototype Pollution                                          │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ lodash                                                       │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Patched in    │ &gt;=4.17.5                                                     │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ react-native-cached-image                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ react-native-cached-image &gt; lodash                           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://npmjs.com/advisories/577                             │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+found 11 vulnerabilities (2 low, 8 moderate, 1 high) in 26316 scanned packages
+  11 vulnerabilities require manual review. See the full report for details.
+</code></pre>
+
+<p>This shows up when I try to <code>npm install</code>, and all of them required manual review. I've tried to visit <a href=""https://www.npmjs.com/advisories/577"" rel=""noreferrer"">this</a> to check for more info and apparently it's because my <code>lodash</code> is of version <code>4.17.4</code>. So I've then run <code>npm install --save lodash@4.17.5</code> and checked my <code>package.json</code> to make sure it's reflecting correctly. </p>
+
+<p>However, it seems the vulnerabilities is still there. Wondering if I fix it the wrong way?</p>
+
+<p>As per requested, the body of package.json</p>
+
+<pre><code>""dependencies"": {
+   ""lodash"": ""^4.17.5"",
+}
+</code></pre>
+",<reactjs><react-native><npm><lodash>,0.0,0,1,0,0,0,0,1
+21391,21391,52081295,1,52081757,1069871,1.0,0.0,0.0,0.0,2018-08-29T15:35:51.800,3.0,732.0,How do I install lodash v3 Typescript typings,"<p>Unfortunately I cannot upgrade to lodash 4 right now. So, I'm trying to use the v3 typings provided in  <a href=""https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/lodash"" rel=""nofollow noreferrer"">https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/lodash</a> , which has a v3 folder with lodash 3 typings. However, when I do <code>npm install @types/lodash --save-dev</code> the v3 folder is not there. All I see is the <code>common</code> and 'fp' folder.</p>
+",<typescript><lodash><npm-install><typescript-typings><definitelytyped>,0.0,0,0,0,0,0,0,1
+21468,21468,52128454,1,54757276,7180331,1.0,4.0,0.0,0.0,2018-09-01T13:14:55.930,3.0,3510.0,npm audit fix not fixing low vulnerability,"<p>I am using <code>nightmare</code> for testing.After running npm audit I get a warning about lodash Prototype pollution.I tried to fix this by running <code>npm audit fix</code> but no result.After that I tried using <code>--force</code> but still get :</p>
+
+<pre><code>fixed 0 of 1 vulnerability in 2108 scanned packages
+  1 vulnerability required manual review and could not be updated
+</code></pre>
+
+<p>Any ideas how can I fix it?</p>
+
+<p>Here is a screenshot:
+<a href=""https://i.stack.imgur.com/qvkj4.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/qvkj4.png"" alt=""enter image description here""></a></p>
+",<npm><lodash><nightmare><npm-audit>,0.0,0,0,0,0,0,0,1
+22075,21752,52356770,1,0,9141338,1.0,4.0,0.0,0.0,2018-09-16T17:38:50.170,-1.0,111.0,npm run build throws code ELIFECYCLE after installing all dependencies for lodash,"<p>I have been trying to run the lodash library on my system.Here is the link to the library .<a href=""https://github.com/lodash/lodash"" rel=""nofollow noreferrer"">link to lodash github</a></p>
+
+<p>. I forked the repo and then cloned it on my system .I ran npm install ad installed all the dependencies in the package.json by running npm install and it worked fine .After that i tried npm run build as shown on github page and I am getting this error .</p>
+
+<pre><code>module.js:549
+    throw err;
+    ^
+
+Error: Cannot find module '/home/satya/lodash/lib/main/build-dist.js'
+    at Function.Module._resolveFilename (module.js:547:15)
+    at Function.Module._load (module.js:474:25)
+    at Function.Module.runMain (module.js:693:10)
+    at startup (bootstrap_node.js:191:16)
+    at bootstrap_node.js:612:3
+
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! lodash@4.17.4 build:main: `node lib/main/build-dist.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the lodash@4.17.4 build:main script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+</code></pre>
+
+<p>How do I resolve the above so that I can introduce console logs and start reading .</p>
+",<javascript><npm><lodash>,1.0,0,0,0,0,0,0,1
+22744,22421,53006991,1,0,10562688,1.0,4.0,0.0,0.0,2018-10-26T10:45:42.893,-6.0,11600.0,How to install Lodash,"<p>I'm new to lodash and i've have installed lodash as </p>
+
+<pre><code>npm i --save lodash
+</code></pre>
+
+<p>and im calling it in my index.js file as </p>
+
+<pre><code>import _ from 'lodash';
+</code></pre>
+
+<p>However this is not working and its displaying the error on console as </p>
+
+<blockquote>
+  <p>index.js:1 Uncaught SyntaxError: Unexpected identifier '_'</p>
+</blockquote>
+
+<p>Im not using node.js</p>
+",<javascript><npm><ecmascript-6><lodash>,0.0,0,0,0,0,0,0,1
+23754,23431,53986470,1,53986471,4706711,1.0,0.0,0.0,0.0,2018-12-31T10:40:25.617,1.0,116.0,"Using only some specific functions from lodash, but installing as a whole seems a huge chunk of depedencies","<p>In my project I have installed underscore.js but I noticed that I need the Lodash's <code>fill</code> function but installing lodash as well seems a big chunk of dependencies in my project, depedencies that offer similar functionality, thus making it a waste of time migrating from underscore to lodash, or using both libraries.</p>
+<p>So how I can have only some specific functionalities from lodash whilst using the underscore.js?</p>
+",<javascript><npm><underscore.js><lodash>,0.0,0,0,0,0,0,0,1
+24233,23910,54406565,1,0,10942034,1.0,0.0,0.0,0.0,2019-01-28T16:42:28.873,0.0,1199.0,Invalid channel name - What could be causing this?,"<p>I am working on a site that will have a chatbox on it, basically it has a bunch of channels for different languages as well a channel for moderators and a channel for announcements.</p>
+
+<p>I am getting an error <code>[join] invalid channel name</code> and since i'm so new with coding/developing I thought i'd share my code in hopes someone here can tell me where I messed something up.</p>
+
+<p><strong>CHAT.JS</strong></p>
+
+<pre><code>var assert   =  require('assert');
+var CBuffer  =  require('CBuffer');
+var events   =  require('events');
+var util     =  require('util');
+var _        =  require('lodash');
+var debug    =  require('debug')('app:chat');
+
+var db       =  require('./database');
+var lib      =  require('./lib');
+
+
+//Mute users by ip/username and store muted users in the database
+
+var CHAT_HISTORY_SIZE = 100;
+
+var SPECIAL_CHANNELS = {
+    all: {
+        desc: 'Channel where all messages are broadcasted, read only',
+        writable: false,
+        modsOnly: false
+    },
+
+    moderators: {
+        desc: 'Channel for moderators only, they are joinedds',
+        writable: true,
+        modsOnly: true
+    }
+
+    //This is the behaviour for all the other channels:
+    //defaultProps: {
+    //    desc: '',
+    //    writable: true,
+    //    modsOnly: false
+    //}
+};
+
+// There is a mods channel for every channel
+// The mods are joined to a channel called mod:channelName
+
+function Chat(io) {
+    var self = this;
+
+    self.io = io;
+
+    // Number of connected clients
+    self.clientCount = 0;
+
+    /*
+     Collection of muted users.
+     key:   Username
+     value: Object with the following fields
+     time:       Date object when the user was muted
+     moderator:  The username of the moderator that muted the user
+     timespec:   Initial (nominal diff) time the user has been muted
+     end:        Until when the user is muted
+     shadow:     If the mute is a shadow mute
+     */
+    self.muted = {};
+
+    io.on('connection', onConnection);
+
+    function onConnection(socket) {  //socket.user is attached on the login middleware
+        debug('socket connection event received');
+
+        //Attach disconnect handler
+        socket.on('disconnect', function() {
+            --self.clientCount;
+            console.log('Client disconnect, left: ', self.clientCount);
+            debug('client disconnect');
+        });
+
+        //Join to a Room
+        socket.on('join', function(channelName) {
+            debug('join event received from user %s', socket.user ? socket.user.username : '~guest~');
+            self.join(socket, channelName);
+        });
+
+        //Register the message event
+        socket.on('say', function(message, isBot, customChannelName) {
+            self.onSay(socket, message, isBot, customChannelName);
+        });
+
+        ++self.clientCount;
+        console.log('Client joined: ', self.clientCount, ' - ', socket.user ? socket.user.username : '~guest~'); //TODO: Add ip address
+    }
+
+    events.EventEmitter.call(self); //Call event emitter 'constructor' function
+}
+
+util.inherits(Chat, events.EventEmitter);
+
+Chat.prototype.join = function(socket, channelName) {
+    var self = this;
+
+    var moderator = socket.user &amp;&amp; socket.user.moderator;
+
+    //Check channelName variable and avoid users to join the mods channel
+    **if(isChannelNameInvalid(channelName) || isChannelNameModsOnly(channelName))
+        return sendError(socket, '[join] Invalid channel name');**
+
+    //Check if the channel is moderators only
+    if(SPECIAL_CHANNELS.hasOwnProperty(channelName))
+        if(SPECIAL_CHANNELS[channelName].modsOnly &amp;&amp; !moderator)
+            return sendError(socket, '[join] This channel is moderators only');
+
+    //Check if the user was joined to another room before, if it was leave that room
+    if(socket.currentChannel)
+        socket.leave(socket.currentChannel);
+
+    //If mod leave the mods channel for this channel
+    if(socket.modCurrentChannel)
+        socket.leave(socket.modCurrentChannel);
+
+    //Save the name of the current room in the socket, this can also be used to check if the user is joined into a channel
+    socket.currentChannel = channelName;
+
+    //Get user history of a room and send it to the user
+    self.getHistory(channelName, function(err, history) {
+
+        //If we couldn't reach the history send an empty history to the user
+        if(err) {
+            history = [];
+        }
+
+        var res = {
+            history: history,
+            username: socket.user ? socket.user.username : null,
+            channel: channelName,
+            moderator: moderator
+        };
+
+        //Actually join the socket.io room
+        socket.join(channelName);
+
+        //If the user is mod and is not on the mods channel join him to the channel mod:channelName
+        if(moderator &amp;&amp; channelName !== 'moderators') {
+            var chan = 'mod:'+channelName;
+            socket.join(chan);
+            socket.modCurrentChannel = chan;
+        }
+
+        //Return join info to the user
+        socket.emit('join', res);
+    });
+
+};
+
+Chat.prototype.onSay = function(socket, message, isBot, customChannelName) {
+    if (!socket.user)
+        return sendError(socket, '[say] you must be logged in to chat');
+
+    if (!socket.currentChannel)
+        return sendError(socket, '[say] you must be joined before you can chat');
+
+    //Check if the message is for a custom channel
+    var channelName;
+    if(customChannelName)
+        if(isChannelNameInvalid(customChannelName))
+            return sendError(socket, '[say] invalid channel name');
+        else
+            channelName = customChannelName;
+    else
+        channelName = socket.currentChannel;
+
+    //Check if the message is for a non writable channel ('all')
+    if(SPECIAL_CHANNELS.hasOwnProperty(channelName) &amp;&amp; !SPECIAL_CHANNELS[channelName].writable)
+        return sendErrorChat(socket, 'The all channel is read only');
+
+    //Message validation
+    message = message.trim();
+
+    if (typeof message !== 'string')
+        return sendError(socket, '[say] no message');
+
+    if (message.length == 0 || message.length &gt; 500)
+        return sendError(socket, '[say] invalid message size');
+
+    var cmdReg = /^\/([a-zA-z]*)\s*(.*)$/;
+    var cmdMatch = message.match(cmdReg);
+
+    if (cmdMatch) //If the message is a command try to execute it
+        this.doChatCommand(socket.user, cmdMatch, channelName, socket);
+    else //If not broadcast the message
+        this.say(socket, socket.user, message, channelName, isBot);
+
+};
+
+Chat.prototype.doChatCommand = function(user, cmdMatch, channelName, socket) {
+    var self = this;
+
+    var cmd  = cmdMatch[1];
+    var rest = cmdMatch[2];
+
+    switch (cmd) {
+        case 'shutdown':
+            return sendErrorChat(socket, '[shutdown] deprecated feature boss');
+        case 'mute':
+        case 'shadowmute':
+            if (user.moderator) {
+                var muteReg = /^\s*([a-zA-Z0-9_\-]+)\s*([1-9]\d*[dhms])?\s*$/;
+                var muteMatch = rest.match(muteReg);
+
+                if (!muteMatch)
+                    return sendErrorChat(socket, 'Usage: /mute &lt;user&gt; [time]');
+
+                var username = muteMatch[1];
+                var timespec = muteMatch[2] ? muteMatch[2] : ""30m"";
+                var shadow   = cmd === 'shadowmute';
+
+                self.mute(shadow, user, username, timespec, channelName,
+                    function (err) {
+                        if (err)
+                            return sendErrorChat(socket, err);
+                    });
+            } else {
+                return sendErrorChat(socket, '[mute] Not a moderator.');
+            }
+            break;
+        case 'unmute':
+            if (user.moderator) {
+                var unmuteReg = /^\s*([a-zA-Z0-9_\-]+)\s*$/;
+                var unmuteMatch = rest.match(unmuteReg);
+
+                if (!unmuteMatch)
+                    return sendErrorChat(socket, 'Usage: /unmute &lt;user&gt;');
+
+                var username = unmuteMatch[1];
+                self.unmute(
+                    user, username, channelName,
+                    function (err) {
+                        if (err) return sendErrorChat(socket, err);
+                    });
+            }
+            break;
+        default:
+            sendErrorChat(socket, 'Unknown command ' + cmd);
+            break;
+    }
+};
+
+Chat.prototype.getHistory = function (channelName, callback) {
+    if(channelName === 'all')
+        db.getAllChatTable(CHAT_HISTORY_SIZE, fn);
+    else
+        db.getChatTable(CHAT_HISTORY_SIZE, channelName, fn);
+
+    function fn (err, history) {
+        if(err) {
+            console.error('[INTERNAL_ERROR] got error ', err, ' loading chat table');
+            return callback(err);
+        }
+
+        callback(null, history);
+    }
+};
+
+Chat.prototype.say = function(socket, user, message, channelName, isBot) {
+    var self = this;
+
+    var date = new Date();
+
+    isBot = !!isBot;
+
+    var msg = {
+        date:      date,
+        type:      'say',
+        username:  user.username,
+        role:      user.userclass,
+        message:   message,
+        bot:       isBot,
+        channelName: channelName
+    };
+
+    //Check if the user is muted
+    if (lib.hasOwnProperty(self.muted, user.username)) {
+        var muted = self.muted[user.username];
+        if (muted.end &lt; date) {
+            // User has been muted before, but enough time has passed.
+            delete self.muted[user.username];
+        } else if (muted.shadow) {
+            // User is shadow muted. Echo the message back to the
+            // user but don't broadcast.
+            self.sendMessageToUser(socket, msg);
+            return;
+        } else {
+            self.sendMessageToUser(socket, {
+                date:      date,
+                type:      'info',
+                username:  user.username,
+                role:      user.userclass,
+                message:   'You\'re muted. ' + lib.printTimeString(muted.end - date) + ' remaining',
+                bot:       false,
+                channelName: channelName
+            });
+            return;
+        }
+    }
+
+    self.sendMessageToChannel(channelName, msg, user.id);
+};
+
+/** Send a message to the user of this socket **/
+Chat.prototype.sendMessageToUser = function(socket, msg) {
+    socket.emit('msg', msg);
+};
+
+/** Send a message to a channel and to the all channel and store it in the database **/
+Chat.prototype.sendMessageToChannel = function(channelName, msg, userID) {
+    console.assert(msg.hasOwnProperty('bot') &amp;&amp; msg.date, msg.hasOwnProperty('message') &amp;&amp; msg.type);
+    this.io.to(channelName).emit('msg', msg);
+    this.io.to('all').emit('msg', msg);
+    this.saveChatMessage(userID, msg.message, channelName, msg.bot, msg.date);
+};
+
+Chat.prototype.saveChatMessage = function(userId, message, channelName, isBot, date) {
+    db.addChatMessage(userId, date, message, channelName, isBot, function(err) {
+       if(err)
+        console.error('[INTERNAL_ERROR] got error ', err, ' saving chat message of user id ', userId);
+    });
+};
+
+Chat.prototype.mute = function(shadow, moderatorUser, username, time, channelName, callback) {
+    var self = this;
+    var now = new Date();
+    var ms  = lib.parseTimeString(time);
+    var end = new Date(Date.now() + ms);
+
+    // Query the db to make sure that the username exists.
+    db.getUserByName(username, function(err, userInfo) {
+
+        if (err) {
+            if(typeof err === 'string') //USERNAME_DOES_NOT_EXIST
+                callback(err);
+            else
+                console.error('[INTERNAL_ERROR] got error ', err, ' muting user ', userInfo.username);
+            return;
+        }
+        assert(userInfo);
+
+        // Overriding previous mutes.
+        self.muted[userInfo.username] = {
+            date:        now,
+            moderator:   moderatorUser.username,
+            timespec:    time,
+            end:         end,
+            shadow:      shadow
+        };
+
+        var msg = {
+            date:        now,
+            type:        'mute',
+            message: null,
+            moderator:   moderatorUser.username,
+            username:    userInfo.username,
+            timespec:    time,
+            shadow:      shadow,
+            bot: false
+        };
+
+        //If mute shadow inform only mods about it
+        if (shadow) {
+            self.io.to('moderators').emit('msg', msg);
+            self.io.to('mod:'+channelName).emit('msg', msg);
+        //If regular mute send mute message to the channel
+        } else {
+            self.io.to(channelName).emit('msg', msg);
+            self.io.to('moderators').emit('msg', msg);
+        }
+
+        callback(null);
+    });
+};
+
+Chat.prototype.unmute = function(moderatorUser, username, channelName, callback) {
+    var self = this;
+    var now = new Date();
+
+    if (!lib.hasOwnProperty(self.muted, username))
+        return callback('USER_NOT_MUTED');
+
+    var shadow = self.muted[username].shadow;
+    delete self.muted[username];
+
+    var msg = {
+        date:      now,
+        type:      'unmute',
+        message: null,
+        moderator: moderatorUser.username,
+        username:  username,
+        shadow:    shadow,
+        bot: false
+    };
+
+    //If mute shadow inform only mods about it
+    if (shadow) {
+        self.io.to('moderators').emit('msg', msg);
+        self.io.to('mod:'+channelName).emit('msg', msg);
+        //If regular mute send mute message to the channel
+    } else {
+        self.io.to(channelName).emit('msg', msg);
+        self.io.to('moderators').emit('msg', msg);
+    }
+
+    callback(null);
+};
+
+//Send an error to the chat to a client's socket
+function sendErrorChat(socket, message) {
+    socket.emit('msg', {
+        date: new Date(),
+        type: 'error',
+        message: message
+    });
+}
+
+//Send an error event to a client's socket
+function sendError(socket, description) {
+    console.warn('Chat client error ', description);
+    socket.emit('err', description);
+}
+
+function isChannelNameInvalid(channelName) {
+    return (typeof channelName !== 'string' || channelName.length &lt; 1 || channelName.length &gt; 100);
+}
+
+function isChannelNameModsOnly(channelName) {
+    return /^mod:/.test(channelName);
+}
+
+module.exports = Chat;
+</code></pre>
+",<node.js><debugging><npm><lodash><npm-start>,0.0,0,0,0,0,0,0,1
+26094,25771,56150065,1,0,10804366,1.0,0.0,0.0,0.0,2019-05-15T13:02:57.357,3.0,4519.0,How to update the dependency of one package which is in package-lock.json,"<p>We want to update the lodash version to 4.17.11 but it is dependency of grunt-angular-translate . grunt-angular-translate is in package.json . If i am updating the grunt-angular-translate to 0.3.0 it is not updating the lodash to version 4.7.11 .How can we update the dependency which is in package-lock.json.</p>
+
+<p>package.json:</p>
+
+<pre><code>""devDependencies"": {
+    ""grunt"": ""^1.0.3"",
+    ""grunt-angular-translate"": ""^1.0.0"",
+    ""grunt-bump"": ""^0.8.0"",
+</code></pre>
+
+<p>package-lock.json:</p>
+
+<pre><code>""grunt-angular-translate"": {
+      ""version"": ""0.3.0"",
+      ""resolved"": ""https://registry.npmjs.org/grunt-angular-translate/-/grunt-angular-translate-0.3.0.tgz"",
+      ""integrity"": ""sha1-vQEYr6JNj1cCMf2NUtgp2AjFEbM="",
+      ""dev"": true,
+      ""requires"": {
+        ""flat"": ""^1.2.0"",
+        ""json-stable-stringify"": ""^1.0.0"",
+        ""lodash"": ""~2.4.1""
+      },
+      ""dependencies"": {
+        ""lodash"": {
+          ""version"": ""2.4.2"",
+          ""resolved"": ""https://registry.npmjs.org/lodash/-/lodash-2.4.2.tgz"",
+          ""integrity"": ""sha1-+t2DS5aDBz2hebPq5tnA0VBT9z4="",
+          ""dev"": true
+        }
+      }
+    },
+</code></pre>
+",<npm><lodash><npm-install>,0.0,0,0,0,0,0,0,1
+26202,25879,56276106,1,56276212,10385263,2.0,15.0,0.0,0.0,2019-05-23T13:15:08.757,3.0,9062.0,Lodash.uniqueId always returns 1,"<p>Try to use <a href=""https://lodash.com/docs/4.17.11#uniqueId"" rel=""nofollow noreferrer"">lodash</a> (version 4.17.11)</p>
+
+<p><code>_.uniqueId()</code> always returns <strong><em>1</em></strong> instead of random 3-digits number. </p>
+
+<p>Also <code>_.uniqueId('prefix')</code> always returns <strong><em>prefix1</em></strong>.</p>
+
+<p>Is it a problem?</p>
+",<javascript><npm><lodash>,0.0,0,0,0,0,0,0,1
+26711,26388,56745489,1,56746095,458425,3.0,2.0,0.0,0.0,2019-06-25T00:46:52.613,0.0,3568.0,import {fn1} from 'lib' vs import fn1 from 'lib',"<p>I am importing a few functions from lodash and my coworker tells me that it's better to import each function separately than to import them as a group.</p>
+
+<p>Current method:</p>
+
+<pre><code>import {fn1, fn2, fn3} from 'lodash';
+</code></pre>
+
+<p>Preferred method:</p>
+
+<pre><code>import fn1 from 'lodash/fn1';
+import fn2 from 'lodash/fn2';
+import fn3 from 'lodash/fn3';
+</code></pre>
+
+<p>Her reasoning is that latter imports less code, as it won't import the entire lodash library.</p>
+
+<p>Is that the case?</p>
+",<javascript><npm><webpack><lodash>,0.0,1,0,0,0,0,0,1
+26833,26510,56856280,1,56856624,344669,1.0,0.0,0.0,0.0,2019-07-02T16:01:13.700,0.0,2505.0,npm ERR! notarget No matching version found for lodash@4.17.12-pre,"<p>I see `lodash 4.17.12-pre is released. but npm not able to download this package, its giving no matching version error message.</p>
+
+<p><a href=""https://github.com/lodash/lodash/releases"" rel=""nofollow noreferrer"">https://github.com/lodash/lodash/releases</a></p>
+
+<p>How to download this version of package?</p>
+
+<pre><code>npm view lodash
+
+{ name: 'lodash',
+  description: 'Lodash modular utilities.',
+  'dist-tags': { latest: '4.17.11' },
+</code></pre>
+
+<p>Thanks</p>
+
+<p>SR</p>
+",<node.js><npm><lodash>,0.0,0,0,0,0,0,0,1
+26840,26517,56867099,1,56867264,10856873,2.0,0.0,0.0,0.0,2019-07-03T09:34:09.457,4.0,8024.0,How to fix Seriate and Lodash vulnerabilities,"<p>For my project I have one package used, Seriate. </p>
+
+<p><code>npm install seriate</code> </p>
+
+<p>However running this gives the following result:</p>
+
+<blockquote>
+  <p>found 17 vulnerabilities (9 low, 1 moderate, 7 high)</p>
+</blockquote>
+
+<p>I ran <code>npm audit</code> and <code>npm audit fix</code> yet nothing. I have also looked into the dependencies, Lodash seems to have a security issue (supposedly fixed at 4.17.11).</p>
+
+<p>How can I fix these? I have tried to update lodash like so: <code>npm install lodash@4.17.11</code> however that didn't work either. </p>
+
+<p>Also is this something to worry about, it runs from a local server which is secure in itself?</p>
+
+<p>thanks for any help </p>
+",<node.js><npm><lodash>,0.0,0,0,0,0,0,0,1
+27595,27136,57477490,1,57477582,11922204,1.0,2.0,0.0,0.0,2019-08-13T12:11:48.023,-1.0,889.0,"Why are all Lodash functions unavailable on my project? (""not a function"" Error)","<p>I just installed lodash and tried to use its <code>_.lowerCase</code> function. It did not work as I got <em>“TypeError: <code>_.lowerCase</code> is not a function”</em>. I reinstalled lodash and tried again with no result. I tried the <code>_.kebabCase</code> function as well and it did not work either (got the same error). I read some older posts and did not find a clear solution. Does anybody know what’s the matter with this error?</p>
+
+<p>Here is the part where the error is pointing at (<code>_.kebabCase</code> line):</p>
+
+<pre><code>app.get(""/posts/:content"", function(req, res){ 
+  let postName = _.kebabCase(req.params.content);
+  var checker = false;
+
+  for(let i = 0; i &lt; postArray.length; i++){
+    let currentTitle = _.kebabCase(postArray[i].title);
+
+    if(currentTitle == postName){
+      checker = true;
+      break;
+    }
+  }
+</code></pre>
+
+<p>Here is the Error message I get:</p>
+
+<p><a href=""https://i.stack.imgur.com/Deu7Y.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/Deu7Y.png"" alt=""TypeError: _.kebabCase is not a function""></a></p>
+",<javascript><node.js><npm><lodash>,0.0,0,0,0,0,0,0,1
+28143,27684,58010084,1,0,106979,2.0,0.0,0.0,0.0,2019-09-19T11:33:44.343,2.0,884.0,how to deal with bloated lodash npm package size?,"<p>I have been absent from nodejs development for a few years, and to my surprise when I did</p>
+
+<pre><code>$ npm install lodash
+</code></pre>
+
+<p>the size of my <code>node_modules</code> grew by 4.8MiB</p>
+
+<p>how come a library that judging by its source line count should be around 260KiB takes so much space?</p>
+
+<p>I am deploying my code as an AWS Lambda, and the ability to edit and debug in the console is lost due the increased size of my distribution file (partly because of this).</p>
+
+<p>What's the 2019 way to deal with this?</p>
+",<node.js><npm><lodash><packaging>,0.0,0,0,0,0,0,0,1
+29378,28850,59140940,1,0,10864386,2.0,0.0,0.0,0.0,2019-12-02T14:26:24.457,0.0,11829.0,"ERROR in node_modules/@types/lodash/common/collection.d.ts(1783,24): error TS2304: Cannot find name 'Exclude'","<p>Whenever I try to run <code>ng serve</code> command getting the following error. Below is the error detail.</p>
+
+<blockquote>
+  <p>ERROR in node_modules/@types/lodash/common/collection.d.ts(1783,24): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/collection.d.ts(1805,46): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/collection.d.ts(1827,46): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(818,12): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(827,12): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(837,12): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(848,12): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(853,45): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(870,34): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(878,34): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(887,34): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(897,34): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(902,43): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(916,34): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(924,34): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(933,34): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(943,34): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(948,43): error TS2304: Cannot find name 'NonNullable'.
+  node_modules/@types/lodash/common/object.d.ts(1689,12): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1706,12): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1723,12): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1740,12): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1817,12): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1841,12): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1865,12): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1874,12): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1898,12): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1974,34): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(1998,34): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(2022,34): error TS2304: Cannot find name 'Exclude'.
+  node_modules/@types/lodash/common/object.d.ts(2046,34): error TS2304: Cannot find name 'Exclude'.
+  src/app/dashboard/dashboard.component.ts(5,21): error TS2307: Cannot find module 'chart.js/src/chart.js'.</p>
+</blockquote>
+
+<p>And Below is my package.json file</p>
+
+<pre><code>{
+    ""name"": ""TestApplication"",
+    ""version"": ""0.0.0"",
+    ""license"": ""MIT"",
+    ""angular-cli"": {},
+    ""scripts"": {
+        ""ng"": ""ng"",
+        ""start"": ""ng serve --host 0.0.0.0 --port 4200"",
+        ""hmr"": ""ng serve --host 0.0.0.0 --port 4200 4201 --hmr -e=hmr"",
+        ""test"": ""ng test"",
+        ""pree2e"": ""webdriver-manager update --standalone false --gecko false"",
+        ""e2e"": ""protractor""
+    },
+    ""private"": true,
+    ""dependencies"": {
+        ""@angular/animations"": ""^5.2.5"",
+        ""@angular/cdk"": ""^5.2.5"",
+        ""@angular/common"": ""^5.2.5"",
+        ""@angular/compiler"": ""^5.2.5"",
+        ""@angular/core"": ""^5.2.5"",
+        ""@angular/forms"": ""^5.2.5"",
+        ""@angular/http"": ""^5.2.5"",
+        ""@angular/platform-browser"": ""^5.2.5"",
+        ""@angular/platform-browser-dynamic"": ""^5.2.5"",
+        ""@angular/router"": ""^5.2.5"",
+        ""@aspnet/signalr"": ""1.0.0-preview1-28189"",
+        ""@durwella/zoomable-canvas"": ""^1.1.0"",
+        ""@types/bootstrap"": ""^3.3.33"",
+        ""@types/jquery"": ""^3.2.12"",
+        ""@types/jquery.blockui"": ""0.0.28"",
+        ""@types/jquery.validation"": ""^1.16.3"",
+        ""@types/lodash"": ""^4.14.121"",
+        ""@types/moment"": ""^2.13.0"",
+        ""@types/moment-timezone"": ""^0.2.34"",
+        ""@types/signalr"": ""^2.2.33"",
+        ""@types/toastr"": ""^2.1.33"",
+        ""abp-ng2-module"": ""^2.0.0"",
+        ""abp-web-resources"": ""^3.5.0"",
+        ""adal-angular5"": ""^1.0.36"",
+        ""angular2-multiselect-dropdown"": ""^2.9.0"",
+        ""animate.css"": ""^3.5.2"",
+        ""block-ui"": ""^2.70.1"",
+        ""bootstrap"": ""^3.3.7"",
+        ""bootstrap-select"": ""^1.12.2"",
+        ""bootstrap-submenu"": ""^3.0.0"",
+        ""chart.js"": ""^2.6.0"",
+        ""core-js"": ""^2.4.1"",
+        ""famfamfam-flags"": ""^1.0.0"",
+        ""flot"": ""^0.8.0-alpha"",
+        ""font-awesome"": ""^4.7.0"",
+        ""jasmine"": ""^3.3.1"",
+        ""jquery"": ""^3.1.1"",
+        ""jquery-countto"": ""^1.2.0"",
+        ""jquery-migrate"": ""^3.0.0"",
+        ""jquery-slimscroll"": ""^1.3.8"",
+        ""jquery-sparkline"": ""^2.4.0"",
+        ""js-cookie"": ""^2.1.4"",
+        ""lodash"": ""^4.17.15"",
+        ""moment"": ""^2.18.1"",
+        ""moment-timezone"": ""^0.5.13"",
+        ""morris.js"": ""^0.5.0"",
+        ""ng2-charts"": ""^1.6.0"",
+        ""ng2-ckeditor"": ""^1.2.1"",
+        ""ng2-search-filter"": ""^0.4.7"",
+        ""ng2-toastr"": ""^4.1.2"",
+        ""ngx-bootstrap"": ""^2.0.2"",
+        ""ngx-debounce-click"": ""0.0.1"",
+        ""ngx-image-zoom"": ""^0.3.3"",
+        ""ngx-loading"": ""^2.0.1"",
+        ""ngx-pagination"": ""^3.0.3"",
+        ""ngx-pinch-zoom"": ""^1.2.0"",
+        ""ngx-spinner"": ""6.1.2"",
+        ""node-waves"": ""^0.7.5"",
+        ""push.js"": ""1.0.4"",
+        ""raphael"": ""^2.2.7"",
+        ""rxjs"": ""^5.5.2"",
+        ""signalr"": ""^2.2.1"",
+        ""simple-line-icons"": ""^2.4.1"",
+        ""spin.js"": ""^2.3.2"",
+        ""sweetalert"": ""^2.0.8"",
+        ""toastr"": ""^2.1.2"",
+        ""ts-helpers"": ""^1.1.2"",
+        ""web-animations-js"": ""^2.3.1"",
+        ""zone.js"": ""0.8.18""
+    },
+    ""devDependencies"": {
+        ""@angular/cli"": ""^1.6.8"",
+        ""@angular/compiler-cli"": ""^5.2.5"",
+        ""@angularclass/hmr"": ""^2.1.3"",
+        ""@types/jasmine"": ""2.8.6"",
+        ""@types/jasminewd2"": ""2.0.3"",
+        ""@types/node"": ""^8.0.27"",
+        ""codelyzer"": ""^3.1.2"",
+        ""jasmine-core"": ""^2.5.2"",
+        ""jasmine-spec-reporter"": ""^4.2.1"",
+        ""karma"": ""^1.4.1"",
+        ""karma-chrome-launcher"": ""^2.0.0"",
+        ""karma-cli"": ""^1.0.1"",
+        ""karma-coverage-istanbul-reporter"": ""^1.3.0"",
+        ""karma-jasmine"": ""^1.1.0"",
+        ""karma-jasmine-html-reporter"": ""^0.2.2"",
+        ""node-sass"": ""^4.13.0"",
+        ""nswag"": ""^11.12.7"",
+        ""protractor"": ""^5.1.1"",
+        ""ts-node"": ""^3.3.0"",
+        ""tslint"": ""^5.7.0"",
+        ""typescript"": ""2.5.3""
+    }
+}
+</code></pre>
+
+<p>So far I tried:</p>
+
+<ol>
+<li>npm install</li>
+<li>changed the TypeScript version to 2.8</li>
+<li>Deleted the node_modules and ran the npm install command </li>
+<li>updated all the components to the latest version.</li>
+</ol>
+
+<p>Any idea/suggestion is much appreciated.</p>
+",<angular><typescript><npm><angular-cli><lodash>,0.0,0,0,0,0,0,0,1
+30204,29676,59864001,1,0,11702338,0.0,7.0,0.0,0.0,2020-01-22T16:15:47.640,4.0,1071.0,Upgrade a package that isn't in package.json,"<p>I get a warning from GitHub today, asking me to handle vulnerability caused by <strong>lodash</strong> that version is lower than 4.17.12 (<a href=""https://i.stack.imgur.com/8Qyc0.png"" rel=""nofollow noreferrer"">This GitHub Alert</a>).</p>
+
+<p>But I don't directly use lodash at this time, it's used by my dependencies. Though all of the dependencies use lodash 4.17.15, a 4.17.11 is still there. Followings are the outputs of <code>yarn list --pattern lodash</code>.</p>
+
+<pre><code>...more dependencies above
+├─ cheerio@1.0.0-rc.3
+│  └─ lodash@4.17.15
+├─ global-tunnel-ng@2.7.1
+│  └─ lodash@4.17.15
+├─ istanbul-lib-instrument@3.3.0
+│  └─ lodash@4.17.15
+├─ jest-config@24.9.0
+│  └─ lodash@4.17.15
+├─ lodash@4.17.11
+</code></pre>
+
+<p>Then I tried <code>yarn remove lodash</code>, but got <code>error This module isn't specified in a package.json file.</code></p>
+
+<p><strong>So how do I upgrade the package(or remove it) that isn't in my packages.json?</strong></p>
+",<javascript><github><npm><lodash><yarnpkg>,0.0,0,0,0,0,0,0,1
+30375,29847,60001130,1,0,11848651,2.0,2.0,0.0,0.0,2020-01-31T09:27:31.753,0.0,5979.0,Uncaught ReferenceError: require is not defined?,"<p>I have downloaded node-js and I am using npm inside a folder. I have downloaded the <strong>lodash</strong> package as a dependency and it is in the <strong>node modules</strong> folder.</p>
+
+<p>but when I try to use it using <strong>require()</strong> it is giving above mentioned error in the console and suggesting to use <strong>ES6 modul</strong>e by vs code and require is a module of <strong>common.js</strong></p>
+
+<p>I have a package.json file and lodash is listed as a dependency. I am able to run lodash in the command line using node server but not in the browser</p>
+
+<p>Do we need any other package installed in order for require() function to run other than <strong>node-js</strong>?
+what am I doing wrong?
+I am on windows and using the latest version of node and npm
+    let a = require('lodash');</p>
+",<javascript><node.js><npm><lodash>,0.0,0,0,0,0,0,0,1
+31123,30595,60700036,1,0,2304751,1.0,1.0,0.0,0.0,2020-03-16T03:34:05.467,15.0,7229.0,Tree shaking in NextJS includes all of node_modules package even if not using it all,"<p>Below is a screen shot of my package size from Next JS. What I want to point out is the <code>react-color</code> components under <code>node_modules</code>. I am importing them this way:</p>
+
+<p><code>import { GithubPickerProps, GithubPicker, AlphaPicker } from 'react-color';</code></p>
+
+<p>But you see it includes all the things I'm not using such as <code>photoshop.js</code>, <code>sketch.js</code>, etc.</p>
+
+<p>How do I get it not to bundle the things I'm not using with tree shaking?</p>
+
+<p>I did notice that <code>import { debounce } from 'lodash';</code> imported all of <code>lodash</code> but <code>import debounce from 'lodash/debounce';</code> reduced the package size by 200kB.</p>
+
+<p><a href=""https://i.stack.imgur.com/vl7su.jpg"" rel=""noreferrer""><img src=""https://i.stack.imgur.com/vl7su.jpg"" alt=""enter image description here""></a></p>
+",<reactjs><typescript><npm><lodash><next.js>,0.0,0,0,0,0,0,0,1
+31181,30653,60748212,1,0,10541642,0.0,3.0,0.0,0.0,2020-03-18T22:13:24.143,0.0,39.0,Select is not getting populated with the element inside a Map object,"<p>I have the following code:</p>
+
+<pre><code>import React, { Component } from 'react';
+import { render } from 'react-dom';
+import Hello from './Hello';
+import './style.css';
+import _ from ""lodash"";
+
+interface AppProps { }
+interface AppState {
+  name: string;
+}
+
+class App extends Component&lt;AppProps, AppState&gt; {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'React'
+    };
+  }
+
+  render() {
+
+    let options = new Map(_.range(2002, 1920).map(yr =&gt; [yr.toString(), yr]));
+    console.log(options);
+
+    return (
+      &lt;div&gt;
+        &lt;Hello name={this.state.name} /&gt;
+        &lt;p&gt;
+          Start editing to see some magic happen :)
+        &lt;/p&gt;
+        &lt;select&gt;
+        {
+          [...options.keys()].map((key: string) =&gt; {
+            return (&lt;option value={key} key={key}&gt;{options.get(key)}&lt;/option&gt;);
+          })
+        }
+        &lt;/select&gt;
+
+      &lt;/div&gt;
+    );
+  }
+}
+
+render(&lt;App /&gt;, document.getElementById('root'));
+</code></pre>
+
+<p><a href=""https://stackblitz.com/edit/react-ts-6jygtm?file=index.tsx"" rel=""nofollow noreferrer"">https://stackblitz.com/edit/react-ts-6jygtm?file=index.tsx</a></p>
+
+<p>Do you have any idea of why the <code>Select</code> element is not getting populated with the elements inside that <code>Map</code> object?</p>
+
+<p>I'm getting these errors:</p>
+
+<p><a href=""https://i.stack.imgur.com/bUrgP.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/bUrgP.png"" alt=""enter image description here""></a></p>
+",<javascript><reactjs><typescript><npm><lodash>,0.0,0,0,0,0,0,0,1
+32111,31583,61554829,1,61554910,7579703,1.0,0.0,0.0,0.0,2020-05-02T05:17:38.093,0.0,352.0,Lodash like import implementation,"<p>I am looking for references on How to implement lodash like imports for my module which is a npm package.
+Example
+in lodash we can import like <br/> <code>import get from ""lodash/get"";</code></p>
+
+<p>Currently in my module we can import like this <br/><br/><code>import {sample1} from ""module"";</code> <br/><br/>but it would be great if we can import like this <br/><br/><code>import sample1 from ""module/sample1"";</code></p>
+",<javascript><npm><package><lodash>,0.0,0,0,0,0,0,0,1
+32963,32435,62327305,1,62327652,7704544,2.0,0.0,0.0,0.0,2020-06-11T14:58:45.600,1.0,97.0,Transform object by removing a property but maintaining its content,"<p>I'm trying to find a method to ""reduce"" an object.
+This is what i have</p>
+
+<pre><code>{ _attributes: { name: 'titolo', description: 'il titolo della sezione' },
+  field:
+   [ { _attributes:
+        { name: 'titolo',
+          type: 'input',
+          label: 'titolo',
+          value: 'titolo' } },
+     { _attributes:
+        { name: 'colore',
+          type: 'input',
+          select: 'giallo,blu',
+          label: 'seleziona il colore',
+          value: 'titolo' } }
+    ] 
+}
+</code></pre>
+
+<p>and this is what i'd like to have</p>
+
+<pre><code>{  name: 'titolo', description: 'il titolo della sezione' ,
+  field:
+   [ 
+        { name: 'titolo',
+          type: 'input',
+          label: 'titolo',
+          value: 'titolo' } ,
+
+        { name: 'colore',
+          type: 'input',
+          select: 'giallo,blu',
+          label: 'seleziona il colore',
+          value: 'titolo' } 
+    ] 
+}
+</code></pre>
+
+<p>Basically removing the _attributes property, but maintaining its content.
+I'd like to know if is there some smart method other than looping the object.</p>
+",<javascript><npm><lodash>,0.0,0,0,0,0,0,0,1
+33458,32930,62787452,1,0,9702455,1.0,0.0,0.0,0.0,2020-07-08T04:15:53.407,1.0,680.0,Lodash version number is mismatch in package-lock.json?,"<p>i am using the lodash latest version. But in package-lock.json. It's in version @4.17.4. Because of this veracode is showing high risk vulnerability in lodash. When i ran npm audit.</p>
+<pre><code>Invalid: lock file's lodash@4.17.4 does not satisfy lodash@4.17.15
+</code></pre>
+<p>it shows like this.</p>
+<p>After giving npm audit fix. Its still in the same version number in package-lock.json.</p>
+<p>Is there any way to update the version number in package-lock.json.</p>
+<p>Please help me with this. Thanks in advance.</p>
+",<reactjs><npm><lodash><veracode>,0.0,0,0,0,0,0,0,1
+34521,33993,63707603,1,0,203018,1.0,4.0,0.0,0.0,2020-09-02T14:21:30.943,11.0,21380.0,"lodash error while building /@types/lodash/common/object.d.ts (1188,142): '(' expected","<p>Everything was fine, but suddenly my build started to fail. And these are the errors I am seeing</p>
+<pre><code>ERROR in /node_modules/@types/lodash/common/function.d.ts (852,68): ';' expected.
+
+ERROR in /node_modules/@types/lodash/common/common.d.ts (9,11): ';' expected.
+
+ERROR in /node_modules/@types/lodash/common/common.d.ts (9,56): '(' expected.
+
+ERROR in /node_modules/@types/lodash/common/common.d.ts (9,72): '(' expected.
+
+ERROR in /node_modules/@types/lodash/common/common.d.ts (9,86): '(' expected.
+
+ERROR in /node_modules/@types/lodash/common/common.d.ts (9,103): '(' expected.
+</code></pre>
+<p>My package.json shows following versions for typescript and lodash:</p>
+<pre><code>&quot;@types/lodash&quot;: &quot;^4.14.74&quot;,
+&quot;typescript&quot;: &quot;2.1.5&quot;,
+</code></pre>
+<p>I tried to use <code>npm i -D @types/lodash@ts2.1.5</code> , but that didn't help as npm throws an error saying No compatible version found.</p>
+<p>Anyone know what version for lodash I can use?</p>
+",<javascript><typescript><npm><lodash>,0.0,0,0,0,0,0,0,1
+34607,34079,63785650,1,0,6025788,1.0,0.0,0.0,0.0,2020-09-08T00:24:03.657,1.0,943.0,"Can I use package.json ""resolutions"" to substitute in lodash-es for lodash?","<p>Pretty straightforward, I'm wondering if resolutions can be used in this fashion (substituting in a <em>different</em>) package like you can for dependencies.</p>
+<pre class=""lang-js prettyprint-override""><code>  &quot;resolutions&quot;: {
+    &quot;lodash&quot;: &quot;npm:lodash-es@^14.7.x&quot;
+  },
+</code></pre>
+<p>And if I can do that with NPM or Yarn, are there problems beyond the normal risks if I were to force <code>lodash</code> to a certain version.</p>
+",<javascript><npm><lodash><yarnpkg><yarn-workspaces>,0.0,0,0,0,0,0,0,1
+36169,35641,65289529,1,0,13646749,1.0,2.0,0.0,0.0,2020-12-14T13:06:27.823,0.0,92.0,Installing lodash.filter,"<p>What is the difference between <code>npm install</code> and <code>npm install --save</code>?</p>
+<p>I try to install <code>lodash.filter</code> using <code>npm install --save lodash.filter</code>. I thought it install the packet + describes it in package.json.
+But the system says, she do not understand, what <code>lodash.filter</code> is.</p>
+<p>Should I install <code>lodash.filter</code> again using <code>npm install lodash.filter</code>? Or what should I do? Uninstalling <code>lodash.filter</code> and trying to install it again?</p>
+",<node.js><lodash><npm-install>,0.0,0,0,0,0,0,0,1
+36870,36342,65894808,1,0,8897020,2.0,4.0,0.0,0.0,2021-01-26T01:40:46.107,0.0,165.0,How to get all properties of the second array of objects when comparing with the first?,"<p>I am using JavaScript with lodash and have two array of objects as follows:</p>
+<pre><code>objArr1 = [{'x': 1, 'y': 2, 'z': 3}, {'x': 10, 'y': 20, 'z': 30}, {'x': 100, 'y': 200, 'z': 300}, {'x': 1000, 'y': 2000, 'z': 3000}, {'x': 10000, 'y': 20000, 'z': 30000}]
+
+objArr2 = [{'x': 1, 'y': 2, 'a': 5}, {'x': 10, 'y': 20, 'a': 6}, {'x': 100, 'y': 200, 'a': 9}]
+</code></pre>
+<p>I am using the matching key as 'x' and I am able to get:</p>
+<pre><code>_.intersectionBy(objArr1, objArr2, 'x')
+
+[{'x': 1, 'y': 2, 'z': 3}, {'x': 10, 'y': 20, 'z': 30}, {'x': 100, 'y': 200, 'z': 300}]
+</code></pre>
+<p>However, I also need to get the 'a' property in the second array of objects.</p>
+<p>e.g.</p>
+<pre><code>[{'x': 1, 'y': 2, 'z': 3, 'a': 5}, {'x': 10, 'y': 20, 'z': 30, 'a': 6}, {'x': 100, 'y': 200, 'z': 300, 'a': 9}]
+</code></pre>
+<p>Couldn't seem to figure out using lodash.</p>
+<p>Please help! Thanks!</p>
+",<javascript><arrays><npm><lodash><javascript-objects>,0.0,0,0,0,0,0,0,1
+37593,37065,66474855,1,66477733,1355504,1.0,0.0,0.0,0.0,2021-03-04T12:16:24.803,2.0,4308.0,How can I update only the lodash package a child dependent(required dependency package for babel/core) from lodash@4.17.19 to v4.17.21,"<p>Recently <code>lodash</code> package reported a security vulnerability issue on the github page. You can find details here. <a href=""https://github.com/lodash/lodash/issues/5083"" rel=""nofollow noreferrer"">https://github.com/lodash/lodash/issues/5083</a>.</p>
+<pre>
+This latest version of lodash has security vulnerability of Command Injection (CVE-2021-23337).
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23337
+https://snyk.io/vuln/SNYK-JS-LODASH-1040724
+
+All versions of package lodash; all versions of package org.fujion.webjars:lodash are vulnerable to Command Injection via template.
+</pre>
+<p>They have resolved the issue and its fix is present in the lodash v4.17.21.
+I am using the Angular 10 version. I am not using lodash directly but, One of the angular package that is <code>@angular/localize@10.0.7</code> internally uses uses <code>@babel/core@7.8.3</code> and this babel internally uses <code>lodash@4.17.19</code>.</p>
+<p>Angular people will update the version number in their latest release and currently, I don't want to upgrade to the latest version of angular. Therefore, my question is how can I update only the lodash package, a child dependent(required dependency package for babel/core) from lodash@4.17.19 to v4.17.21 ?</p>
+",<javascript><angular><npm><lodash><angular-localize>,0.0,0,0,0,0,0,0,1
+37697,37169,66546320,1,0,5698411,0.0,1.0,0.0,0.0,2021-03-09T11:49:15.677,1.0,254.0,TWISTLOCK Issue for lodash package while deploying,"<p>While deploying NODE code getting package vulnerability issue for lodash.
+I have updated lodash package version to latest version 4.17.21 but, still showing vulnerability issue .
+Below is the error.</p>
+<p>lodash 4.17.19 High Fixed IN 4.17.21</p>
+",<node.js><express><npm><jenkins-pipeline><lodash>,0.0,0,0,1,0,0,0,1
+38173,37645,66933728,1,0,15522076,1.0,0.0,0.0,0.0,2021-04-03T17:00:27.093,0.0,693.0,How to fix NPM high severity vulnerabilities? (Pollution),"<p>i wanted to install some npm packages but i get the same error always</p>
+<p>&quot;3 high severity vulnerabilities&quot;</p>
+<p>when i press npm audit fix</p>
+<p>i get always this:</p>
+<p><a href=""https://i.stack.imgur.com/3oJIB.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/3oJIB.png"" alt=""this is the error i get with every command i use"" /></a></p>
+<p>i tried updating lodash and  jsdoctypeparser since the links say that pollution problems come with old versions of lodash and jsdoctypeparser but it doesn't work (at least the command to run the update, it gives the same error)</p>
+<p>also tried the npm audit fix --force but it's the same</p>
+",<javascript><node.js><npm><lodash><npm-update>,0.0,0,0,0,0,0,0,1
+38261,37733,67019220,1,0,3537901,6.0,3.0,0.0,0.0,2021-04-09T10:13:47.077,10.0,23539.0,Cypress: Module not found: Error: Can't resolve 'cypress/types/lodash,"<p>I am running my first test in Cypress from VS IDE and Cypress was working while until I encountered the error below without having changed or updated anything..</p>
+<p>My Cypress (7.0.0) installed via NPM command using Node.js 14.16.1 is encountering &quot;Module not found: Error: Can't resolve 'cypress/types/lodash&quot; error message when executing my tests.</p>
+<p>I have tried to remove all loadash files from the project and executing the code but the error remains unchanged.</p>
+<p>Can someone please tell me how I can diagnose or fix this issue!!</p>
+<hr />
+<h2><strong>Error Message:</strong></h2>
+<pre><code>Error: Webpack Compilation Error
+./cypress/integration/myTests/helloWorld.test.js
+Module not found: Error: Can't resolve 'cypress/types/lodash' in 'C:\Users\.....\Documents\.....\Tools\Cypress\Software\cypress\integration\myTests'
+resolve 'cypress/types/lodash' in 'C:\Users\.....\Documents\.....\Tools\Cypress\Software\cypress\integration\myTests'
+  Parsed request is a module
+  using description file: C:\Users\.....\Documents\.....\Tools\Cypress\Software\package.json (relative path: ./cypress/integration/myTests)
+    Field 'browser' doesn't contain a valid alias configuration
+    Looked for and couldn't find the file at the following paths:
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\cypress\integration\myTests\node_modules]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\cypress\integration\node_modules]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\cypress\node_modules]
+[C:\Users\.....\Documents\.....\Tools\Cypress\node_modules]
+[C:\Users\.....\Documents\.....\Tools\node_modules]
+[C:\Users\.....\Documents\.....\node_modules]
+[C:\Users\.....\Documents\node_modules]
+[C:\Users\.....\node_modules]
+[C:\Users\node_modules]
+[C:\node_modules]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash.js]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash.json]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash.jsx]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash.mjs]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash.coffee]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash\index]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash\index.js]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash\index.json]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash\index.jsx]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash\index.mjs]
+[C:\Users\.....\Documents\.....\Tools\Cypress\Software\node_modules\cypress\types\lodash\index.coffee]
+ @ ./cypress/integration/myTests/helloWorld.test.js 6:4-35
+ 
+    at Watching.handle [as handler] (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\@cypress\webpack-preprocessor\dist\index.js:172:23)
+    at C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\webpack\lib\Watching.js:99:9
+    at AsyncSeriesHook.eval [as callAsync] (eval at create (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\tapable\lib\HookCodeFactory.js:33:10), &lt;anonymous&gt;:6:1)
+    at AsyncSeriesHook.lazyCompileHook (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\tapable\lib\Hook.js:154:20)
+    at Watching._done (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\webpack\lib\Watching.js:98:28)
+    at C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\webpack\lib\Watching.js:73:19
+    at Compiler.emitRecords (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\webpack\lib\Compiler.js:499:39)
+    at C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\webpack\lib\Watching.js:54:20
+    at C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\webpack\lib\Compiler.js:485:14
+    at AsyncSeriesHook.eval [as callAsync] (eval at create (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\tapable\lib\HookCodeFactory.js:33:10), &lt;anonymous&gt;:6:1)
+    at AsyncSeriesHook.lazyCompileHook (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\tapable\lib\Hook.js:154:20)
+    at C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\webpack\lib\Compiler.js:482:27
+    at C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\neo-async\async.js:2818:7
+    at done (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\neo-async\async.js:3522:9)
+    at AsyncSeriesHook.eval [as callAsync] (eval at create (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\tapable\lib\HookCodeFactory.js:33:10), &lt;anonymous&gt;:6:1)
+    at AsyncSeriesHook.lazyCompileHook (C:\Users\.....\AppData\Local\Cypress\Cache\7.0.0\Cypress\resources\app\packages\server\node_modules\tapable\lib\Hook.js:154:20)
+</code></pre>
+",<javascript><node.js><npm><lodash><cypress>,0.0,0,0,0,0,0,0,1
+38795,38267,67488236,1,67488343,13969734,1.0,0.0,0.0,0.0,2021-05-11T13:55:18.157,1.0,217.0,Importing modules in JS,"<p>I got a problem that I struggle with for a long time and it's about importing modules to my main JS script.</p>
+<p>I downloaded a lodash library via npm and I want to import it into my main script in order to use its functionalities. Here's the code:</p>
+<pre><code>import * as _ from './node_modules/lodash/lodash.js';
+
+console.log(_.head([1,2,3]))
+</code></pre>
+<p>However, when I'm running the script I receive such an error:</p>
+<blockquote>
+<pre class=""lang-none prettyprint-override""><code>!  ▶ Uncaught TypeError: _.head is not a function
+        &lt;anonymous&gt; http://127.0.0.1:5500/playground.js:43
+      [Więcej informacji]
+&gt;&gt; _.head([1,2])
+&lt;- 1
+</code></pre>
+</blockquote>
+<p>As you can see, I cannot use <code>_.head</code> in the script, but I can use it from the console, which - I think - means that lodash was imported correctly.</p>
+<p>What might be the cause of this problem? Also, I don't know if it's just me or is importing modules really such a painful thing to do? Maybe you can recommend some articles on this topic?
+Thank you for all the replies in advance</p>
+",<javascript><npm><import><lodash>,0.0,0,0,0,0,0,0,1
+41705,40958,69599700,1,0,17170496,0.0,0.0,0.0,0.0,2021-10-16T21:32:46.540,1.0,1377.0,Getting command Injection in Lodash,"<p>Recently , I am facing below vulnerability on my security scan</p>
+<p>Security scan results</p>
+<pre><code>Explanation: The `lodash` package is vulnerable to Command Injection. The `template` function in the `lodash.js` and `template.js` files does not properly ensure the `variable` property of the `options` parameter to be a valid EcmaScript. An attacker can exploit this vulnerability by passing a template with malicious JavaScript in it to the affected function. This will result in Remote Code Execution.
+</code></pre>
+<p><em>Note:</em> This vulnerability is due to an insufficient fix for CVE-2021-23337.</p>
+<p>Detection: The application is vulnerable by using this component.</p>
+<p>Recommendation: There is no non-vulnerable upgrade path for this component/package. We recommend investigating alternative components or a potential mitigating control.</p>
+<p>When I run npm audit, I see this is vulnerabilities.Though , All of  my packages are updated in Package.Json file still I am getting this error</p>
+<p>NPM audit results:</p>
+<pre><code>{
+ High    Command Injection in lodash                     
+ Package loadash
+ Patched in      &gt;=4.17.21
+ Dependency ofgrunt-maven-deploy [dev]
+  Path            grunt-maven-deploy &gt;     grunt &gt; grunt-legacy-log &gt;               
+              grunt-legacy-log-utils &gt; lodash                               
+More info       https://github.com/advisories/GHSA-35jh-r3h4-6jhm  
+
+
+    
+High    Command Injection in lodash                                                                
+Patched in      &gt;=4.17.21                                                     
+Dependency of   grunt-maven-deploy [dev] 
+Path            grunt-maven-deploy &gt; grunt &gt; grunt-legacy-log &gt; lodash     
+More info       https://github.com/advisories/GHSA-35jh-r3h4-6jhm   
+}
+
+“Package.json”
+{
+“Grunt” : “1.4.1”
+“Grunt-cli”: “1.4.3”
+“Grunt-maven-deploy” :”0.2.1”
+“Grunt-run”: “0.8.1”
+“Grunt-tslint”: “5.0.2”
+}
+</code></pre>
+<p>Could someone please explain and help me to resolve this issue</p>
+<p>Thanks</p>
+",<javascript><npm><lodash><fortify><commandinjection>,0.0,0,0,0,0,0,0,1
+42058,41311,69917034,1,69917336,17329834,2.0,0.0,0.0,0.0,2021-11-10T16:40:19.120,0.0,259.0,If I install lodash.minby does it means it just installs this specific function?,"<p>I am getting rid of lodash, so some stuff I am redoing in es6 and other like this one I would like to keep but just this one function.</p>
+<p>I see there is this npm <a href=""https://www.npmjs.com/package/lodash.minby"" rel=""nofollow noreferrer"">https://www.npmjs.com/package/lodash.minby</a> but im not sure if i install this it will only install this, or the whole library, can anyone please confirm?</p>
+<p>Thanks.</p>
+",<npm><lodash>,0.0,0,0,0,0,0,0,1
+42112,41365,69950479,1,0,1445015,0.0,0.0,0.0,0.0,2021-11-13T00:34:09.703,1.0,46.0,Extra files in lodash tarball in npm registry,"<p>I was inspecting the lodash tarball in npm registry, downloaded through <code>npm pack lodash</code> command, and was comparing the file contents with the files on the lodash <a href=""https://github.com/lodash/lodash"" rel=""nofollow noreferrer"">GitHub repository</a>. The tarball contains <code>js</code> files prefixed with an underscore that are not present in the repository. For example, <code>_DataView.js</code>, <code>_coreJsData.js</code> etc. There are 306 such files in the tarball that are not present in the repository.</p>
+<p>Therefore, my question is,</p>
+<p>(1) What are these files that are present in the npm tarball but not in the source repository?</p>
+<p>(2) If they are auto-generated files, how to detect such files?</p>
+",<javascript><npm><lodash>,0.0,0,0,0,0,0,0,1
+46707,45960,73222347,1,0,2127277,1.0,0.0,0.0,0.0,2022-08-03T13:11:04.033,1.0,593.0,Why webpack bundle analyzer show lodash bundled more than once?,"<p>We use <a href=""https://www.npmjs.com/package/webpack-bundle-analyzer"" rel=""nofollow noreferrer"">webpack-bundle-analyzer</a> to visualize what is bundled in our application and optimize it.</p>
+<p>It appears <code>lodash</code> is imported, among many other <code>lodash.*</code> package (those package are just small part of lodash), you can visualize lodash in red in the following screenshot:</p>
+<p><img src=""https://user-images.githubusercontent.com/77674046/182615945-402005b0-0606-46d0-9005-da1ea9313c63.png"" alt=""image"" /></p>
+<p>In our <a href=""https://github.com/pass-culture/pass-culture-app-native/blob/master/package.json"" rel=""nofollow noreferrer""><code>package.json</code></a>, we only have installed <code>lodash.*</code> modules, and in our sources we only import those module, we never <code>import 'lodash'</code> directly.</p>
+<p>This is the result of <code>npm ls lodash</code>:</p>
+<pre class=""lang-rb prettyprint-override""><code>$ npm ls lodash
+PassCulture@1.199.0 /home/dka/workspace/github.com/pass-culture/pass-culture-app-native
+├─┬ @lingui/cli@3.13.2
+│ └─┬ inquirer@7.3.3
+│   └── lodash@4.17.21 deduped
+├─┬ @react-native-community/eslint-config@3.0.1
+│ └─┬ eslint-plugin-flowtype@2.50.3
+│   └── lodash@4.17.21 deduped
+├─┬ @sentry/react-native@4.1.2
+│ └─┬ @sentry/wizard@1.2.17
+│   ├─┬ inquirer@6.5.2
+│   │ └── lodash@4.17.21 deduped
+│   └── lodash@4.17.21 deduped
+├─┬ @storybook/addon-a11y@6.5.3
+│ ├─┬ @storybook/api@6.5.3
+│ │ └── lodash@4.17.21 deduped
+│ ├─┬ @storybook/csf@0.0.2--canary.4566f4d.1
+│ │ └── lodash@4.17.21 deduped
+│ └── lodash@4.17.21
+├─┬ @storybook/addon-actions@6.5.3
+│ ├── lodash@4.17.21 deduped
+│ └─┬ telejson@6.0.8
+│   └── lodash@4.17.21 deduped
+├─┬ @storybook/addon-essentials@6.5.3
+│ ├─┬ @storybook/addon-controls@6.5.3
+│ │ └── lodash@4.17.21 deduped
+│ └─┬ @storybook/addon-docs@6.5.3
+│   ├─┬ @storybook/mdx1-csf@0.0.1-canary.1.867dcd5.0 invalid: &quot;canary&quot; from node_modules/@storybook/addon-docs
+│   │ └── lodash@4.17.21 deduped
+│   ├─┬ @storybook/preview-web@6.5.3
+│   │ └── lodash@4.17.21 deduped
+│   ├─┬ @storybook/source-loader@6.5.3
+│   │ └── lodash@4.17.21 deduped
+│   └── lodash@4.17.21 deduped
+├─┬ @storybook/addon-interactions@6.5.9
+│ ├─┬ @storybook/api@6.5.9
+│ │ └── lodash@4.17.21 deduped
+│ └─┬ @storybook/instrumenter@6.5.9
+│   └─┬ @storybook/addons@6.5.9
+│     └─┬ @storybook/api@6.5.9
+│       └── lodash@4.17.21 deduped
+├─┬ @storybook/react@6.5.3
+│ ├─┬ @storybook/core@6.5.3
+│ │ ├─┬ @storybook/core-client@6.5.3
+│ │ │ ├─┬ @storybook/client-api@6.5.3
+│ │ │ │ └── lodash@4.17.21 deduped
+│ │ │ └── lodash@4.17.21 deduped
+│ │ └─┬ @storybook/core-server@6.5.3
+│ │   ├─┬ @storybook/core-client@6.5.3
+│ │   │ └── lodash@4.17.21 deduped
+│ │   └── lodash@4.17.21 deduped
+│ ├─┬ @storybook/docs-tools@6.5.3
+│ │ └── lodash@4.17.21 deduped
+│ ├─┬ @storybook/store@6.5.3
+│ │ └── lodash@4.17.21 deduped
+│ ├─┬ babel-plugin-react-docgen@4.2.1
+│ │ └── lodash@4.17.21 deduped
+│ └── lodash@4.17.21 deduped
+├─┬ @testing-library/jest-dom@5.16.2
+│ └── lodash@4.17.21 deduped
+├─┬ @welldone-software/why-did-you-render@6.2.3
+│ └── lodash@4.17.21 deduped
+├─┬ appcenter-cli@2.10.10
+│ ├─┬ inquirer@8.2.0
+│ │ └── lodash@4.17.21 deduped
+│ └── lodash@4.17.21 deduped
+├─┬ babel-core@6.26.3
+│ ├─┬ babel-generator@6.26.1
+│ │ └── lodash@4.17.21 deduped
+│ ├─┬ babel-register@6.26.0
+│ │ └── lodash@4.17.21 deduped
+│ ├─┬ babel-template@6.26.0
+│ │ └── lodash@4.17.21 deduped
+│ ├─┬ babel-traverse@6.26.0
+│ │ └── lodash@4.17.21 deduped
+│ ├─┬ babel-types@6.26.0
+│ │ └── lodash@4.17.21 deduped
+│ └── lodash@4.17.21 deduped
+├─┬ babel-plugin-styled-components@2.0.7
+│ └── lodash@4.17.21 deduped
+├─┬ flipper-plugin-react-query-native-devtools@3.0.0
+│ └── lodash@4.17.21 deduped
+├─┬ html-webpack-plugin@4.5.2
+│ ├── lodash@4.17.21 deduped
+│ └─┬ pretty-error@2.1.2
+│   ├── lodash@4.17.21 deduped
+│   └─┬ renderkid@2.0.7
+│     └── lodash@4.17.21 deduped
+├─┬ jest@26.6.3
+│ └─┬ @jest/core@26.6.3
+│   └─┬ jest-config@26.6.3
+│     └─┬ jest-environment-jsdom@26.6.2
+│       └─┬ jsdom@16.7.0
+│         ├─┬ data-urls@2.0.0
+│         │ └─┬ whatwg-url@8.7.0
+│         │   └── lodash@4.17.21 deduped
+│         └─┬ whatwg-url@8.7.0
+│           └── lodash@4.17.21 deduped
+├─┬ optimize-css-assets-webpack-plugin@5.0.8
+│ └─┬ last-call-webpack-plugin@3.0.0
+│   └── lodash@4.17.21 deduped
+├─┬ react-native-calendars@1.1284.0
+│ └── lodash@4.17.21 deduped
+├─┬ react-native@0.68.2
+│ ├─┬ @react-native-community/cli-platform-android@7.0.1
+│ │ ├─┬ @react-native-community/cli-tools@7.0.1
+│ │ │ └── lodash@4.17.21 deduped
+│ │ └── lodash@4.17.21 deduped
+│ ├─┬ @react-native-community/cli-platform-ios@7.0.1
+│ │ ├─┬ @react-native-community/cli-tools@7.0.1
+│ │ │ └── lodash@4.17.21 deduped
+│ │ └── lodash@4.17.21 deduped
+│ └─┬ @react-native-community/cli@7.0.3
+│   ├─┬ @react-native-community/cli-hermes@6.3.0
+│   │ └─┬ @react-native-community/cli-platform-android@6.3.0
+│   │   └── lodash@4.17.21 deduped
+│   ├─┬ @react-native-community/cli-tools@6.2.0
+│   │ └── lodash@4.17.21 deduped
+│   └── lodash@4.17.21 deduped
+├─┬ styled-components@5.3.3
+│ └─┬ babel-plugin-styled-components@2.0.2
+│   └── lodash@4.17.21 deduped
+├─┬ ts-jest@26.5.6
+│ └── lodash@4.17.21 deduped
+├─┬ webpack-bundle-analyzer@4.5.0
+│ └── lodash@4.17.21 deduped
+├─┬ webpack-dev-server@3.11.3
+│ ├─┬ http-proxy-middleware@0.19.1
+│ │ └── lodash@4.17.21 deduped
+│ └─┬ portfinder@1.0.28
+│   └─┬ async@2.6.4
+│     └── lodash@4.17.21 deduped
+├─┬ webpack-manifest-plugin@2.2.0
+│ └── lodash@4.17.21 deduped
+└─┬ workbox-webpack-plugin@6.4.2
+  └─┬ workbox-build@6.4.2
+    └── lodash@4.17.21 deduped
+</code></pre>
+<p>As you can see, all the modules are devDependencies except one which is <code>@sentry/react-native</code> (our webapp is also a react-native app), I doubt this is the reason why lodash get bundled, but I have raised an issue <a href=""https://github.com/getsentry/sentry-wizard/issues/182"" rel=""nofollow noreferrer"">sentry-wizard/issues/182</a> and <a href=""https://github.com/getsentry/sentry-react-native/issues/2409"" rel=""nofollow noreferrer"">sentry-react-native/issues/2409</a>.</p>
+<p>Also, the web just bundle in dev environment, but there is no <code>node_modules</code> folder distributed in the production build, this is how webpack work, so this whole <code>lodash</code> is a mystery.</p>
+<p>Why does the whole <code>lodash</code> get also imported and how can I improve my bundle?</p>
+",<javascript><npm><webpack><lodash><tree-shaking>,0.0,1,0,0,0,0,0,1
+49489,48742,75202113,1,0,16176865,1.0,0.0,0.0,0.0,2023-01-22T16:37:05.203,0.0,147.0,How can I create an npm package where submodules can be imported directly,"<p>How can I create an npm package where submodules can be imported directly, such as with<br />
+<code>const logger = require('server-package-poc/logger')?</code><br />
+I want the same functionality as in the lodash or crypto-js packages</p>
+<pre><code>// server-package-poc/index.ts
+import greeter from &quot;./greeter&quot;;
+import logger from &quot;./logger&quot;;
+
+export { greeter, logger };
+
+</code></pre>
+<p><a href=""https://i.stack.imgur.com/sXny2.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/sXny2.png"" alt=""enter image description here"" /></a></p>
+<p>how can i access logger/greeter without /dist?</p>
+",<node.js><npm><lodash><node-modules><npm-package>,0.0,0,0,0,0,0,0,1
+50538,49791,75786387,1,0,15357678,3.0,1.0,0.0,0.0,2023-03-20T03:32:50.047,0.0,335.0,How to Successfully Upgrade lodash: Troubleshooting Upgrade Failures,"<p>When attempting to upgrade lodash in a Node.js directory, I encountered the following errors:</p>
+<p>Error 1:</p>
+<pre><code>sudo npm install lodash@latest
+npm WARN saveError ENOENT: no such file or directory, open '/usr/share/nodejs/package.json'
+npm WARN enoent ENOENT: no such file or directory, open '/usr/share/nodejs/package.json'
+npm WARN nodejs No description
+npm WARN nodejs No repository field.
+npm WARN nodejs No README data
+npm WARN nodejs No license field.
+
++ lodash@4.17.21
+updated 1 package and audited 1 package in 0.384s
+found 0 vulnerabilities
+</code></pre>
+<p>Error 2:</p>
+<pre><code>/usr/share/nodejs/lodash$ sudo npm install lodash@latest
+npm ERR! code ENOSELF
+npm ERR! Refusing to install package with name &quot;lodash&quot; under a package
+npm ERR! also called &quot;lodash&quot;. Did you name your project the same
+npm ERR! as the dependency you're installing?
+npm ERR!
+npm ERR! For more information, see:
+npm ERR!     &lt;https://docs.npmjs.com/cli/install#limitations-of-npms-install-algorithm&gt;
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2023-03-20T03_12_36_652Z-debug.log
+</code></pre>
+<p>I also noticed that lodash was installed in the /home/ubuntu/node_modules/ directory when I ran the upgrade command in other directories. However, I'm unsure whether I need to update lodash in the /usr/share/nodejs directory, as it's the only directory showing version information when I use npm list lodash. Additionally, I didn't install lodash in the node_modules directory, and I'm not sure what to do with it.</p>
+<p>Furthermore, there are many lodash-related files under the nodejs directory. What are the functions of these files, and are they all related to lodash?&quot;</p>
+",<javascript><node.js><ubuntu><npm><lodash>,0.0,0,0,0,0,0,0,1
+50569,49822,75806937,1,0,6365949,0.0,3.0,0.0,0.0,2023-03-21T22:36:10.700,1.0,335.0,Can't fix npm audit vulnerabilities,"<p>I have a react js electron repo, where when I run <code>npm i</code> in my windows 10 command prompt, I get this output:</p>
+<pre><code>34 vulnerabilities (1 low, 9 moderate, 16 high, 8 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+</code></pre>
+<p>I want to fix all the vulnerabilities, so will start with the 8 critical issues.
+I've tried running <code>npm audit fix</code> and <code>npm audit fix --force</code> but the number of vulnerabilities is the same.</p>
+<p>I installed the npm package <code>npm-check-updates</code> to make sure everything in my package.json file was up to date:</p>
+<pre><code>npx npm-check-updates
+Checking C:\Users\marti\repo\package.json
+[====================] 27/27 100%
+
+All dependencies match the latest package versions :)
+
+</code></pre>
+<p>But when I run <code>npm audit</code>, even after deleting my node_modules and package-lock.json before running <code>npm i</code> again, I still see it says 8 critical vulnerabilities.</p>
+<p>So I run npm audit and pick one of the critical vulnerabilities to try and fix:</p>
+<pre><code>lodash.merge  &lt;=4.6.1
+Severity: critical
+Prototype Pollution in lodash.merge - https://github.com/advisories/GHSA-2m96-9w4j-wgv7
+Prototype Pollution in lodash.merge - https://github.com/advisories/GHSA-h726-x36v-rx45
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-jf85-cpcp-j695
+fix available via `npm audit fix`
+node_modules/multispinner/node_modules/lodash.merge
+  multispinner  *
+  Depends on vulnerable versions of lodash.merge
+  node_modules/multispinner
+</code></pre>
+<p>I added <code>&quot;lodash&quot;: &quot;^4.17.21&quot;</code> to my package.json dependencies (it wasnt there before) and deleted package-lock.json / node_modules, ran <code>npm i </code> again, but there are still 8 critical vulnerabilities including the lodash one.</p>
+<p>Do the <code>npm audit fix</code> commands not work in command prompt? I'm using node version <code>v14.18.1</code></p>
+",<javascript><node.js><npm><lodash>,0.0,0,0,0,0,0,0,1
+51375,50628,76238048,1,0,21889233,0.0,2.0,0.0,0.0,2023-05-12T15:55:20.197,0.0,376.0,I have a problem with a excute command npm run build for import lodash,"<p><a href=""https://i.stack.imgur.com/PCrpB.png"" rel=""nofollow noreferrer"">error img</a></p>
+<p>[vite]: Rollup failed to resolve import &quot;lodash&quot; from &quot;C:/wamp64/www/Spendify-app/Spendify/resources/js/bootstrap.js&quot;.
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+<code>build.rollupOptions.external</code>
+error during build:
+Error: [vite]: Rollup failed to resolve import &quot;lodash&quot; from &quot;C:/wamp64/www/Spendify-app/Spendify/resources/js/bootstrap.js&quot;.
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+<code>build.rollupOptions.external</code>
+at viteWarn (file:///C:/wamp64/www/Spendify-app/Spendify/node_modules/vite/dist/node/chunks/dep-934dbc7c.js:46561:23)
+at onRollupWarning (file:///C:/wamp64/www/Spendify-app/Spendify/node_modules/vite/dist/node/chunks/dep-934dbc7c.js:46585:9)
+at onwarn (file:///C:/wamp64/www/Spendify-app/Spendify/node_modules/vite/dist/node/chunks/dep-934dbc7c.js:46332:13)
+at Object.onwarn (file:///C:/wamp64/www/Spendify-app/Spendify/node_modules/rollup/dist/es/shared/node-entry.js:25305:13)
+at ModuleLoader.handleInvalidResolvedId (file:///C:/wamp64/www/Spendify-app/Spendify/node_modules/rollup/dist/es/shared/node-entry.js:23940:26)<br />
+at file:///C:/wamp64/www/Spendify-app/Spendify/node_modules/rollup/dist/es/shared/node-entry.js:23900:26</p>
+",<javascript><vue.js><npm><lodash>,0.0,0,0,0,1,0,0,1
+53548,52801,77390340,1,0,8965420,1.0,0.0,0.0,0.0,2023-10-30T16:25:03.000,0.0,17.0,Can't install redux-mock-store: 404 Not Found - GET lodash.isplainobject,"<p>I am trying to install redux-mock-store using npm.<br />
+I am using node 16.10.0.
+But, I keep getting this error:</p>
+<pre><code>npm ERR! code E404
+npm ERR! 404 Not Found - GET https://packagecloud.io/github/git-lfs/npm/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz
+npm ERR! 404 
+npm ERR! 404  'lodash.isplainobject@https://packagecloud.io/github/git-lfs/npm/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz' is not in this registry.
+npm ERR! 404 You should bug the author to publish it (or use the name yourself!)
+npm ERR! 404 
+npm ERR! 404 Note that you can also install from a
+npm ERR! 404 tarball, folder, http url, or git url.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/ahmed/.npm/_logs/2023-10-30T16_21_48_489Z-debug-0.log
+</code></pre>
+<p>Other modules get installed normally. No idea what's going on here.</p>
+",<node.js><npm><lodash><redux-mock-store><packagecloud.io>,0.0,0,0,0,0,0,0,1

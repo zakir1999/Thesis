@@ -1,0 +1,2008 @@
+,Unnamed: 0,QId,QPostTypeId,QAcceptedAnswerId,QOwnerUserId,QAnswerCount,QCommentCount,QFavoriteCount,QCommunityOwnedDate,QCreationDate,QScore,QViewCount,QTitle,QBody,QTags,QStackTrace,Webpack,React,Express,Vue,Jest,Moment,Lodash,Asynchronous
+212,212,9547750,1,9551189,133392,1.0,2.0,0.0,0.0,2012-03-03T16:37:40.787,0.0,577.0,node.js asynchronous issue?,"<p>Basically I want to loop through existing arrtickers to get each symbol</p>
+
+<p>Then read the content inside each symbol url and save the content into local dir.</p>
+
+<p>In php, it will print out each ticker and each symbol in step by step.</p>
+
+<p>But in node, the sequences are mess up.</p>
+
+<p>it will print out all the url_optionable first...</p>
+
+<p>then sometimes print console.log('path: ' + file), sometimes print console.log(""The file was saved!"");</p>
+
+<p>Everytime run through fs.writefile function, sym value is not detected, the saved file is show as msn-.html</p>
+
+<pre><code>for(var v=0;v&lt;arrtickers.length;v++)
+{
+    var arrticker= arrtickers[v].split('@@');
+    var sym= $.trim(arrticker[1]);
+
+    url_optionable= ""http://sample.com/ns/?symbol=""+sym;
+
+    console.log('url_optionable: ' + url_optionable);
+
+    request({ uri:url_optionable }, function (error, response, body) {
+      if (error &amp;&amp; response.statusCode !== 200) {
+        console.log('Error contacting ' + url_optionable)
+      }
+
+      jsdom.env({
+        html: body,
+        scripts: [
+          jqlib
+        ]
+      }, function (err, window) {
+
+        var $ = window.jQuery;
+        var data= $('body').html();
+
+        var file= ""msn-""+sym+"".html"";
+        console.log('path: ' + file);
+
+        fs.writeFile(file, data, function(err) {
+            if(err) {
+            console.log(err);
+            } 
+            else 
+            {
+                console.log(""The file was saved!"");
+                }
+        });
+      });
+    });
+}
+</code></pre>
+",<node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+346,346,11698886,1,0,445651,1.0,0.0,0.0,0.0,2012-07-28T06:31:35.870,0.0,351.0,php's-`mysql_fetch_array()`-like actions in node.js?,"<p>I guess node.js' mysql drivers are async, but I'm not really sure what that means, so... The npm module for node.js allows for rows to ""<code>stream</code>"" or be ""gathered up all at once"".</p>
+
+<p>Can someone show me where streaming and gathering are applied, and can someone show me how a <code>mysql_fetch_array()</code>-like (from php) operation would be done in node.js?</p>
+",<node.js><asynchronous><translation><npm><polyglot>,0.0,0,0,0,0,0,0,0,1
+1061,1061,18732178,1,18734459,2368581,1.0,4.0,0.0,0.0,2013-09-11T03:27:39.427,0.0,752.0,Writing async javascript functions,"<p>I'm fairly familiar with nodejs now, but I have never tried to build a module before. I was curious to a bit abut async functions. </p>
+
+<ol>
+<li><p>If you are writing a function that just returns a value, if it worth it to make it async for example, should this be written async?:</p>
+
+<p>exports.getFilename = function () {
+    return filename;
+}</p></li>
+<li><p>Next, when writing a async function, is writing a function with a callback enough for performance, or is it recommended to thread it using a threading library as well?</p></li>
+</ol>
+
+<p>Sorry for the somewhat obvious question, I noramlly am the one calling these functions</p>
+",<node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+2287,2287,24935505,1,24939807,203141,1.0,0.0,0.0,0.0,2014-07-24T13:45:40.233,0.0,115.0,Grunt Plugin- async.each with globbing pattern,"<p>I'm working on a grunt plugin that was written (by someone else) to receive hard-coded file names (src and dest), but I'm trying to change it to be able to be pointed to a directory with a globbing pattern and specify an output folder for the ""dest"".  But I'm having trouble with the async.each, because my initial implementation has a nested async.each.  Specifically, I think I have a problem with when to call the callback().  I'm getting hung up in some loop somewhere.  </p>
+
+<p>This does work as written because the files are created correctly both ways of configuring the Gruntfile.js, but the previously-working tests are now broken.</p>
+
+<p>I'm just wondering about how to structure the second nested loop.  Perhaps that doesn't need to use async?</p>
+
+<p>The Gruntfile.js should be able to be config'd as:</p>
+
+<pre><code>myplugin: {
+    dev: {
+        files : {
+            'src/business.html': 'src/test_src/business.test',
+            ...
+        }
+    }
+},
+</code></pre>
+
+<p>or as a globbing pattern (this is what I'm adding)</p>
+
+<pre><code>myplugin: {
+    dev: {
+        src: ['src/test_src/*.test'],
+        dest: 'output'
+    }
+},
+</code></pre>
+
+<p>The plugin started out with a single async.each, with each loop handling a specific ""files"" src/dest.  But when we're using a globbing pattern, there's only one outer loop, the pattern, so I need a second async.each to handle the actual files (there are ~11).</p>
+
+<pre><code>grunt.registerMultiTask('myplugin', 'Compiles files using myplugin', function () {
+
+    done = this.async();
+
+    // Iterate over all specified file groups.
+    async.each(this.files, function (fileGlob, cb) {
+        var destination = fileGlob.dest;
+        grunt.log.debug(""FileGlob: "" + fileGlob);
+
+        async.each(fileGlob.src, function (filepath, callback) {
+            if (notAPartial(filepath) &amp;&amp; grunt.file.exists(filepath)) {
+                if (filepath.match(/\.(test|html)$/)) {
+                    grunt.log.debug('test compilation of ' + filepath);
+                    compileMyFile(filepath, destination);
+                } else {
+                    // this callback is from the orig version
+                    // i think it's causing problems with the nested async.each calls
+                    callback(new Error(""No handler for filetype: "" + filepath));
+                }
+            }
+        }, function(err) {
+            if(err) done(err);
+            else done();
+        });
+        cb();
+    }, function(err) {
+        if(err) done(err);
+        else done();
+        grunt.log.ok(""Compiled "" + count + "" files."");
+    });
+})
+</code></pre>
+",<javascript><node.js><asynchronous><gruntjs><npm>,0.0,0,0,0,0,0,0,0,1
+2294,2294,24953431,1,24954872,3801085,2.0,0.0,0.0,0.0,2014-07-25T10:17:30.923,1.0,976.0,An alternative to npm async module?,"<p>Today I'm using parse.com and I would like to perform an asynchronous programming in javascript. I found the npm async module: <a href=""https://www.npmjs.org/package/node-async"" rel=""nofollow"">https://www.npmjs.org/package/node-async</a>
+But parse.com doesn't accept npm modules. Would you know any alternative to async module for parse.com ?</p>
+
+<p>Thanking you in anticipation</p>
+",<javascript><asynchronous><parse-platform><npm>,0.0,0,0,0,0,0,0,0,1
+2456,2456,25492058,1,25492098,2436847,1.0,0.0,0.0,0.0,2014-08-25T18:21:23.970,0.0,916.0,NodeJS Async series not working sequentially,"<p>I have the below code,</p>
+
+<pre><code>    var async = require('async'); var rest = require('restler');
+
+    async.series([
+        function(callback){
+           rest.get('https://api.twitter.com/1.1/statuses/mentions_timeline.json').on('complete', function(result) {
+              if (result instanceof Error) {
+                console.log('Error:', result);
+                this.retry(5000); // try again after 5 sec
+              } else {
+                console.log(result);
+              }         });
+            callback(null, 'one');
+        },
+        function(callback){
+            console.log('2nd function');
+            callback(null, 'two');
+        }
+        ],
+
+// optional callback
+        function(err, results){
+               // results is now equal to ['one', 'two']
+               console.log(results);
+        });
+</code></pre>
+
+<p>I am expecting output like this,</p>
+
+<pre><code>{ errors: [ { message: 'Bad Authentication data', code: 215 } ] }
+2nd function
+[ 'one', 'two' ]
+</code></pre>
+
+<p>But am getting the below output,</p>
+
+<pre><code>2nd function
+[ 'one', 'two' ]
+{ errors: [ { message: 'Bad Authentication data', code: 215 } ] }
+</code></pre>
+
+<p>Rest request output always coming at last.
+What is the correct way of doing this?</p>
+",<javascript><node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+2518,2518,25705067,1,25705318,3502786,3.0,1.0,0.0,0.0,2014-09-06T21:46:50.980,43.0,82670.0,Using Async waterfall in node.js,"<p>I have 2 functions that I'm running asynchronously. I'd like to write them using waterfall model. The thing is, I don't know how..</p>
+
+<p>Here is my code :</p>
+
+<pre><code>var fs = require('fs');
+function updateJson(ticker, value) {
+  //var stocksJson = JSON.parse(fs.readFileSync(""stocktest.json""));
+  fs.readFile('stocktest.json', function(error, file) {
+    var stocksJson =  JSON.parse(file);
+
+    if (stocksJson[ticker]!=null) {
+      console.log(ticker+"" price : "" + stocksJson[ticker].price);
+      console.log(""changing the value..."")
+      stocksJson[ticker].price =  value;
+
+      console.log(""Price after the change has been made -- "" + stocksJson[ticker].price);
+      console.log(""printing the the Json.stringify"")
+      console.log(JSON.stringify(stocksJson, null, 4));
+      fs.writeFile('stocktest.json', JSON.stringify(stocksJson, null, 4), function(err) {  
+        if(!err) {
+          console.log(""File successfully written"");
+        }
+        if (err) {
+          console.error(err);
+        }
+      }); //end of writeFile
+    } else {
+      console.log(ticker + "" doesn't exist on the json"");
+    }
+  });
+} // end of updateJson 
+</code></pre>
+
+<p>Any idea how can I write it using waterfall, so i'll be able to control this? Please write me some examples because I'm new to node.js</p>
+",<javascript><node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+2818,2818,26782057,1,26785850,1623348,1.0,0.0,0.0,0.0,2014-11-06T14:35:57.273,0.0,768.0,"Meteor bindEnvironment: ""Did not check() all arguments""","<p>My code below throws an error on the server saying: </p>
+
+<p>Exception while invoking method '/app/shipping/ship' Error: Did not check() all arguments during call to '/app/shipping/ship'</p>
+
+<pre><code>Meteor.methods({
+  '/app/shipping/ship': function (weight, length, width, height) {
+    check(weight, Number);
+    check(length, Number);
+    check(width, Number);
+    check(height, Number);
+
+    var async = Meteor.npmRequire('async');
+
+    var quote = function (callback) {
+      Meteor.call('/app/shipping/quote', 'DE', weight, length, width, height, function (err, res) {
+        if (err) {
+          callback(err);
+        }
+        else {
+          callback(null, res);
+        }
+      });
+    };
+
+    async.waterfall([
+      Meteor.bindEnvironment(quote)
+    ], function(err, result) {
+      console.log(result);
+    });
+  }
+});
+</code></pre>
+
+<p>I think that I've checked all the arguments (weight, length, width and height), do I have to check somewhere else?</p>
+
+<p>Thanks!</p>
+",<node.js><asynchronous><meteor><callback><npm>,0.0,0,0,0,0,0,0,0,1
+2820,2820,26801785,1,26811922,1623348,1.0,0.0,0.0,0.0,2014-11-07T12:58:57.903,1.0,264.0,Meteor doesn't throw error but crashes,"<p>I want to implement error handling in my app but when I throw a Meteor.Error my server crashes. This might be because I'm using a future to wait for the result. How can I get this running?</p>
+
+<pre><code>Meteor.methods({
+  '/app/pdf/download': function (url, name) {
+    check(url, String);
+    check(name, Match.Any);
+
+    if ( ! name) {
+      name = url.split('/').pop();
+    } else {
+      name += '.pdf';
+    }
+
+    var Future = Meteor.npmRequire('fibers/future');
+    var Download = Meteor.npmRequire('download');
+
+    var future = new Future();
+
+    var download = new Download({ extract: true, strip: 1 })
+      .get(url)
+      .dest(process.env.PWD + '/staticFiles')
+      .rename(name);
+
+    // Run download
+    download.run(function (err, files, stream) {
+      if (err) {
+        throw new Meteor.Error(500, 'Couldn\'t download file');
+      }
+
+      future.return(name);
+    });
+
+    return future.wait();
+  }
+});
+</code></pre>
+",<asynchronous><meteor><npm><node-fibers>,0.0,0,0,0,0,0,0,0,1
+3065,3065,27680713,1,0,1475962,1.0,2.0,0.0,0.0,2014-12-28T21:24:44.473,1.0,10028.0,Error running npm install: No compatible version found: async,"<p>I have caolan/async added in my package.json as</p>
+
+<pre><code>""async"": ""~0.9.0"",
+</code></pre>
+
+<p>npmjs page of async has ""0.9.0 published 7 months ago by caolan"" written on their website. When I install using npm install it gives me error</p>
+
+<pre><code>npm ERR! notarget No compatible version found: async@'&gt;=0.9.2-0 &lt;0.10.0-0'
+npm ERR! notarget Valid install targets:
+npm ERR! notarget [""0.1.0"",""0.1.1"",""0.1.2"",""0.1.3"",""0.1.4"",""0.1.5"",""0.1.6"",""0.1.7"",""0.1.8"",""0.1.9"",""0.1.10"",""0.1.11"",""0.1.12"",""0.1.13"",""0.1.14"",""0.1.15"",""0.1.16"",""0.1.17"",""0.1.18"",""0.1.19"",""0.1.20"",""0.1.21"",""0.1.22"",""0.2.0"",""0.2.1"",""0.2.2"",""0.2.3"",""0.2.4"",""0.2.5"",""0.2.6"",""0.2.7"",""0.2.8"",""0.2.9"",""0.2.10"",""0.3.0"",""0.4.0"",""0.4.1"",""0.5.0"",""0.6.0"",""0.6.1"",""0.6.2"",""0.7.0"",""0.8.0"",""0.9.0""]
+npm ERR! notarget 
+npm ERR! notarget This is most likely not a problem with npm itself.
+npm ERR! notarget In most cases you or one of your dependencies are requesting
+npm ERR! notarget a package version that doesn't exist.
+
+npm ERR! System Linux 3.13.0-36-generic
+npm ERR! command ""/usr/bin/node"" ""/usr/bin/npm"" ""install""
+npm ERR! cwd /home/ubuntu/pickingo/pickingo
+npm ERR! node -v v0.10.35
+npm ERR! npm -v 1.4.28
+npm ERR! code ETARGET
+npm ERR! 
+npm ERR! Additional logging details can be found in:
+npm ERR!     /home/ubuntu/pickingo/pickingo/npm-debug.log
+npm ERR! not ok code 0
+</code></pre>
+
+<p>How to fix the error?</p>
+",<node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+3341,3341,28516349,1,0,476024,2.0,1.0,0.0,0.0,2015-02-14T13:58:48.677,0.0,1574.0,Using npm async to run in parallel async methods and return a unified response,"<p>I have 2 <code>async</code> methods that can run independently one from each other. I would like to call a callback once both are finished. I have tried using <code>async.parallel()</code> (npm) but this seems to be for non async methods. How can I implement this?</p>
+
+<p>Here is my <code>async.parallel call()</code>; note that asyncTasks is my function array, where the functions are async. </p>
+
+<pre><code>async.parallel(asyncTasks, function(resultFinal){
+  console.log(""---------&gt;&gt;&gt;&gt;&gt; message: ""+JSON.stringify(resultFinal));
+  console.log("""");
+  callback(new RequestResponse(true, resultFinal));
+});
+</code></pre>
+
+<p>In short, what I really want is a way to execute multiple async methods in parallel and consider that method finished when the callback provided for that function is triggered.</p>
+
+<hr>
+
+<p><strong>UPDATE</strong></p>
+
+<p>for a better understanding, I've included the two functions I am using </p>
+
+<p><strong>getGroups</strong></p>
+
+<pre><code>var getGroups = function (callback_async_1) { //get groups + members
+
+    pg.connect(datebasePath, function (err, client, done) {
+
+        var s = squel.select();
+        s.from(""groups_members"");
+        s.where(""user_id = ?"", userId);
+
+        console.log(""query: "" + s.toString());
+
+        client.query(s.toString(), function (err, result) { //get groups ids in which i am a member
+            if (err) {
+                console.error(""error...1 "" + err);
+                callback_async_1(responseData);
+            } else {
+                //  console.log(""init -- get from group_members "" + JSON.stringify(result.rows));
+
+                var groupIds = [];
+                if (result.rows.length &gt; 0) {
+
+                    for (var i = 0; i &lt; result.rows.length; i++) {
+                        groupIds.push(result.rows[i].group_id); // create group ids list
+                    }
+                    //          console.log(""group ids : "" + groupIds);
+                }
+                if (groupIds.length === 0) {
+                    callback_async_1(responseData);
+                }
+                var s = squel.select();
+                s.from(""groups"");
+                s.where(""id IN ?"", groupIds);
+
+                client.query(s.toString(), function (err, result2) { // retrieve all the groups in which i take part
+                    if (err) {
+                        console.error(""error...2 "" + err);
+                        callback_async_1(responseData);
+                        return;
+                    } else {
+                        // var groupIds2 = [];
+
+                        // console.log(""init -- get from groups "" + JSON.stringify(result2.rows));
+                        var groups = [];
+                        //   var groups_members = [];
+                        for (var i = 0; i &lt; result2.rows.length; i++) {
+                            groups.push(result2.rows[i]); // adding group info to list
+                            //   var groupId = result2.rows[i].id;
+                            //  groupIds2.push(groupId);
+                        }
+                        // console.log("""");
+                        //console.log("" -------&gt;&gt;&gt;&gt; "" + JSON.stringify(groups));
+                        // console.log("""");
+                        //  responseData.groups = groups;
+                        responseData.push({ //pushing groups into response
+                            ""groups"": groups
+                        });
+                        var s = squel.select();
+                        s.from(""groups_members"");
+                        s.where(""group_id IN ?"", groupIds);
+
+                        client.query(s.toString(), function (err, result3) { // get all the members in my groups
+
+                            //console.log(""get from group_members --- "" + JSON.stringify(result3.rows));
+                            var groupMembers = [];
+                            for (var i = 0; i &lt; result3.rows.length; i++) {
+                                groupMembers.push({
+                                    groupMember: result3.rows[i] // pushing all the group members
+                                });
+                            }
+                            //console.log("""");
+                            // console.log("" -------&gt;&gt;&gt;&gt; "" + JSON.stringify(groupMembers));
+                            // console.log("""");
+                            responseData.push({
+                                ""groupsMembers"": groupMembers
+                            });
+
+                            // console.log(""resulting json till now; Groups : "" + JSON.stringify(responseData));
+                            //fetching now events
+
+                            var s = squel.select();
+                            s.from(""events"");
+                            s.where(""group_id IN ?"", groupIds);
+
+                            client.query(s.toString(), function (err, result4) { //selecting all events that have my groups
+                                if (err) {
+                                    console.error(""error...3 "" + err);
+                                    callback_async_1(responseData);
+                                    return;
+                                } else {
+                                    var events = [];
+                                    for (var i = 0; i &lt; result4.rows.length; i++) {
+                                        events.push(result4.rows[i]);
+                                    }
+                                    // responseData.events = events;
+                                    responseData.push({
+                                        ""events"": events
+                                    });
+                                    //responseData.push (events);
+
+                                    callback_async_1(responseData);
+                                    // asyncTasks[1](callback);
+                                }
+                            });
+                        });
+                    }
+                });
+            }
+        });
+        done();
+    });
+};
+</code></pre>
+
+<p><strong>getRegisteredContacts</strong></p>
+
+<pre><code>var getRegisteredContacts = function (callback_async_2) { // get registered contacts
+
+    pg.connect(datebasePath, function (err, client, done) {
+
+        //get contacts that are registered
+        var s = squel.select();
+        s.from(""users"");
+        s.where(""phone_number IN ?"", arrayOfContacts);
+
+        client.query(s.toString(), function (err, result5) { // retriving registered contacts -- should be run with async parallel, it does not depend on the other calls
+            if (err) {
+                console.error(err);
+                callback_async_2(responseData);
+            } else {
+                if (result5.rows.length &gt; 0) {
+                    var contacts = [];
+                    for (var i = 0; i &lt; result5.rows.length; i++) {
+                        contacts.push(result5.rows[i]);
+                    }
+                    responseData.push({
+                        ""registeredContacts"": contacts
+                    });
+                }
+
+                //console.log("""");
+                //console.log("" -------&gt;&gt;&gt;&gt; "" + JSON.stringify(events));
+                // console.log("""");
+                // console.log(""final ---&gt; "" + JSON.stringify(responseData));
+                callback_async_2(responseData);
+            }
+        });
+        done();
+    });
+};
+</code></pre>
+",<node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+3520,3520,29029957,1,0,574519,1.0,0.0,0.0,0.0,2015-03-13T10:30:42.243,0.0,782.0,"Node.js, Express Routes, async and callback/building a result object","<p>I've hit another brick wall where I can't quite grasp what to do here, or at least how to do it the correct way. I've implemented an async call so I can run multiple requests in a waterfall method and each one relies on the result of another. This works fine, the trouble is, the third step in the waterfall actually needs to make multiple requests.</p>
+
+<p>What I have at the minute is like below:</p>
+
+<pre><code>async.waterfall([
+    function(callback) {
+        Object.find().exec(function (err, records) {
+            callback(null, records);
+        });
+    },
+    function(arg1, callback) {
+        request('url' + arg1.property + '', function(err, resp, body) {
+            callback(null, arg1, JSON.parse(body));
+        });
+    },
+    function(arg1, arg2, callback) {
+        var array = {newarray:[]};
+
+        arg2.forEach(function(eachField){
+            request('url' + arg2.property, function(err, resp, body) {
+                array.newarray.push(JSON.parse(body));
+            });
+        });
+
+        // AT THIS POINT THIS ARRAY SHOWS AS EMPTY
+        console.log(array);
+
+        callback(null, arg1, arg2, array);
+    }
+], function (err, result) {
+    // RESULT BREAKS DUE TO FORMAT OF DIFFERENT RESPONSES
+    console.log(result);
+}); 
+</code></pre>
+
+<p>This is kind of working. It makes the first request, sends the data to the second function in the waterfall, makes 10 further requests etc.</p>
+
+<p>Firstly, the array I'm pushing everything to appears empty outside of the 'request' call, and secondly the format of data that comes back from each request is different - this second part I can sort out, but basically I need to understand how to make a request, off the back of that request make 10 further (small, honest!) requests and build these into an object.</p>
+
+<p>At the end I essentially want to end up with something like:</p>
+
+<p>{
+    response1: dataSet,
+    response2: dataSet,
+    response3: dataset
+}</p>
+
+<p>And in the future, I may want to add or change some of these, so any help would be hugely helpful!!! All I'm trying to do is make a few requests, build an object with their JSON responses so in my view I can do what I want with that large amount of data!</p>
+
+<p>Thanks</p>
+",<node.js><asynchronous><express><request><npm>,0.0,0,0,1,0,0,0,0,1
+4051,4051,30541690,1,30541758,877703,2.0,0.0,0.0,0.0,2015-05-30T02:44:30.133,8.0,757.0,npm's guidelines on callback errors,"<p>I was reading through <a href=""https://docs.npmjs.com/misc/coding-style#callbacks-sync-async-style"">npm’s coding style guidelines</a> and came across the following very cryptic suggestion:</p>
+
+<blockquote>
+  <p>Be very careful never to ever ever throw anything. It’s worse than useless. Just send the error message back as the first argument to the callback.</p>
+</blockquote>
+
+<p>What exactly do they mean and how does one implement this behavior? Do they suggest calling the callback function within itself?</p>
+
+<p>Here’s what I could think of using the async <a href=""https://nodejs.org/api/fs.html#fs_fs_readdir_path_callback"">fs.readdir</a> method.</p>
+
+<pre><code>fs.readdir('./', function callback(err, files) {
+  if (err) {
+    // throw err  // npm says DO NOT do this!
+    callback(err) // Wouldn’t this cause an infinite loop?
+  }
+  else {
+    // normal stuff
+  }
+})
+</code></pre>
+",<javascript><asynchronous><error-handling><callback><npm>,0.0,0,0,0,0,0,0,0,1
+4143,4143,30764639,1,0,1485752,1.0,7.0,0.0,0.0,2015-06-10T18:36:46.307,0.0,182.0,async.series inside an asynchronous grunt task,"<p>I have a grunt tasks which runs asynchronously (using this.async) as I have asynchronous functions in the code. I also want few tasks to run in series so I am using async.series from async npm module. 
+Problem is that when I reach the last callback of async.series i.e. function(err, result), I call a done() to inform that the asynchronous grunt task has been successfully completed, it fails sometimes and passes sometimes. I cannot seem to understand it. Here is the code:</p>
+
+<pre><code>grunt.registerTask('aggCompJSON', function(){
+  var done = this.async();
+  var resultFile = {};  // final JSON object
+  var groupJSON = {};   // groups JSON object
+
+  async.series([
+    function(callback){
+        // get Application Configuration
+        __getAppConfig(grunt, callback);
+    },
+
+    function(callback){
+        // generate Component_map
+        __genCompMap(grunt, callback);
+    }
+  ], function (err, result){
+        done();
+    }
+  );
+</code></pre>
+
+<p>I get the following error: </p>
+
+<blockquote>
+  <p>Fatal error: ENOENT, open 'logs/app.log'</p>
+</blockquote>
+
+<p>and also sometimes a success. Any input is appreciated. 
+Thanks</p>
+
+<blockquote>
+  <p>P.S. None of the functions return error. The <strong>err</strong> object in the
+  last callback is always <strong>null</strong>.</p>
+</blockquote>
+",<javascript><node.js><asynchronous><gruntjs><npm>,0.0,0,0,0,0,0,0,0,1
+4370,4370,31248180,1,0,3791726,1.0,0.0,0.0,0.0,2015-07-06T14:15:14.300,-1.0,34.0,unable to return in node.js from a function,"<p>I have three blocks of code where block one executes first and the result of first block is passed to bloack 2 and then the final result is then passed to the third block which has to send data to the route.
+But at the end the return is undefined.</p>
+
+<pre><code>function getUserKey(userRole, callback) {
+
+
+//keys value is stored and returned
+                  var keys = base.menuModel.find({ 'name' : userRole  }, function (err, result) {
+                                        if (!err) {
+                                            var menu =  JSON.stringify(result);
+                                              menu = JSON.parse(menu);
+                                              var menuKeys = [];
+                                              for(i = 0;i &lt; Object.keys(menu[0].permissions[0]).length;i++) {
+                                                    menuKeys.push((Object.keys(menu[0].permissions[0])[i]));
+                                                  }
+                                                callback(null,menuKeys);                   
+                //returns menukeys to be shown
+                                          }
+                                              else {
+                                                return err;
+                                              }
+                                         });
+
+                }
+</code></pre>
+
+<p>n is holding the menu keys </p>
+
+<pre><code>                function userMenuData(n, callback) {
+                       var filterResult =  base.globalMenuModel.find({""title"" : { $in : n}},function (err, result) {
+                                              if (!err) {
+                                                    callback(null,result);        
+                                                     } 
+                                              else {
+                                                  return err;
+                                              }
+                                             });
+                }
+
+                var userMenu = function(userRole,callback) {
+                  var userMenuTemp = async.compose(userMenuData, getUserKey);
+            var sendData = userRole is passed and the result is obtained
+                    userMenuTemp(userRole,function(err,result) {
+
+                      return result; // data success
+                    });
+            console.log(sendData);  //undefined
+            return sendData;
+                }
+</code></pre>
+
+<p>here i want to pass sendData to route in node.js
+but at the console i am getting undefined.
+Thanks for any help</p>
+",<node.js><asynchronous><express><npm>,0.0,0,0,1,0,0,0,0,1
+4522,4522,31615723,1,31616912,3204676,1.0,4.0,0.0,0.0,2015-07-24T16:43:41.093,0.0,909.0,Async piping file to an HTTP request,"<p>I'm trying to send off interleaved GET and POST requests to a server, but the POST request is sending data from a file, which seems to throw off the timing.</p>
+
+<pre><code>var async = require('async');
+var http = require('http');
+var request = require('request');
+var fs = require('fs');
+
+var arr = [];
+for (var i = 1; i &lt;= 50; i++) {
+   arr.push(i);
+}
+
+var limitedAgent = new http.Agent({maxSockets: 6});
+
+function processThenSendRequest(data, onfinish) {
+    request.get({
+        url: 'http://www.google.com',
+        pool: limitedAgent
+    }, (function(j) {
+        return function(err, res) {
+            console.log(""GET: response from "" + j);
+        };
+    })(data)).on('socket', (function(j) {
+        return function(socket) {
+            console.log(""GET: socket assigned for "" + j);
+        }
+    })(data));
+
+    var source = fs.createReadStream('README.md');
+
+    var postReq = request.post({
+        url: 'http://www.google.com',
+        pool: limitedAgent
+    }, (function(j) {
+        return function(err, res) {
+            console.log(""POST: response from "" + j);
+        };
+    })(data)).on('socket', (function(j) {
+        return function(socket) {
+            console.log(""POST: socket assigned for "" + j);
+        }
+        })(data));
+
+    // source.pipe(postReq);
+
+    setTimeout(function() {
+        onfinish(null, data);
+    }, 10000);
+}
+
+async.map(arr, processThenSendRequest, function(err, results) {
+    if (err) console.error(err);
+    console.log(""finished"");
+});
+</code></pre>
+
+<p>The code as written above runs fine, with the GET and POST requests being sent out in alternating order, but if I uncomment the <code>source.pipe(postReq)</code> line, then all the GET requests are sent before all the POST requests. </p>
+
+<p>Is there a solution to this issue? I could use <code>async.mapLimit</code> but that feels like a hack and that the solution should be through the request library - this impression may be based on a misunderstanding though.</p>
+",<node.js><asynchronous><stream><npm-request>,0.0,0,0,0,0,0,0,0,1
+4736,4736,32139471,1,32139572,2625992,1.0,2.0,0.0,0.0,2015-08-21T11:44:09.413,0.0,103.0,break node script with async,"<p>I'm running npm install command for list of modules on Node and have an error about async</p>
+
+<blockquote>
+  <p>TypeError: undefined is not a function</p>
+</blockquote>
+
+<p>What is the problem?</p>
+
+<pre><code>var fs = require( ""fs"" ),
+    path = require( ""path"" ),
+    child_process = require( ""child_process""),
+    async = require( ""async""),
+    modulesPath = ""../modules/"";
+
+var dirs = fs.readdirSync( modulesPath )
+    .filter( function( dir ) {
+        return fs.statSync( path.join( modulesPath, dir )).isDirectory();
+    });
+
+var install = function() {
+    if ( dirs.length === 0 ) {
+        return;
+    }
+
+    var dir = dirs.shift();
+    console.log( ""installing dependencies for : '"" + dir + ""'"" );
+
+    child_process.exec( ""npm prune --production | npm install"", {
+        cwd: modulesPath + dir
+    }, install );
+
+
+  };
+
+install();
+</code></pre>
+",<javascript><node.js><asynchronous><npm><exec>,0.0,0,0,0,0,0,0,0,1
+5279,5279,33267724,1,33269614,3144720,1.0,0.0,0.0,0.0,2015-10-21T19:33:44.180,1.0,82.0,How to call this wordcount function using the meteorhacks:npm package?,"<p>I installed <a href=""https://github.com/meteorhacks/npm"" rel=""nofollow"">meteorhacks/npm</a> in order to use the <a href=""https://www.npmjs.com/package/wordcount"" rel=""nofollow"">Wordcount</a> package in my Meteor app.</p>
+
+<p>However, I can't get my method working.</p>
+
+<p>client</p>
+
+<pre><code>  getWordcount = function getWordcount(words, callback) {
+    Meteor.call('getWordcount', words, callback);
+  }
+
+console.log(getWordcount('hello world')); // testing
+</code></pre>
+
+<p>server</p>
+
+<pre><code>  Meteor.methods({
+    'getWordcount': function getWordcount(words) {
+      var WordcountApi = Meteor.npmRequire('wordcount');
+      var wordcount = new WordcountApi({
+          version: ""1.1.1""
+      });
+
+      var words = Async.runSync(function(done) {
+        wordcount.words, function(err, data) {
+          done(null, data);
+        }
+      });
+
+      return words.result;
+    }
+  });
+</code></pre>
+
+<p>I'm returning an error message in my console that says: </p>
+
+<p>""Error invoking Method 'getWordcount': Internal server error [500]""</p>
+",<javascript><asynchronous><meteor><npm>,0.0,0,0,0,0,0,0,0,1
+5518,5518,33683000,1,0,5556672,2.0,1.0,0.0,0.0,2015-11-12T22:56:47.050,1.0,63.0,Trouble with node asynchronous GET request using promises,"<p>I'm very new to programming (3 months) and am having trouble with how node handles asynchronous functions (I think).  </p>
+
+<p>I have a Merchant class object with a method ""addMenu"" that makes a GET request for a menu from an external API and then updates the merchant by setting the merchant.data.menu object (which is null by default) to the new menu we just got.  </p>
+
+<p>Code in question:</p>
+
+<pre><code>this.addMenu = function(currentMerchant) {
+  var id = currentMerchant.id;
+
+  function  getMenu(id) {
+    var deferred = Q.defer();
+    var url = 'https://api.delivery.com/merchant/'+id+'/menu?client_id=xyz';
+
+    request.get(url, function(error, response, body) {
+      if(error) {
+        console.log(""Something went wrong with menu GET request: Status Code: "" + response.statusCode);
+        deferred.reject(new Error(error));
+      } else if(!error &amp;&amp; response.statusCode == 200) {
+        menuObj = JSON.parse(body);
+        deferred.resolve(menuObj);
+      }        
+    });
+
+    return deferred.promise;
+  };
+
+  this.data.menu  = getMenu(id).then(function(currentMenu) {
+    return currentMenu;
+  });
+
+  console.log(this.data.menu);
+};
+</code></pre>
+
+<p>When I log (this.data.menu), I get ""{ state: 'pending' }.""  I can do setTimeout and get things to work but doesn't that defeat the whole purpose of promises?  I've been stuck on this general problem for days - have been delving into callbacks, delays, promises etc to solve it but am thinking I might be missing something more fundamental in my thinking.</p>
+
+<p>Thank you!</p>
+
+<p><em>Edit to add</em>:</p>
+
+<p>Well after all that I realized that the real crux of my problem was the inability to access this.data.menu from inside of the callback / promise which lead me to doing all kinds of weird stuff and trying to return them into the this. variable etc.</p>
+
+<p>Just read up on the ""var that = this;"" trick to gain access to class scope which made all of my callback and promise attempts work fine and make sooo much more sense in my head.  And I now know a hell of a lot more about promises that I ever intended as a side benefit.  Thanks for the help folks!</p>
+",<javascript><node.js><asynchronous><q><npm-request>,0.0,0,0,0,0,0,0,0,1
+5959,5959,34419911,1,0,1440000,1.0,0.0,0.0,0.0,2015-12-22T16:06:50.433,0.0,31.0,Daisy Chained NPM Package Functions with Meteor.wrapAsync(),"<p>I am trying to use a Node package within my meteor app. Natively in node I'd need to daisy chain the calls together like so:</p>
+
+<pre><code>return client.auth(req.session.token, req.session.sec).user(""_SELF_"").find(function(err, body, headers) {
+    if (err) {
+      console.log(err);
+    }
+    if (body) {
+      console.dir(body);
+    }
+    if (body) {
+      return res.send(body.results[0]);
+    }
+  });
+</code></pre>
+
+<p>I've tried several things without success. Such as:</p>
+
+<pre><code>  var authSync = Meteor.wrapAsync(client.auth, client);
+  return authSync(req.session.token, req.session.sec).user(""_SELF_"").find(function(err, body, headers) {
+        if (err) {
+          console.log(err);
+        }
+        if (body) {
+          console.dir(body);
+        }
+        if (body) {
+          return res.send(body.results[0]);
+        }
+      });
+</code></pre>
+",<javascript><node.js><asynchronous><meteor><npm>,0.0,0,0,0,0,0,0,0,1
+6302,6302,34929015,1,0,1828780,0.0,2.0,0.0,0.0,2016-01-21T16:24:46.467,2.0,817.0,Simple async eachLimit example throws range error?,"<p>My code is very simple:</p>
+
+<pre><code>async.eachLimit(lines, 5, function iterator(line, complete) {
+    console.log(line)
+    complete(null);
+}, function done(err) {
+  if(err) throw err;
+    console.log('done yo!');
+});
+</code></pre>
+
+<p>However, I keep getting the following error. What am I not understanding?</p>
+
+<pre><code>RangeError: Maximum call stack size exceeded
+</code></pre>
+",<node.js><asynchronous><express><npm><async.js>,0.0,0,0,1,0,0,0,0,1
+7156,7156,36274247,1,0,5361705,0.0,2.0,0.0,0.0,2016-03-29T02:17:37.093,0.0,17.0,Node Return from Asynchronous Function,"<p>I have a Node.js package in which I have the following export:</p>
+
+<pre><code>exports.getSubredditLinks = function(url) {
+  request(url, function(err, resp, body) {
+    if (err) return console.error(err);
+    var arr = new Array();
+    $ = cheerio.load(body);
+    $('a.title.may-blank').each(function(i, elem) {
+      arr.push($(elem).attr('href'));
+    });
+    console.log(arr);
+    return arr;
+  });
+}
+</code></pre>
+
+<p>However, I need to return the array created by adding a bunch of HTML elements into the array <code>arr</code>. It doesn't work like this, I think because it is an asynchronous function, but I don't know how to return a value from such a function.</p>
+",<javascript><node.js><asynchronous><module><npm>,0.0,0,0,0,0,0,0,0,1
+7885,7885,37371712,1,37371917,5734741,2.0,4.0,0.0,0.0,2016-05-22T07:34:10.310,-1.0,840.0,How can I execute queries one after the other and extract value from 1st query and use it in the 2nd using expressJS?,"<pre><code>router.post(""/application_action"", function(req,res){
+var Employee = req.body.Employee;
+var conn = new jsforce.Connection({
+  oauth2 : salesforce_credential.oauth2
+});
+var username = salesforce_credential.username;
+var password = salesforce_credential.password;
+    conn.login(username, password, function(err, userInfo, next) {
+if (err) { return console.error(err); res.json(false);}
+// I want this conn.query to execute first and then conn.sobject
+    conn.query(""SELECT id FROM SFDC_Employee__c WHERE Auth0_Id__c = '"" + req.user.id + ""'"" , function(err, result) {
+    if (err) { return console.error(err); }
+
+    Employee[""Id""] = result.records[0].Id;
+ });
+   //I want this to execute after the execution of above query i.e. conn.query
+    conn.sobject(""SFDC_Emp__c"").update(Employee, function(err, ret) {
+ if (err || !ret.success) { return console.error(err, ret);}
+ console.log('Updated Successfully : ' + ret.id);
+ });
+});
+</code></pre>
+
+<p>I have provided my code above. I need to modify <code>Employee</code> in the <code>conn.query</code> and use it in <code>conn.sobject</code>. I need to make sure that my first query executes before 2nd because I am getting value from 1st and using in the 2nd. Please do let me know if you know how to accomplish this.</p>
+",<node.js><express><asynchronous><npm><salesforce>,0.0,0,0,1,0,0,0,0,1
+8508,8508,38268371,1,0,1387204,1.0,1.0,0.0,0.0,2016-07-08T13:50:24.047,1.0,4298.0,How to make millions of parallel http requests from nodejs app?,"<p>I have to make a million http calls from my nodejs app. </p>
+
+<p>Apart from doing it using async lib, callbacks is there any other way to call these many requests in parallel to process it much faster?</p>
+
+<p>Kindly suggest me on the same</p>
+",<javascript><node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+8727,8727,38558489,1,38558553,6288600,1.0,1.0,0.0,0.0,2016-07-25T01:21:32.757,0.0,113.0,Getting around Node's Asynchronous nature,"<p>I am writing a content scraper that scrapes information about shirts on a particular webiste.  I have everything set up with NPM packages in Node to scrape and create a CSV file.  The problem I am running into is that as many know, Node is asynchronous in nature.  The CSV file I am trying to write is writing before the JSON object I create is finished being created (iterating with an each loop to build it), thus it passes in my 'fields' parameter for json2csv (npm package). But it passes in my data as an empty object.  Can anyone tell me how to tell node to wait until my json object is built before trying to use fs.writefile to create the CSV file?  Thank you</p>
+
+<pre><code>'use strict';
+
+//require NPM packages
+
+var request = require('request');
+var cheerio = require('cheerio');
+var fs = require('fs');
+var json2csv = require('json2csv');
+
+//Array for shirts JSON object for json2csv to write.
+var ShirtProps = [];
+
+var homeURL = ""http://www.shirts4mike.com/"";
+
+//start the scraper
+scraper(); 
+
+//Initial scrape of the shirts link from the home page
+function scraper () {
+  //use the datafolderexists function to check if data is a directory
+  if (!DataFolderExists('data')) {
+    fs.mkdir('data');
+  }
+  //initial request of the home url + the shirts.php link
+  request(homeURL + ""shirts.php"", function (error, response, html) {
+    if (!error &amp;&amp; response.statusCode == 200) {
+      var $ = cheerio.load(html);
+
+      //scrape each of the links for its html data
+      $('ul.products li').each(function(i, element){
+        var ShirtURL = $(this).find('a').attr('href');
+        console.log(ShirtURL);
+        //pass in each shirtURL data to be scraped to add it to an object
+        ShirtHTMLScraper(ShirtURL);
+      }); 
+      FileWrite();
+      // end first request
+    } else {
+      console.error(error);
+    }
+  });
+}
+
+//create function to write the CSV file.
+function FileWrite() {
+  var fields = ['Title', 'Price', 'ImageURL', 'URL', 'Time'];
+  var csv = json2csv({data: ShirtProps, fields: fields}); 
+  console.log(csv);
+  var d = new Date();
+  var month = d.getMonth()+1;
+  var day = d.getDate();
+  var output = d.getFullYear() + '-' +
+  ((''+month).length&lt;2 ? '0' : '') + month + '-' +
+  ((''+day).length&lt;2 ? '0' : '') + day;
+
+  fs.writeFile('./data/' + output + '.csv', csv, function (error) {
+    if (error) throw error;      
+  });    
+}
+
+//function to scrape each of the shirt links and create a shirtdata object for each.
+function ShirtHTMLScraper(ShirtURL) {
+  request(homeURL + ShirtURL, function (error, response, html) {
+    if (!error &amp;&amp; response.statusCode == 200) {
+      var $ = cheerio.load(html);
+      var time = new Date().toJSON().substring(0,19).replace('T',' ');
+      //json array for json2csv
+      var ShirtData = {
+        title: $('title').html(),
+        price: $("".price"").html(),
+        imgURL: $('img').attr('src'),
+        url: homeURL + ShirtURL,
+        time: time.toString() 
+      };
+      //push the shirt data scraped into the shirtprops array
+      ShirtProps.push(ShirtData);
+      console.log(ShirtProps);
+
+      // //set the feilds in order for the CSV file
+      // var fields = ['Title', 'Price', 'ImageURL', 'URL', 'Time'];
+
+      // //use json2csv to write the file -
+
+      // var csv = json2csv({data: ShirtProps, fields: fields}); 
+      // console.log(csv);
+
+      // //date for the filesystem to save the scrape with today's date.
+      // var d = new Date();
+      // var month = d.getMonth()+1;
+      // var day = d.getDate();
+      // var output = d.getFullYear() + '-' +
+      // ((''+month).length&lt;2 ? '0' : '') + month + '-' +
+      // ((''+day).length&lt;2 ? '0' : '') + day;
+
+      //   //use filesystem to write the file, or overrite if it exists.
+      //     fs.writeFile('./data/' + output + '.csv', csv, function (error) {
+      //       if (error) throw error;
+
+      //     }); //end writeFile
+    } else {
+      console.error(error);
+    }
+  });
+}
+
+//Check if data folder exists, source: http://stackoverflow.com/questions/4482686/check-synchronously-if-file-directory-exists-in-node-js
+function DataFolderExists(folder) {
+  try {
+    // Query the entry
+    var DataFolder = fs.lstatSync(folder);
+
+    // Is it a directory?
+    if (DataFolder.isDirectory()) {
+      return true;
+    } else {
+      return false;
+    }
+  } //end try
+  catch (error) {
+    console.error(error);
+  }
+}
+</code></pre>
+",<javascript><jquery><node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+8819,8819,38687707,1,0,1582712,2.0,0.0,0.0,0.0,2016-07-31T19:33:32.343,1.0,391.0,How to ensure blocking during a loop in Node.JS,"<p>Although I usually enjoy the callback-soup that is Node.JS, I found that a certain part of my code needs to be run in a blocking manner because of an SQLite issue. (Yes, I know I could try and address the SQLite part, it actually makes more sense to ensure blocking.)</p>
+
+<p>I like using the <a href=""https://www.npmjs.com/package/async"" rel=""nofollow"">async</a> module, and though I have a feeling that module has a feature which can be used here, I can't seem to find it. Or, maybe there is a better module out there. Anyway, without further ado:</p>
+
+<pre><code>func = function(callback) {
+    let i = 0;
+    arr.forEach(val =&gt; {
+        if (val.trim().length &gt; 0) {
+            console.log(`Starting for user ${val}.`);
+            let mylc = new lcapp(val);
+            ////// TODO this needs to be made sycnronous. /////
+            async.series({
+                getMyDetails: callback =&gt; getMyDetails(mylc, callback)
+            }, (err, results) =&gt; handleResults(err, results, mylc, callback));
+            /////////////
+        }
+    });
+};
+</code></pre>
+
+<p>The section of code surrounded by <code>////</code> I would like to block until the <code>handleResults</code> function returns. I understand it will require reprogramming the <code>callback</code> in <code>handleResults</code>, or maybe I need to write a parent function around <code>func</code> but I'd like to see if StackOverflow people have some good ideas.</p>
+",<javascript><node.js><asynchronous><npm><synchronization>,0.0,0,0,0,0,0,0,0,1
+11148,11148,41495392,1,41495864,2430772,2.0,0.0,0.0,0.0,2017-01-05T21:54:57.877,0.0,78.0,Using async In Node Module - How to Return Results?,"<p>I am in the process of writing an internal NPM module for my company so that applications can interact with a hardware device we have, which we already have a library written for communicating with it. The problem is, one method I am trying to write needs to execute asynchronously. I want the function to send a command to read from the device, wait for it to return (the device library handles this), and then I parse the results. What I am hoping for is for other developers to be able to call exports.getResolution() to get the values. Here is a snippet of my file with the relevant parts:</p>
+
+<pre><code>var async = require('async');
+
+exports.getResolution = async.series([
+    function(callback) {
+    board.sendAndReceive(bufferlib.generateBuffer(""read"", ""0x00001220"", ""0x00000004""), (function(received) {
+            var hex = bufferlib.sortReceivedHex(received);
+            var status = parseInt('0x' + hex.substring(0, 1), 16);
+            var verticalResolution = parseInt('0x' + hex.substring(1, 4), 16);
+            var horizontalResolution = parseInt('0x' + hex.substring(5, 9), 16);
+            callback(null, {
+                'status': status,
+                'vertical': verticalResolution,
+                'horizontal': horizontalResolution
+            });
+        }));
+    }
+],
+// optional callback
+function(err, results) {
+    status = results[0];
+    return results[0];
+});
+
+console.log(exports.getResolution);
+</code></pre>
+
+<p>I have tried callback hell, Promises, bluebird, ES6 async functions, and a bunch of other solutions but I just can't figure this one out. My most recent attempt uses the async node module to try and execute the code asynchronously, which works, but now I just need to get exports.getResolution to return the actual value the final callback receives. What am I doing wrong? What can I do to make this work? Thank you.</p>
+",<javascript><node.js><asynchronous><npm><async.js>,0.0,0,0,0,0,0,0,0,1
+11602,11602,42031031,1,0,4161612,0.0,2.0,0.0,0.0,2017-02-03T18:46:04.770,1.0,539.0,Is there any way Wait until “Write complete” while write csv in node js,"<p>I am using ""csv-write-stream"" npm, but how to make ensure if a file is finished writing.</p>
+
+<p>Below is the code:</p>
+
+<pre><code>var csvWriter = require('csv-write-stream')
+var writer = csvWriter()
+writer.pipe(fs.createWriteStream('out.csv'))
+writer.write({hello: ""world"", foo: ""bar"", baz: ""taco""})
+writer.end()
+</code></pre>
+
+<p>I use below code to check if file is complete,but after checking no data found in csv file.</p>
+
+<pre><code>writer.on('end', function() {
+
+    process.exit();
+});
+</code></pre>
+
+<p>I need to send mail only after if csv complete.</p>
+",<node.js><csv><asynchronous><npm><fs>,0.0,0,0,0,0,0,0,0,1
+12699,12699,43364170,1,0,123690,1.0,0.0,0.0,0.0,2017-04-12T08:25:07.207,0.0,217.0,Async operation on each file with npm filewalker,"<p>I'm using <a href=""https://www.npmjs.com/package/filewalker"" rel=""nofollow noreferrer"">Filewalker</a> to traverse through a directory. However, for each file, I'd like to perform an asynchronous operation. How do I ensure that <code>done</code> is fired only after all the operations are complete?</p>
+
+<pre><code>filewalker('.')
+  .on('file', function(p, s) {
+    processAsync(p);
+  })
+  .on('done', function() {
+    console.log('All files have been processed');
+  })
+.walk();
+</code></pre>
+",<node.js><asynchronous><npm><filewalker>,0.0,0,0,0,0,0,0,0,1
+14473,14473,45336611,1,45364131,5215003,1.0,0.0,0.0,0.0,2017-07-26T20:16:39.483,0.0,165.0,Meteor async unexpected token (,"<p>I'm using meteor 1.5.1 and I encounter the following bug when trying to import a npm module (kraken-api), server side : </p>
+
+<p>import KrakenClient from 'kraken-api';</p>
+
+<pre><code>    &gt; W20170726-22:02:48.177(2)? (STDERR) packages/modules.js:677
+    &gt; W20170726-22:02:48.181(2)? (STDERR) 
+
+
+     const rawRequest = async (url,headers, data, timeout) =&gt; { 
+     Unexpected token ( 
+
+
+    &gt;  W20170726-22:02:48.193(2)?
+    &gt; (STDERR)     at Object.exports.runInThisContext (vm.js:53:16)
+    &gt; W20170726-22:02:48.197(2)? (STDERR)     at
+    &gt; /home/meteor/project/.meteor/local/build/programs/server/boot.js:331:30
+    &gt; W20170726-22:02:48.204(2)? (STDERR)     at Array.forEach (native)
+    &gt; W20170726-22:02:48.208(2)? (STDERR)     at Function._.each._.forEach
+    &gt; (/root/.meteor/packages/meteor-tool/.1.5.1.bdxouu++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/server-lib/node_modules/underscore/underscore.js:79:11) W20170726-22:02:48.211(2)? (STDERR)     at
+    &gt; /home/meteor/project/.meteor/local/build/programs/server/boot.js:158:5
+    &gt; W20170726-22:02:48.215(2)? (STDERR)     at
+    &gt; /home/meteor/project/.meteor/local/build/programs/server/boot.js:387:5
+    &gt; W20170726-22:02:48.218(2)? (STDERR)     at Function.run
+    &gt; (/home/meteor/project/.meteor/local/build/programs/server/profile.js:510:12)
+    &gt; W20170726-22:02:48.221(2)? (STDERR)     at
+    &gt; /home/meteor/project/.meteor/local/build/programs/server/boot.js:386:11
+</code></pre>
+
+<p>It is expecting something else after the ""async"" 
+line 31 here : 
+<a href=""https://github.com/nothingisdead/npm-kraken-api/blob/master/kraken.js"" rel=""nofollow noreferrer"">https://github.com/nothingisdead/npm-kraken-api/blob/master/kraken.js</a></p>
+
+<p>I'm using nodejs 8.2.1, so await &amp; async should be ok.</p>
+
+<p>Edit : meteor node --version gives me node v4.8.4</p>
+
+<p>If you have any idea</p>
+
+<p>Thanks,</p>
+",<javascript><node.js><asynchronous><meteor><npm>,0.0,0,0,0,0,0,0,0,1
+16810,16810,47765775,1,47804415,2111562,1.0,0.0,0.0,0.0,2017-12-12T05:19:37.260,2.0,476.0,Node.js: request/response between master and workers using IPC,"<p>I need the implementation of request/response between master and workers using IPC (inter-process communication).</p>
+
+<p>This solution must be asynchronous: no any blocking while we awaiting response from worker.</p>
+
+<p>Is there good solution in npm packages?</p>
+",<node.js><asynchronous><npm><ipc>,0.0,0,0,0,0,0,0,0,1
+17692,17692,48643404,1,0,6800730,1.0,6.0,0.0,0.0,2018-02-06T12:46:12.137,2.0,7353.0,Using Async/Await with npm request module,"<p>I am currently trying to send some request with the npm request module.
+The normal callback variant works very well but I am not able to do the same with async await.</p>
+
+<p>At first I tried to do it with 'request-promise-native' module but I am not able to even run a normal promise example.</p>
+
+<pre><code>var request = require('request-promise-native');
+request(login)
+        .then(function (response) {
+            console.log(""Post succeeded with status %d"", response.statusCode);})
+        .catch(function (err) {
+            console.log(""Error"");
+        });
+</code></pre>
+
+<p>I am not sure what I do  wrong but the .then function is called and the response attribute is completely empty. If I look in webstorm debug I see only giberisch � inside that value. screenshot:</p>
+
+<p><a href=""https://i.stack.imgur.com/Czm8y.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/Czm8y.png"" alt=""enter image description here""></a></p>
+
+<p>My final goal is to use the npm request module like that:</p>
+
+<p>var result = await request(login);</p>
+
+<p>And in the result is either the response or an error if that is not possible I also can use the promise only variant. </p>
+
+<p>Can somebody tell me what I do wrong or how to do it correctly?</p>
+
+<p>Regards
+Ruvi</p>
+
+<p>Edit: Ok I found out what the first problem was. 
+      The server I was contacting send gzip info and I needed to put gzip = true in my options object and now I get a readable answer.
+But my problem is not solved:</p>
+
+<p>if I use: </p>
+
+<pre><code>req(login, function(error, response, body){
+        if (error)
+         console.log(error);
+
+        console.log(body);
+        console.log(response.statusCode);
+    });
+</code></pre>
+
+<p>I get the complete request and response object. From the Request module.
+If I use:</p>
+
+<pre><code> var result = await req(login);
+</code></pre>
+
+<p>I get as result the request object but without the response object and response header information.</p>
+
+<p>This returns me only the response body only one variable is filled:</p>
+
+<pre><code>request(login)
+        .then(function (response, body) {
+            console.log(response);})
+        .catch(function (err) {
+            console.log(""Error"");
+        });
+</code></pre>
+
+<p>How do I get promise and await to return me the whole request + response object?</p>
+",<node.js><asynchronous><npm-request>,0.0,0,0,0,0,0,0,0,1
+17790,17790,48743315,1,0,9088534,0.0,3.0,0.0,0.0,2018-02-12T09:39:04.703,0.0,169.0,Node Request piping data failure,"<p>I am trying to download about 800MB per file. This is the code to achieve it:</p>
+
+<pre><code>function makeRequest(url,name,callback){
+                name = promObj.Name;
+                requestsdone =-1;
+                request(url,{auth:auth}, function (err,respnse,body) {
+                })
+                    .on('error', function (err) {
+                        console.log(err)
+                    })
+                    .on('end', function () {
+                        requestsdone++;
+                    }).pipe(fs.createWriteStream('./app/data/' + name[requestsdone] + '.zip'));
+
+                callback();
+
+            }
+
+            async.eachLimit(promObj.requestURLS, 2, makeRequest, function(err) {
+                if(err) reject(promObj)
+                else{
+                    resolve(promObj);
+                }
+            });
+</code></pre>
+
+<p>I updated Node.js to version 9.5.0 and get this error now: </p>
+
+<pre><code>&lt;--- Last few GCs ---&gt;
+
+[12060:000001FED372E610]   487169 ms: Mark-sweep 28.7 (35.4) -&gt; 28.7 (35.4) 
+MB, 33.6 / 0.0 ms  allocation failure GC in old space requested
+[12060:000001FED372E610]   487205 ms: Mark-sweep 28.7 (35.4) -&gt; 28.7 (35.4) 
+MB, 36.2 / 0.0 ms  last resort GC in old space requested
+[12060:000001FED372E610]   487240 ms: Mark-sweep 28.7 (35.4) -&gt; 28.7 (35.4) 
+MB, 34.7 / 0.0 ms  last resort GC in old space requested
+
+
+&lt;--- JS stacktrace ---&gt;
+
+==== JS stack trace =========================================
+
+Security context: 000001311C6254D9 &lt;JSObject&gt;
+1: stringSlice(aka stringSlice) [buffer.js:586] [bytecode=0000031E27B6DEE1 offset=11](this=000003FACAA022D1 &lt;undefined&gt;,buf=000000CDF7528259 &lt;Uint8Array map = 00000392BE4C4D01&gt;,encoding=000003FACAA022D1 &lt;undefined&gt;,start=0,end=801130252)
+2: toString [buffer.js:664] [bytecode=0000031E27B6DB29 offset=148](this=000000CDF7528259 &lt;Uint8Array map = 00000392BE4C4D01&gt;,encoding=000003FACAA022D1...
+
+FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memory
+</code></pre>
+
+<p>How could I solve this? Thanks in advance.</p>
+
+<p>PS: This question refers to <a href=""https://stackoverflow.com/questions/48597191/requests-with-request-promise-pipe-result-large-data"">Requests with request-promise pipe result (Large data)</a> ,which I asked some time ago. I restructured my code and thought that this problem is worth a new, sepperated question because the original topic of the other question was a different one. </p>
+",<javascript><node.js><asynchronous><npm-request>,0.0,0,0,0,0,0,0,0,1
+18418,18418,49337777,1,49340861,614208,2.0,2.0,0.0,0.0,2018-03-17T14:01:18.460,1.0,690.0,Nodejs read an external image and write as pdf,"<p>I have a html file where I have some variable like {Ticket}. In nodejs I am trying to replace that variable into an image what I have. So basically the output will be a pdf file.</p>
+
+<p>So far now my code looks like this</p>
+
+<p>ticket.html looks like this</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;/td&gt;
+            &lt;td&gt;{Ticket}&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+var html = fs.readFileSync('ticket.html', 'utf8'); //html file
+var GetImage = fs.readFileSync('QRTicket.png'); //image file
+var customHtml = customHtml.replace('{Ticket}', GetImage);
+pdf.create(customHtml, options).toFile('QRImage.pdf', function(err, res) {
+    if (err) return console.log(err);
+    console.log(res); 
+});
+</code></pre>
+
+<p>But its creating a blank pdf file.
+I am using <a href=""https://www.npmjs.com/package/html-pdf"" rel=""nofollow noreferrer"">html-pdf</a> to generate pdf file. I am struggling to get this done but its not working. So any help and suggestions will be really appreciable</p>
+",<javascript><node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+18577,18577,49477420,1,0,9548339,1.0,3.0,0.0,0.0,2018-03-25T15:19:15.413,0.0,36.0,How to call function in async,"<p>function <code>a()</code> in async function :</p>
+
+<pre><code>MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db(mongourl);
+    function a (){
+      //do something
+    }
+});
+</code></pre>
+
+<p>how to trigger <code>a()</code> in another async function?</p>
+
+<pre><code>server.on('clientConnected', function(client) {
+    //do a()
+});
+</code></pre>
+",<function><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+19096,19096,49962105,1,0,2512141,0.0,4.0,0.0,0.0,2018-04-22T03:04:15.273,0.0,21.0,How can I tell if a function from an npm module is asynchronous?,"<p>My background is in systems programming/data management. New to the web development scene and javascript. Have been having a lot of fun exploring the plethora of npm modules available for server-side and client-side development. As I explore these modules and experiment with them in my code I'm noticing a recurring difficulty.</p>
+
+<p>As a concrete example, I've just inserted the Browserify npm module into a node.js web app. The documentation for Browserify suggests to use it like so:</p>
+
+<pre><code>var brow = browserify(__dirname + '/client_js/main.js', {debug:true});
+brow.bundle(function(err, buf){ ... });
+</code></pre>
+
+<p>A common problem that I encounter when using npm modules is that I cannot tell at a glance whether a module function is asynchronous or not. In this case, I would assume that browserify() is async, because I'm passing in a file path and I assume the function will read that filepath, which would put some todo's on the event loop. On the other hand, browserify() does not accept a callback function, which suggests it's not async?</p>
+
+<p>Assuming that browserify() is async, how can I be sure that all the events it puts on the event loop are completed before I call brow.bundle() on the next line?</p>
+
+<p>In this instance and in many other cases with npm modules, I am left wondering whether the module function will complete before I depend on the results later in the script. Is there a way to tell? If the only solution is to read the module source, that's fair, but it introduces a heavy burden for adopting new modules.</p>
+
+<p>I am aware of an npm module that attempts to help with this: <a href=""https://www.npmjs.com/package/is-async-function"" rel=""nofollow noreferrer"">https://www.npmjs.com/package/is-async-function</a>. Is this the best solution available?</p>
+",<javascript><node.js><asynchronous><npm><browserify>,0.0,0,0,0,0,0,0,0,1
+19101,19101,49965583,1,49965767,4952537,1.0,2.0,0.0,0.0,2018-04-22T11:49:55.160,1.0,3066.0,Await async functions to be done in reduce() function,"<p>I have a fuction which includes the following:</p>
+
+<pre><code>const newThreads = newItems.reduce( (acc, item) =&gt; {
+  request(item.href, function(error2, response2, html2){
+
+    if(!error2) {
+
+      const thread = cheerio.load(html2)
+      const today = thread('div#ignmsgbttns1').parent().parent().find(""b:contains('Today')"")
+
+      if(today.text()) {
+        acc.push(item)
+      }
+
+    }
+  })
+  return acc
+}, [])
+
+console.log(newThreads)
+</code></pre>
+
+<p>Of course the log returns an empty array, because of the async stuff 
+(<code>request</code>)  executed in the <code>reduce</code> loop.</p>
+
+<p>So what I would like to do is:</p>
+
+<pre><code>const newThreads = await newItems.reduce( etc...
+</code></pre>
+
+<p>And wait for the <code>requests</code> in the <code>reduce</code> loop to be done.</p>
+
+<p>But I don't get my head around how to do it properly.</p>
+
+<p>So I know I have to use <code>async</code>, <code>await</code> or <code>promises</code>, but don't know how to do it.</p>
+
+<p>I think the <code>reduce callback</code> also has to be <code>async</code> but absolutely not sure on this point.</p>
+
+<p>The <code>request</code> method comes from the <a href=""https://www.npmjs.com/package/request"" rel=""nofollow noreferrer"">npm request package</a> , they also provide some <a href=""https://www.npmjs.com/package/request#promises--asyncawait"" rel=""nofollow noreferrer"">packages</a> to use promises, but to be honest, I don't know how to apply it with <code>reduce</code>.</p>
+
+<p>I'm pretty sure there is already a similar question somewhere but couldn't find it.</p>
+
+<p>Any help would be greatly appreciated.</p>
+
+<p>ps: for those wondering what cheerio is, here the <a href=""https://www.npmjs.com/package/cheerio"" rel=""nofollow noreferrer"">link</a>.</p>
+
+<p><strong>Final code after applying answer</strong></p>
+
+<p>I had to use the <a href=""https://www.npmjs.com/package/async-request"" rel=""nofollow noreferrer"">async-request package</a></p>
+
+<pre><code>const newThreads = newItems.reduce(async (acc, item) =&gt; {
+  const current = await acc;
+
+  const html2 = await requestAsync(item.href);
+  const thread = cheerio.load(html2.body);
+
+  const today = thread('div#ignmsgbttns1')
+    .parent()
+    .parent()
+    .find(""b:contains('Today')"");
+
+  if (today.text()) current.push(item);
+
+  return current;
+}, []);
+
+newThreads.then((res) =&gt; {  
+  //..doing stuff with res 
+})
+</code></pre>
+",<javascript><asynchronous><es6-promise><reduce><npm-request>,0.0,0,0,0,0,0,0,0,1
+20142,20142,50924814,1,50925514,9957307,2.0,3.0,0.0,0.0,2018-06-19T09:22:14.613,20.0,30055.0,Node.js - Wait for multiple async calls to finish before continuing in code,"<p>So basically i have a for loop with an async function in it. Problem is that the program just continues after the loop and i want it to wait until all async functions which were called in the loop are finished before the code continues.</p>
+
+<p>In my code ""bar"" is a json array with other json arrays in it.</p>
+
+<pre><code>function write(bla) { // gets called one after another
+
+  for(var url in bla) {
+    asyncFunctionCall(url); // Executed about 50 times, it has to run parallel
+  }
+  // Wait for all called functions to finish before next stuff happens and
+  // write gets called again.
+
+}
+
+for(var foo in bar) {
+  // Here i parse the json array ""foo"" which is in the json array ""bar""
+  write(foo[bla]); // bla is an array of multiple urls.
+}
+</code></pre>
+
+<p>The async function call looks something like this:</p>
+
+<pre><code>var request = require('request');
+
+request(url, function (error, response, body) {
+  if(typeof response !== 'undefined') {
+    if((response.statusCode &gt;= 400 &amp;&amp; response.statusCode &lt;= 451)
+    || (response.statusCode &gt;= 500 &amp;&amp; response.statusCode &lt;= 511))
+      return true;
+    return false;
+  }
+  return false;
+});
+</code></pre>
+",<javascript><node.js><loops><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+22660,22337,52927701,1,0,10539953,1.0,2.0,0.0,0.0,2018-10-22T10:58:10.093,-1.0,512.0,Http Request inside forEach - NodeJS,"<p>I have spreadsheets with data that needs to be uploaded via an API. After extracting the data from the spreadsheet, I create an object and put it in an array. </p>
+
+<p>My idea was to iterate over this array and make a request for every single object in there and use the status code to display a success or error message.
+  The code seems to work fine with small quantities (~ 200 elements) but when I try to stress it (lets say 3500 elements), the line <code>response.statusCode</code> breaks because <code>response</code> is undefined. I thought I wouldn't have any problems with the async part because the callback would be called only when the server responded, but it seems not to be the case here.
+Why am I getting <code>response</code> undefined in a callback? </p>
+
+<p>Here's a piece of code i'm using:</p>
+
+<pre><code>array.forEach(function (element) {
+        //Configure Request
+        var options = {
+            url: 'http://example',
+            method: 'POST',
+            headers: headers,
+            body: element,
+            json: true
+        }
+
+        request(options, function (error, response, body) {
+            if (!error &amp;&amp; response.statusCode == 200) {
+                console.log(response.statusCode);
+                console.log(body)
+            } else {
+                console.log(response.statusCode);
+                console.log(error)
+
+            }
+        });
+    });
+</code></pre>
+
+<p>Thanks!</p>
+",<javascript><node.js><ajax><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+23029,22706,53270058,1,53377794,3791358,3.0,10.0,0.0,0.0,2018-11-12T21:03:13.543,1.0,994.0,Node can't find certain modules after synchronous install,"<p>I've got a script that synchronously installs non-built-in modules at startup that looks like this</p>
+
+<pre><code>const cp = require('child_process')
+
+function requireOrInstall (module) {
+  try {
+    require.resolve(module)
+  } catch (e) {
+    console.log(`Could not resolve ""${module}""\nInstalling`)
+    cp.execSync(`npm install ${module}`)
+    console.log(`""${module}"" has been installed`)
+  }
+  console.log(`Requiring ""${module}""`)
+  try {
+    return require(module)
+  } catch (e) {
+    console.log(require.cache)
+    console.log(e)
+  }
+}
+
+const http    = require('http')
+const path    = require('path')
+const fs      = require('fs')
+const ffp     = requireOrInstall('find-free-port')
+const express = requireOrInstall('express')
+const socket  = requireOrInstall('socket.io')
+// List goes on...
+</code></pre>
+
+<p>When I uninstall modules, they get installed successfully when I start the server again, which is what I want. However, the script starts throwing <code>Cannot find module</code> errors when I uninstall the first or first two modules of the list that use the function <code>requireOrInstall</code>. That's right, the errors only occur when the script has to install either the first or the first two modules, not when only the second module needs installing.</p>
+
+<p>In this example, the error will be thrown when I uninstall find-free-port, <strong>unless</strong> I move its <code>require</code> at least one spot down ¯\_(• _ •)_/¯</p>
+
+<p>I've also tried adding a delay directly after the synchronous install to give it a little more breathing time with the following two lines:</p>
+
+<pre><code>var until = new Date().getTime() + 1000
+while (new Date().getTime() &lt; until) {}
+</code></pre>
+
+<p>The pause was there. It didn't fix anything.</p>
+
+<p><a href=""https://stackoverflow.com/questions/53270058/node-cant-find-certain-modules-after-synchronous-install?noredirect=1#comment93537687_53270058"">@velocityzen came with the idea to check the cache</a>, which I've now added to the script. It doesn't show anything out of the ordinary.</p>
+
+<p><a href=""https://stackoverflow.com/questions/11600684/check-if-a-node-js-module-is-available?noredirect=1#comment31750733_11600684"">@vaughan's comment on another question</a> noted that this exact error occurs when requiring a module twice. I've changed the script to use <code>require.resolve()</code>, but the error still remains.</p>
+
+<p>Does anybody know what could be causing this?</p>
+
+<p><strong>Edit</strong></p>
+
+<p>Since the question has been answered, I'm posting the one-liner (139 characters!). It doesn't globally define <code>child_modules</code>, has no last <code>try-catch</code> and doesn't log anything in the console:</p>
+
+<pre><code>const req=async m=&gt;{let r=require;try{r.resolve(m)}catch(e){r('child_process').execSync('npm i '+m);await setImmediate(()=&gt;{})}return r(m)}
+</code></pre>
+
+<p>The name of the function is <code>req()</code> and can be used like in <a href=""https://stackoverflow.com/questions/53270058/node-cant-find-certain-modules-after-synchronous-install/53377794#53377794"">@alex-rokabilis' answer</a>.</p>
+",<javascript><node.js><asynchronous><npm><npm-install>,0.0,0,0,0,0,0,0,0,1
+24329,24006,54488024,1,0,10918923,1.0,0.0,0.0,0.0,2019-02-01T22:36:49.300,0.0,77.0,npm inputting user-selected choice from drop down list,"<p>I'm very new to node.js and async programming. I'm attempting to make a program that shuffles a spotify playlist. I put the user's playlists into an array.</p>
+
+<p>I would like to display this array on the webpage for the user to select. Once the user makes their selection, I want to continue with the program using the selected element. This is the code snippet I've written thus far. </p>
+
+<pre><code>// Callback functions
+    function plCallback(selected_playlist) {
+      playlist_id =
+      console.log(playlist_id);
+    }
+
+    function getPlaylist(body, plCallback) {
+      // Pull user playlists
+      for (var i = 0; i &lt; body.items.length; i++) {
+        playlistArray.push({'name': body.items[i].name, 'id': body.items[i].id});
+      }
+
+      // prompt user to select desired playlist to shuffle
+      var selPlaylist = document.getElementById('playlist-drop');
+      for (var i = 0; i &lt; playlistArray.length; i++) {
+        var opt = playlistArray[i].name;
+        var el = document.createElement(""option"");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+      }
+
+      // send selected playlist to Callback
+      var dropdown_return = document.getElementById('playlist-drop');
+      var selected_playlist = dropdown_return.options[dropdown_return.selectedIndex].value;
+      plCallback(selected_playlist);
+    }
+</code></pre>
+
+<p>I am really at a loss for what I even need to search for since I'm so new to js and node.</p>
+
+<p>To summarize: I populate a js array with spotify playlists. I want to display this list to the user to make a selection. Once that selection is made, I need the program to continue using said selection.</p>
+",<javascript><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+26076,25753,56136602,1,56136644,7858691,1.0,2.0,0.0,0.0,2019-05-14T18:38:12.833,2.0,35.0,Handling Async in Nodejs,"<p>Hey folks I'm having some trouble to solve an async issue in Node.js</p>
+
+<pre><code>let isDone = false;
+setTimeOut(() =&gt; { isDone = true }, 1000)
+
+let i = 0;
+while(!isDone) {
+ console.log(i++)
+}
+</code></pre>
+
+<p>The thing is, isDone eventually becomes true, but the while keeps forever, why?</p>
+",<javascript><node.js><asynchronous><npm><synchronization>,0.0,0,0,0,0,0,0,0,1
+26877,26554,56904975,1,0,1971067,0.0,6.0,0.0,0.0,2019-07-05T14:27:15.707,0.0,243.0,Why query response time is more in node.js or express.js compare to PHP and Mysql Client?,"<p>I'm comparing response/execution time of query with PHP script and express.js (mysql npm module) and mysql (command line).</p>
+
+<p>I observed that response time is more in node.js compare to others.</p>
+
+<p>My query :</p>
+
+<pre><code>     SELECT (1 + 1) AS result
+</code></pre>
+
+<p><strong>Response time (avg)</strong></p>
+
+<ul>
+<li>Express js : 2 ms</li>
+<li>Mysql (command-line) : less than 0 ms</li>
+<li>PHP Script : 0.11 ms </li>
+</ul>
+
+<p><strong>code in Express JS</strong></p>
+
+<pre><code>const express = require(""express"");
+const app = express();
+
+const mysql = require('mysql');
+
+app.get('/', (req, res) =&gt; {
+        const connection = mysql.createConnection({
+        host: ""localhost"",
+        user: ""root"",
+        password: """",
+        database: ""test""
+    });
+
+    global.start = Date.now();
+
+    connection.query('SELECT (1 + 1) AS result', function (error, results, fields) {
+        if (error) throw error;
+        connection.end();
+        let end = Date.now();
+        let elapsed = end - global.start;
+        let result = results[0]['result'];
+        res.send('Result : ' + result + ' &lt;br/&gt; Time Elapsed : ' + elapsed + ' ms');
+    });    
+});
+
+app.listen(8080);
+</code></pre>
+
+<p><strong>Code in PHP</strong></p>
+
+<pre><code>&lt;?php
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'test';
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn-&gt;connect_error) {
+    die(""Connection failed: "" . $conn-&gt;connect_error);
+} 
+
+$sql = ""SELECT 1 + 1 AS result"";
+
+$start = microtime(true);
+$result = $conn-&gt;query($sql);
+$end = microtime(true);
+
+
+
+if ($result-&gt;num_rows &gt; 0) {
+    // output data of each row
+    while($row = $result-&gt;fetch_assoc()) {
+        echo ""Result: "" . $row[""result""] . ""&lt;br&gt;"";
+        echo 'Time Elapsed : ' . number_format(($end-$start)*1000,2) . ' ms &lt;br/&gt;';
+            }
+} else {
+    echo ""0 results"";
+}
+
+
+
+$conn-&gt;close();
+?&gt;
+</code></pre>
+
+<p>I expect response time of node.js (mysql npm module) should be approximately matched with others.</p>
+",<mysql><node.js><express><asynchronous><npm>,0.0,0,0,1,0,0,0,0,1
+28537,28009,58314794,1,0,2359877,1.0,0.0,0.0,0.0,2019-10-10T02:54:31.100,0.0,539.0,How to implement continuous loop for npm package script,"<p>My code is</p>
+
+<p>My index.js script is as follows:</p>
+
+<pre><code>import personfaces from './dist/index';
+
+const dnte = new personfaces();
+
+dnte.getImage({ width: 256, height: 256, type: 'file' })
+.then(res =&gt; { console.log('result-&gt;', res); })
+.catch(err =&gt; { console.log('error-&gt;', err); });
+</code></pre>
+
+<p>I run the code  using terminal command ""npm start"" but I want to make this as a continuous repetitive loop for say 100 runs.
+Each time I run the code at my terminal, it downloads an image and I want it to be a continuous process with 100 runs so that it generates 100 images.</p>
+
+<p>is there a way to run terminal command 100 runs or add 100 runs to my main code.</p>
+",<node.js><asynchronous><npm>,0.0,0,0,0,0,0,0,0,1
+33102,32574,62460596,1,0,8815760,1.0,0.0,0.0,0.0,2020-06-18T22:48:33.373,0.0,357.0,Lambda function not running part of code returning nothing,"<p>I am trying to have a function return the correct values back to another function which does processing on the returned data. I have this function inside the same file as the one I am trying to call it from - a Lambda function - I am calling it using <code>const response = sendRequest(url)</code> which the url is provided from another variable. I've checked this variable and it is for sure the correct value I set it to.</p>
+
+<p>The goal is to return information about the request back to the primary function. I want to process the data there and act on it. </p>
+
+<p>The actual request function should be fine as I can run it exactly as it is - minus the resolve part - in a <code>test.js</code> file. </p>
+
+<p>Problematic function</p>
+
+<pre><code>async function sendRequest (url) {
+  let code;
+  return new Promise((resolve, reject) =&gt; {
+    request({ url, timeout: 20000 }, (error, response, body) =&gt; {
+      if (error == 'ENOTFOUND' || error == 'ETIMEDOUT') {
+        response.statusCode = 500;
+      }
+      if (error || (response.statusCode &lt; 200 &amp;&amp; response.statusCode &gt; 299) || !response.statusCode) {
+        if (!response || !response.statusCode) {
+          code = 500;
+        } else {
+          code = response.statusCode;
+        }
+      }
+      console.log(`Elapsed time: ${response.elapsedTime}`)
+      return resolve({code, error, elapsedTime: response.elapsedTime})
+    });
+  });
+}
+</code></pre>
+
+<p>Current output</p>
+
+<pre><code>{error: null}
+</code></pre>
+",<javascript><node.js><asynchronous><async-await><npm-request>,0.0,0,0,0,0,0,0,0,1
+35016,34488,64188589,1,64190072,5062992,1.0,2.0,0.0,0.0,2020-10-03T20:16:08.990,0.0,292.0,How can I make an incredibly simple node.js server which itself makes an HTTP request?,"<p>I have found very simple code that creates a server and displays a string, using the &quot;http&quot; module.
+eg. from <a href=""https://garywoodfine.com/simple-lightweight-nodejs-webserver/"" rel=""nofollow noreferrer"">https://garywoodfine.com/simple-lightweight-nodejs-webserver/</a>:</p>
+<pre><code>var http = require('http');
+var server = http.createServer(function (req, res) {
+    var body = 'Amazing lightweight webserver using node.js\n';
+    var content_length = body.length;
+    res.writeHead(200, {
+        'Content-Length': content_length,
+        'Content-Type': 'text/plain' });
+ 
+    res.end(body);
+});
+server.listen(3939);
+console.log('Server is running on port 3939');
+</code></pre>
+<p>I have found very simple code that gets data over HTTP, using the &quot;got&quot; module.
+eg. from <a href=""https://nodesource.com/blog/express-going-into-maintenance-mode"" rel=""nofollow noreferrer"">https://nodesource.com/blog/express-going-into-maintenance-mode</a>:</p>
+<pre><code>const got = require('got');
+
+(async () =&gt; {
+    try {
+        const response = await got('https://www.nodesource.com/');
+        console.log(response.body);
+        //=&gt; '&lt;!doctype html&gt; ...'
+    } catch (error) {
+        console.log(error.response.body);
+        //=&gt; 'Internal server error ...'
+    }
+})();
+</code></pre>
+<p>However I am failing to integrate the two to create a server that, when visited, makes the HTTP call and returns the result.  I essentially just want to replace the <code>var body = 'Amazing lightweight webserver using node.js\n';</code> line from the Gary Woodfine example with the output of the Nodesource example.</p>
+<p>I'm not particularly looking for comments or questions as to why I would want to make something that does this, I'm trying to understand fundamentally why I can't just do what feels like a very simple and natural thing to do: return content based on a server side request to another web service.  I get the impression that the issue is to do with the asynchronous paradigm and obviously I understand the performance improvements it offers, I'm failing to understand how you structure something that works for this simple usecase.</p>
+",<node.js><http><asynchronous><npm><async-await>,0.0,0,0,0,0,0,0,0,1
+35511,34983,64674846,1,64676575,13395739,1.0,0.0,0.0,0.0,2020-11-04T05:51:12.130,1.0,1235.0,"Getting TypeError doc.sheetsByTitle is not a function, google-spreadsheet","<p>I'm using 'google-spreadsheet' and I'm successfully creating a new worksheet but for some reason, I can't manipulate or even select it. I searched through the docs and sites but I still couldn't find a solution.</p>
+<pre><code>async function startup () {
+    const doc = new GoogleSpreadsheet(config.sheetID);
+
+    let creds = require('login data')
+
+    await doc.useServiceAccountAuth(creds);
+
+    await doc.loadInfo(); // loads document properties and worksheets
+    console.log(doc.title);
+
+    for (var i = 0; i &lt; config.channelID.length; i++) {
+        doc.addSheet({ title: config.channelID[i] })
+
+        let sheet = await doc.sheetsByTitle(config.channelID[i])
+        
+    }
+}
+</code></pre>
+<p><code>(node:50552) UnhandledPromiseRejectionWarning: TypeError: doc.sheetsByTitle is not a function</code></p>
+",<node.js><asynchronous><npm><google-sheets-api>,0.0,0,0,0,0,0,0,0,1
+36264,35736,65387511,1,0,2823596,1.0,3.0,0.0,0.0,2020-12-21T04:23:22.613,0.0,244.0,How to write code for checking if process is indeed Parallel in Node/JS,"<p>There are few/many packages that assert they process their some methods parallelly, like async npm package. For many methods including concat they claim they process it parallelly.</p>
+<p><strong>How can the code be written to check if their claim is indeed true?</strong></p>
+<p>I have written code, but it only shows the results after all the process are completed, so there is no way I can't check how the actual process was carried out (parallel or sequential).
+<a href=""https://i.stack.imgur.com/upRVD.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/upRVD.png"" alt=""enter image description here"" /></a></p>
+<pre><code>const async =  require('async');
+const fs = require('fs');
+
+let file1 = 'Abc1.pdf';
+let file2 = 'Abc2.pdf';
+let file3 = 'Abc3.pdf';
+
+async.concat([file1,file2,file3], fs.stat, function(err, results) {
+    results.forEach(element =&gt; {
+        console.log('concat results: ', element.birthtime);
+    });
+});
+
+---output---
+concat results:  2020-12-21T02:40:35.713Z
+concat results:  2020-12-21T02:40:35.668Z
+concat results:  2020-12-21T02:40:35.847Z
+------------
+</code></pre>
+<p>async documentation: <a href=""https://caolan.github.io/async/v3/docs.html#concat"" rel=""nofollow noreferrer"">https://caolan.github.io/async/v3/docs.html#concat</a></p>
+",<javascript><node.js><asynchronous><npm><parallel-processing>,0.0,0,0,0,0,0,0,0,1
+36699,36171,65738383,1,0,14128791,0.0,3.0,0.0,0.0,2021-01-15T14:57:04.733,0.0,332.0,Node.js Axios no error message program stops running,"<p>This code is making requests to the same endpoint and iterating over a number.</p>
+<p>The code will randomly (sometimes the first time, sometimes not until 50+, completely random)</p>
+<p>just stop working!... No error message or anything, it just stops.</p>
+<p>It logs the line just before the instance.get method and then doesn't do anything after that.<br />
+Logs a blank line and quits.</p>
+<p><strong>The last few lines it logs are:</strong></p>
+<pre><code>(...axios response)
+after request... 12
+before request... 13
+(blank line...)
+</code></pre>
+<p><strong>Example of the code:</strong></p>
+<pre><code>/* Axios Ebay Instance */
+const UserAgent = require('user-agents');
+const agent = new UserAgent().toString();
+const ebay = require('axios').default.create({
+    baseURL: `https://www.ebay.com/`,
+    headers: {
+        'User-Agent': agent
+    }
+});
+
+(async () =&gt; {
+    for(let i = 0; i &lt; 100; i++){
+        console.log('before request...', i);
+        try{
+        const r = await ebay.get(
+            `/sch/i.html?_from=R40&amp;_nkw=Fontaine+Red+playing+cards&amp;_sacat=0&amp;rt=nc&amp;LH_Sold=1&amp;LH_Complete=1&amp;_pgn=${i}`);
+            console.log(r);
+        }catch(err){
+            if(err){
+                console.log(err);
+            }
+        }
+        console.log('after request...', i);
+    } 
+})();
+</code></pre>
+",<javascript><asynchronous><npm><error-handling><axios>,0.0,0,0,0,0,0,0,0,1
+40655,39908,68789831,1,68790010,16258268,3.0,1.0,0.0,0.0,2021-08-15T08:19:26.900,0.0,130.0,how can I get the final result from a array of async ？,"<p><a href=""https://www.npmjs.com/package/get-video-duration"" rel=""nofollow noreferrer"">get-video-duration</a> is a npm module that get the duration of video.</p>
+<pre class=""lang-js prettyprint-override""><code>
+const { getVideoDurationInSeconds } = require('get-video-duration')
+
+// From a local path...
+getVideoDurationInSeconds('video.mov').then((duration) =&gt; {
+  console.log(duration)
+})
+
+</code></pre>
+<p>I want to use this module to get the total duration of all videos  from an Array of video pathes.</p>
+<pre class=""lang-js prettyprint-override""><code>
+function getTotals(video_Array) {
+    let total_duration = 0;
+    video_Array.forEach(video =&gt; {
+        getVideoDurationInSeconds(video).then(duration =&gt; {
+            total_duration += duration;
+            
+        })
+    })
+
+}
+
+</code></pre>
+<p>The thing is <code>getVideoDurationInSeconds</code> is Asynchronous,  I can't just simply return the result.</p>
+<pre class=""lang-js prettyprint-override""><code>
+function getTotals(video_Array) {
+    let total_duration = 0;
+    video_Array.forEach(video =&gt; {
+        getVideoDurationInSeconds(video).then(duration =&gt; {
+            total_duration += duration;
+        })
+    })
+    return total_duration;
+}
+
+</code></pre>
+<p>How can I get the final result? Thank you in advance!</p>
+",<javascript><node.js><asynchronous><npm><promise>,0.0,0,0,0,0,0,0,0,1
+42740,41993,70389199,1,70389287,14469062,2.0,1.0,0.0,0.0,2021-12-17T06:25:25.983,4.0,882.0,When to use 'async' built-in for ES2017 or import 'npm i async',"<p>I recently learned that async/await is built into ES2017, but I have made several projects that I needed to require the package <a href=""https://www.npmjs.com/package/async"" rel=""nofollow noreferrer"">async</a> in order to use async/await.</p>
+<p>Is there an easy way to tell when I can access async normally or when I need to import it? Do I ever need to use that npm package? What is the purpose of the async package (which currently shows 47,469,002 weekly downloads) if the exact same functionality is now built into the language?</p>
+<p>For an example project that requires async feel free to look at the <a href=""https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Displaying_data/flow_control_using_async"" rel=""nofollow noreferrer"">Local-Library</a> MongoDB/Express/Node tutorial project on MDN.</p>
+<p>Since this is an Express app (as several of my own are), does this have anything to do with ExpressJS?</p>
+<p>I have looked around for about a bit trying to find these answers but have come up empty-handed. Any help understanding this is appreciated.</p>
+",<javascript><node.js><asynchronous><npm><async-await>,0.0,0,0,0,0,0,0,0,1
+43222,42475,70716764,1,0,159522,2.0,11.0,0.0,0.0,2022-01-14T21:34:24.240,1.0,935.0,Preventing simultaneous calls to the same Promise / async function,"<h2>The Situation</h2>
+<p>I have an asynchronous function that takes <code>~X seconds</code> to resolve. The duration depends on network latency so it is unpredictable.  The function is triggered by user input (think &quot;save current form values to the server&quot;)</p>
+<p>I would like to prevent this function from running multiple times simultaneously.</p>
+<p>I would also like to &quot;queue&quot; calls to the function for potentially calling when the time is right.</p>
+<h2>The Question</h2>
+<p>(A) Is there a term for this concept of a &quot;patient&quot; async function.</p>
+<p>(B) Is there a tool (similar to <a href=""https://www.npmjs.com/package/debounce"" rel=""nofollow noreferrer"">debounce</a>) that will take an async function and turn it into a &quot;patient&quot; one.</p>
+",<node.js><asynchronous><npm><promise>,0.0,0,0,0,0,0,0,0,1
+43448,42701,70880724,1,0,6506011,1.0,0.0,0.0,0.0,2022-01-27T14:55:51.073,1.0,163.0,File Upload to s3 bucket via NodeJS Console app via aws-sdk doesnt get completed,"<p>I do have a one time running JS file, which is running as a command line tool. But not as a REST server.</p>
+<p>The issue I have is that I do have the following function which accepts the arguments and uploads a file to a specified S3 bucket.</p>
+<pre><code>const uploadToAWSS3Bucket = (stream, fileName, bucketName) =&gt;{
+    const params = {
+        Bucket: bucketName || '',
+        Key: fileName,
+        Body: stream
+    };
+
+    console.log(`Using Bucket ${bucketName} for uploading the file ${fileName}`);
+    
+    return s3.upload(params, (err, data) =&gt; {
+        if (err) {
+            console.log(err);
+        }
+        console.log(data.stringify);
+        console.log(`File uploaded successfully. ${data.Location}`);
+        console.log(`Finished uploading the file ${fileName} to Bucket ${bucketName}.`);
+        
+    }).promise();
+    // await sleep(80000);
+
+};
+</code></pre>
+<p>This is called/implemented by the following method.</p>
+<pre><code>(async()=&gt;{
+    const result  = await uploadToAWSS3Bucket(stream, 'filename.json', 'mybucketname');
+    console.log(result);           
+});
+</code></pre>
+<p>However, the <code>node index.js</code> command exits with giving out a commandline output and it appears that the file upload never gets completed because of that.</p>
+<p>Anything that I am missing or any trick that would work on this case?</p>
+",<node.js><asynchronous><npm><async-await><aws-sdk>,0.0,0,0,0,0,0,0,0,1
+46250,45503,72894335,1,0,14171799,1.0,1.0,0.0,0.0,2022-07-07T08:08:25.407,0.0,998.0,How to upload multiple files (50k+)/ folder to AWS S3 node.js,"<p>I've a node js API running on a windows machine which generates some XML files which are later uploaded to S3 bucket. The number of files exceed 50k and sometimes even more.</p>
+<p>In my current approach, I'm using <a href=""https://www.npmjs.com/package/aws-sdk"" rel=""nofollow noreferrer"">aws-sdk</a> package for uploading. Basically I loop through the folder that needs to be uploaded, read every file and upload it.</p>
+<pre><code>const files = fs.readdirSync(dirPath, {
+            withFileTypes: true
+});
+for (const file of files) {
+      const fileContent = fs.readFileSync(path.join(dirPath, file.name));
+      const params = {
+          Bucket: BUCKET_NAME,
+          Key: `${folderPath}/${file.name}`,
+          Body: fileContent
+      };
+      try {
+          await s3.upload(params).promise()
+      } catch (err) {
+          //error handling
+          return;
+      }
+}
+</code></pre>
+<p>This takes around 3-4 hours to upload. Is there any better way to bulk upload files? Or if any way to upload entire folder?</p>
+<p>Thanks in advance</p>
+",<javascript><node.js><asynchronous><amazon-s3><npm>,0.0,0,0,0,0,0,0,0,1
+49429,48682,75166468,1,0,21039993,0.0,4.0,0.0,0.0,2023-01-18T23:57:55.890,0.0,32.0,Lambda function timing out while attempting to retrieve data,"<p>I have been trying to create an AWS Lambda function that pulls information using a node module and returns it. I have been trying the following code:</p>
+<pre><code>const { getChart } = require('billboard-top-100');
+
+exports.handler = async function (event, context) {
+
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+
+            getChart('artist-100', '', (err, chart) =&gt; {
+                if (err) console.log(err);
+                resolve(chart);
+            });
+
+        }, 0);
+    });
+}
+</code></pre>
+<p>which has been timing out when tested with AWS. I am not quite sure what the problem is. Any help would be greatly appreciated!</p>
+<p>I have tried returning the promise in many different formats, but none work. The server should return the data if I'm not mistaken.</p>
+",<javascript><amazon-web-services><asynchronous><npm><aws-lambda>,0.0,0,0,0,0,0,0,0,1

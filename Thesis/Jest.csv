@@ -1,0 +1,1173 @@
+,Unnamed: 0,QId,QPostTypeId,QAcceptedAnswerId,QOwnerUserId,QAnswerCount,QCommentCount,QFavoriteCount,QCommunityOwnedDate,QCreationDate,QScore,QViewCount,QTitle,QBody,QTags,QStackTrace,Webpack,React,Express,Vue,Jest
+11247,11247,41596721,1,0,802484,1.0,0.0,0.0,0.0,2017-01-11T17:08:44.103,4.0,1438.0,Getting absolutely NO output from Jest when running tests,"<p>Here is my package.json:</p>
+
+<pre><code>""jest"": {
+   ""cacheDirectory"": ""/tmp/jestCache"",
+   ""scriptPreprocessor"": ""node_modules/babel-jest"",
+   ""modulePaths"": [
+      ""&lt;rootDir&gt;/app/static/react/""
+   ],
+   ""moduleDirectories"": [
+      ""node_modules"",
+      ""app/static/react/app""
+   ],
+   ""testPathDirs"": [
+      ""app/static/react/__tests__""
+   ],
+   ""testRegex"": ""(.*Tests?\\.jsx?)$""
+}
+</code></pre>
+
+<p>When I run <code>jest --verbose</code>, the tests run, but there is no way to communicate anything to stdout as far as I can tell except by throwing an error. <code>console.log</code> itself does not exist. I am using jest 16.0.2. I've read that there are some recent changes around automocking and console buffering, but it seems like I'm missing something more fundamental.</p>
+
+<p>The tests otherwise run fine.</p>
+
+<p>Working on OSX Yosemite, node 7.4, npm 4.0.5.</p>
+",<reactjs><npm><jestjs><babel-jest>,0.0,0,0,0,0,1
+17314,17314,48268499,1,48269830,1484120,2.0,0.0,0.0,0.0,2018-01-15T18:09:48.870,1.0,495.0,Javascript (Jest) tests on Semaphore CI ruby project,"<p>I've had a Ruby on Rails project for several years set up with Semaphore CI. The Semaphore project is set to use Ruby 2.2.2 as it's language. Over time the project adopted npm with browserify and babelify, and we're using all the latest ES6 features. We added <code>npm install</code> as a setup step to our Semaphore build, and this was working fine.</p>
+
+<p>Now we are starting to use Jest to test our javascripts, and this is working fine locally. But when I added <code>npm test</code> to our Semaphore test commands, <code>npm test</code> fails on semaphore CI with the following errors:</p>
+
+<pre><code>FAIL app/assets/javascripts/tests/selectors/conversations.test.js
+● Test suite failed to run
+
+SyntaxError: Unexpected token {
+
+  at _load_jsdom (node_modules/jest/node_modules/jest-cli/node_modules/jest-environment-jsdom/build/index.js:17:41)
+
+FAIL app/assets/javascripts/tests/reducers/conversations.test.js
+● Test suite failed to run
+
+SyntaxError: Unexpected token {
+  at _load_jsdom (node_modules/jest/node_modules/jest-cli/node_modules/jest-environment-jsdom/build/index.js:17:41)
+
+Test Suites: 2 failed, 2 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        0.65s
+Ran all test suites.
+npm ERR! Test failed.  See above for more details.
+</code></pre>
+
+<p>This is some relavent information from the project's <code>package.json</code>:</p>
+
+<pre><code>""scripts"": {
+  ""test"": ""jest --debug --verbose""
+},
+""jest"": {
+  ""roots"": [
+    ""&lt;rootDir&gt;/app/assets/javascripts""
+  ]
+},
+""dependencies"": {
+  ""babel-plugin-syntax-async-functions"": ""^6.3.13"",
+  ""babel-plugin-transform-class-properties"": ""^6.24.1"",
+  ""babel-plugin-transform-regenerator"": ""^6.3.18"",
+  ""babel-polyfill"": ""^6.3.14"",
+  ""babel-preset-env"": ""^1.5.2"",
+  ""babel-preset-es2015"": ""^6.24.1"",
+  ""babel-preset-es2016"": ""^6.24.1"",
+  ""babel-preset-es2017"": ""^6.24.1"",
+  ""babel-preset-react"": ""^6.3.13"",
+  ""babel-preset-stage-0"": ""^6.3.13"",
+  ""babelify"": ""^7.2.0"",
+  ""browserify"": ""^14.0.0"",
+  ""browserify-incremental"": ""^3.1.0"",
+  ""es6-promise"": ""^3.0.2"",
+  ""fetch"": ""^0.3.6""
+},
+""devDependencies"": {
+  ""babel-core"": ""^6.26.0"",
+  ""babel-jest"": ""^22.1.0"",
+  ""babel-plugin-transform-class-properties"": ""^6.24.1"",
+  ""bootstrap"": ""^4.0.0-beta.3"",
+  ""browserify"": ""^14.4.0"",
+  ""browserify-incremental"": ""^3.1.1"",
+  ""jest"": ""^22.1.1""
+}
+</code></pre>
+
+<p>This is the <code>.babelrc</code> file located in the project :</p>
+
+<pre><code>{
+  ""presets"": [""env"", ""es2015"", ""es2016"", ""es2017"", ""stage-0"", ""react""]
+}
+</code></pre>
+
+<p>Locally, I am on <code>node v7.10.0</code>. I SSH'ed into my Semaphore CI session and discovered that <code>node v4.8.4</code> is installed there. I tried installing <code>node v4.8.4</code> on my local machine and with that version installed, I get the same test errors (posted above) locally as I did on CI. So this is a node version issue.</p>
+
+<p>I added:</p>
+
+<pre><code>""engines"": {
+  ""node"": ""&gt;= 7.1.0""
+}
+</code></pre>
+
+<p>to my <code>package.json</code> file, but that did not affect the node version installed on Semaphore.</p>
+
+<p>So if I already have <code>Ruby 2.2.2</code> chosen as my language and version in the Semaphore Build Settings, how to I change my node version?</p>
+
+<p>Thanks in advance for the help.</p>
+",<node.js><npm><jestjs><babel-jest><semaphore-ci>,1.0,0,0,0,0,1
+17898,17898,48846142,1,0,1772334,19.0,4.0,0.0,0.0,2018-02-17T21:33:39.630,54.0,50565.0,"jest hangs indefinitely, runs no tests","<p>Every time I run jest it never runs anything. I have let the counter go arbitrarily high. I have run jest with --no-cache</p>
+
+<p><a href=""https://i.stack.imgur.com/N3dsO.png"" rel=""noreferrer""><img src=""https://i.stack.imgur.com/N3dsO.png"" alt=""""></a></p>
+
+<p>jest --debug output is as follows:</p>
+
+<pre><code>{
+  ""configs"": [
+    {
+      ""automock"": false,
+      ""browser"": false,
+      ""cache"": true,
+      ""cacheDirectory"": ""/var/folders/7v/64n1tsk11zs2pbwf5bm_c9kc0000gn/T/jest_dx"",
+      ""clearMocks"": false,
+      ""coveragePathIgnorePatterns"": [
+        ""/node_modules/""
+      ],
+      ""detectLeaks"": false,
+      ""forceCoverageMatch"": [],
+      ""globals"": {},
+      ""haste"": {
+        ""defaultPlatform"": ""ios"",
+        ""platforms"": [
+          ""android"",
+          ""ios"",
+          ""native""
+        ],
+        ""providesModuleNodeModules"": [
+          ""react-native""
+        ]
+      },
+      ""moduleDirectories"": [
+        ""node_modules""
+      ],
+      ""moduleFileExtensions"": [
+        ""js"",
+        ""json"",
+        ""jsx"",
+        ""node""
+      ],
+      ""moduleNameMapper"": [
+        [
+          ""^React$"",
+          ""/Users/skilurus/github/flock-react-app/node_modules/react""
+        ]
+      ],
+      ""modulePathIgnorePatterns"": [
+        ""/Users/skilurus/github/flock-react-app/node_modules/react-native/Libraries/react-native/""
+      ],
+      ""name"": ""b29a126b130a0be47202d3bc7b00f1b4"",
+      ""resetMocks"": false,
+      ""resetModules"": false,
+      ""restoreMocks"": false,
+      ""rootDir"": ""/Users/skilurus/github/flock-react-app"",
+      ""roots"": [
+        ""/Users/skilurus/github/flock-react-app""
+      ],
+      ""runner"": ""jest-runner"",
+      ""setupFiles"": [
+        ""/Users/skilurus/github/flock-react-app/node_modules/regenerator-runtime/runtime.js"",
+        ""/Users/skilurus/github/flock-react-app/node_modules/react-native/jest/setup.js"",
+        ""/Users/skilurus/github/flock-react-app/test-setup.js""
+      ],
+      ""snapshotSerializers"": [
+        ""/Users/skilurus/github/flock-react-app/node_modules/enzyme-to-json/serializer.js""
+      ],
+      ""testEnvironment"": ""/Users/skilurus/github/flock-react-app/node_modules/jest-environment-jsdom/build/index.js"",
+      ""testEnvironmentOptions"": {},
+      ""testLocationInResults"": false,
+      ""testMatch"": [
+        ""**/__tests__/**/*.js?(x)"",
+        ""**/?(*.)(spec|test).js?(x)""
+      ],
+      ""testPathIgnorePatterns"": [
+        ""/node_modules/"",
+        ""e2e""
+      ],
+      ""testRegex"": """",
+      ""testRunner"": ""/Users/skilurus/github/flock-react-app/node_modules/jest-jasmine2/build/index.js"",
+      ""testURL"": ""about:blank"",
+      ""timers"": ""real"",
+      ""transform"": [
+        [
+          ""^.+\\.js$"",
+          ""/Users/skilurus/github/flock-react-app/node_modules/babel-jest/build/index.js""
+        ],
+        [
+          ""^[./a-zA-Z0-9$_-]+\\.(bmp|gif|jpg|jpeg|mp4|png|psd|svg|webp)$"",
+          ""/Users/skilurus/github/flock-react-app/node_modules/react-native/jest/assetFileTransformer.js""
+        ]
+      ],
+      ""transformIgnorePatterns"": [
+        ""node_modules/(?!react-native|native-base|react-navigation|react-native-fabric|tipsi-stripe)""
+      ],
+      ""watchPathIgnorePatterns"": []
+    }
+  ],
+  ""globalConfig"": {
+    ""bail"": false,
+    ""changedFilesWithAncestor"": false,
+    ""collectCoverageFrom"": [
+      ""src/**/*.{js,jsx}""
+    ],
+    ""coverageDirectory"": ""/Users/skilurus/github/flock-react-app/__coverage__"",
+    ""coverageReporters"": [
+      ""json"",
+      ""lcov"",
+      ""text""
+    ],
+    ""coverageThreshold"": {
+      ""global"": {
+        ""branches"": 70,
+        ""functions"": 75,
+        ""lines"": 85,
+        ""statements"": 80
+      }
+    },
+    ""detectLeaks"": false,
+    ""expand"": false,
+    ""globalSetup"": null,
+    ""globalTeardown"": null,
+    ""listTests"": false,
+    ""mapCoverage"": false,
+    ""maxWorkers"": 7,
+    ""noStackTrace"": false,
+    ""nonFlagArgs"": [],
+    ""notify"": false,
+    ""notifyMode"": ""always"",
+    ""passWithNoTests"": false,
+    ""rootDir"": ""/Users/skilurus/github/flock-react-app"",
+    ""runTestsByPath"": false,
+    ""testFailureExitCode"": 1,
+    ""testPathPattern"": """",
+    ""testResultsProcessor"": null,
+    ""updateSnapshot"": ""new"",
+    ""useStderr"": false,
+    ""verbose"": true,
+    ""watch"": false,
+    ""watchman"": true
+  },
+  ""version"": ""22.3.0""
+}
+</code></pre>
+
+<p>node --version: 8.9.4</p>
+
+<p>npm --version: 5.6.0</p>
+
+<p>yarn --version 1.3.2</p>
+
+<p>Has anybody seen anything similiar? Does anybody know hot to fix this?</p>
+",<node.js><testing><npm><jestjs><babel-jest>,0.0,0,0,0,0,1
+23222,22899,53466578,1,0,4884334,1.0,2.0,0.0,0.0,2018-11-25T10:25:40.283,2.0,531.0,"Getting Error in Project during start project with Npm start, Project created with create-react-app","<p>I am using ubantu 16 OS and i have installed </p>
+
+<blockquote>
+  <p>Node version v10.13.0 and npm version 6.4.1</p>
+</blockquote>
+
+<p>I am creating Reactjs project based on <a href=""https://github.com/facebook/create-react-app"" rel=""nofollow noreferrer"">create-react-app</a>.</p>
+
+<p>I have created project using command </p>
+
+<pre><code>sudo npm init react-app my-app
+</code></pre>
+
+<p>This command successfully created my-app, but when i am running project using <strong>npm start</strong>
+command under my-app folder i am getting following error</p>
+
+<pre><code>&gt; my-app@0.1.0 start /home/karan/workspace/1425/my-app
+&gt; react-scripts start
+
+
+There might be a problem with the project dependency tree. It is likely not a bug in Create React App, but something you need to fix locally.
+
+The react-scripts package provided by Create React App requires a dependency:
+
+  ""babel-jest"": ""23.6.0""
+
+Don't try to install it manually: your package manager does it automatically. However, a different version of babel-jest was detected higher up in the tree:
+
+  /home/karan/workspace/node_modules/babel-jest (version: 22.4.4) 
+
+Manually installing incompatible versions is known to cause hard-to-debug issues.
+
+If prefer to ignore this check, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project. That will permanently disable this message but you might encounter other issues.
+
+To fix the dependency tree, try following the steps below in the exact order:
+
+  1. Delete package-lock.json (not package.json!) and/or yarn.lock in your project folder.
+  2. Delete node_modules in your project folder.
+  3. Remove ""babel-jest"" from dependencies and/or devDependencies in the package.json file in your project folder.
+  4. Run npm install or yarn, depending on the package manager you use.
+
+In most cases, this should be enough to fix the problem. If this has not helped, there are a few other things you can try:
+
+  5. If you used npm, install yarn (http://yarnpkg.com/) and repeat the above steps with it instead.
+     This may help because npm has known issues with package hoisting which may get resolved in future versions.
+
+  6. Check if /home/karan/workspace/node_modules/babel-jest is outside your project directory.
+     For example, you might have accidentally installed something in your home folder.
+
+  7. Try running npm ls babel-jest in your project folder.
+     This will tell you which other package (apart from the expected react-scripts) installed babel-jest.
+
+If nothing else helps, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project. That would permanently disable this preflight check in case you want to proceed anyway.
+
+P.S. We know this message is long but please read the steps above :-) We hope you find them helpful!
+
+npm ERR! code ELIFECYCLE npm ERR! errno 1 npm ERR! my-app@0.1.0 start: `react-scripts start` npm ERR! Exit status 1 npm ERR!  npm ERR! Failed at the my-app@0.1.0 start script. npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+</code></pre>
+
+<p>As this is showing issue related </p>
+
+<blockquote>
+  <p>react-scripts start ,""babel-jest"": ""23.6.0""</p>
+</blockquote>
+
+<p>but i am new to js framework(node/npm/react), how this problem will resolve please help? </p>
+
+<p><strong>package.json</strong> </p>
+
+<pre><code>{
+  ""name"": ""my-app"",
+  ""version"": ""0.1.0"",
+  ""private"": true,
+  ""dependencies"": {
+    ""react"": ""^16.6.3"",
+    ""react-dom"": ""^16.6.3"",
+    ""react-scripts"": ""2.1.1""
+  },
+  ""scripts"": {
+    ""start"": ""react-scripts start"",
+    ""build"": ""react-scripts build"",
+    ""test"": ""react-scripts test"",
+    ""eject"": ""react-scripts eject""
+  },
+  ""eslintConfig"": {
+    ""extends"": ""react-app""
+  },
+  ""browserslist"": [
+    ""&gt;0.2%"",
+    ""not dead"",
+    ""not ie &lt;= 11"",
+    ""not op_mini all""
+  ]
+}
+</code></pre>
+",<node.js><reactjs><npm><babel-jest>,0.0,0,0,0,0,1
+26533,26210,56595053,1,57241607,10982622,13.0,0.0,0.0,0.0,2019-06-14T09:15:42.950,62.0,81913.0,Cannot find name 'it' in Jest TypeScript,"<p>I try to create an intial setup for Jest in React + TypeScript. I have completed the initial setup and try to check whether the test runs.
+When I run the test using the command <code>npm test</code>, I am getting the following error:</p>
+<pre><code>Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i @types/jest` or `npm i @types/mocha`.
+</code></pre>
+<p>I have installed the types for Jest as well as removed the types in <code>tsconfig.json</code>, but still I am getting the same error.</p>
+<pre><code>{
+  &quot;compilerOptions&quot;: {
+    &quot;target&quot;: &quot;es6&quot;,
+    &quot;lib&quot;: [&quot;dom&quot;, &quot;dom.iterable&quot;, &quot;esnext&quot;],
+    &quot;allowJs&quot;: true,
+    &quot;skipLibCheck&quot;: true,
+    &quot;esModuleInterop&quot;: true,
+    &quot;allowSyntheticDefaultImports&quot;: true,
+    &quot;strict&quot;: true,
+    &quot;forceConsistentCasingInFileNames&quot;: true,
+    &quot;module&quot;: &quot;esnext&quot;,
+    &quot;moduleResolution&quot;: &quot;node&quot;,
+    &quot;plugins&quot;: [{ &quot;name&quot;: &quot;typescript-tslint-plugin&quot; }],
+    &quot;resolveJsonModule&quot;: true,
+    &quot;isolatedModules&quot;: true,
+    &quot;noEmit&quot;: true,
+    &quot;jsx&quot;: &quot;preserve&quot;,
+    &quot;pretty&quot;: true,
+    &quot;baseUrl&quot;: &quot;src&quot;,
+    &quot;types&quot;: [&quot;jest&quot;],
+    &quot;typeRoots&quot;: [&quot;./src/types&quot;],
+    &quot;suppressImplicitAnyIndexErrors&quot;: true
+  },
+  &quot;include&quot;: [&quot;src&quot;, &quot;node_modules/@types/jest&quot;],
+  &quot;exclude&quot;: [&quot;node_modules&quot;]
+}
+`
+
+</code></pre>
+<p>Package.json</p>
+<pre><code>
+    &quot;jest&quot;: {
+        &quot;transform&quot;: {
+          &quot;.(ts|tsx)&quot;: &quot;ts-jest&quot;
+        },
+        &quot;testRegex&quot;: &quot;(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$&quot;,
+        &quot;moduleFileExtensions&quot;: [
+          &quot;ts&quot;,
+          &quot;tsx&quot;,
+          &quot;js&quot;
+        ]
+      },
+      &quot;devDependencies&quot;: {
+        &quot;@babel/plugin-proposal-export-default-from&quot;: &quot;^7.2.0&quot;,
+        &quot;@types/enzyme&quot;: &quot;^3.9.3&quot;,
+        &quot;@types/jest&quot;: &quot;^24.0.14&quot;,
+        &quot;enzyme&quot;: &quot;^3.10.0&quot;,
+        &quot;gh-pages&quot;: &quot;^1.2.0&quot;,
+        &quot;husky&quot;: &quot;^2.2.0&quot;,
+        &quot;jest&quot;: &quot;^24.8.0&quot;,
+        &quot;node-sass&quot;: &quot;^4.11.0&quot;,
+        &quot;prettier&quot;: &quot;^1.17.0&quot;,
+        &quot;react-scripts&quot;: &quot;2.1.8&quot;,
+        &quot;react-test-renderer&quot;: &quot;^16.8.6&quot;,
+        &quot;stylelint&quot;: &quot;^9.3.0&quot;,
+        &quot;stylelint-config-recommended-scss&quot;: &quot;^3.2.0&quot;,
+        &quot;stylelint-config-standard&quot;: &quot;^18.2.0&quot;,
+        &quot;stylelint-order&quot;: &quot;^0.8.1&quot;,
+        &quot;stylelint-scss&quot;: &quot;^3.1.3&quot;,
+        &quot;ts-jest&quot;: &quot;^24.0.2&quot;,
+        &quot;tslint&quot;: &quot;^5.16.0&quot;,
+        &quot;tslint-config-prettier&quot;: &quot;^1.18.0&quot;,
+        &quot;tslint-plugin-prettier&quot;: &quot;^2.0.1&quot;,
+        &quot;tslint-react&quot;: &quot;^4.0.0&quot;,
+        &quot;tslint-react-hooks&quot;: &quot;^2.1.0&quot;
+      }
+
+</code></pre>
+",<typescript><npm><jestjs><ts-jest>,0.0,0,0,0,0,1
+30552,30024,60176403,1,0,1235929,2.0,4.0,0.0,0.0,2020-02-11T19:53:34.517,0.0,2031.0,"Why doesn't ""npm start"" work on brand new-crated react project?","<p>I'm using </p>
+
+<pre><code>localhost:client davea$ npm -version
+6.11.3
+</code></pre>
+
+<p>and following the advice here -- <a href=""https://stackoverflow.com/questions/53089122/issue-with-babel-jest-dependency-when-running-npm-start-in-a-react-app"">Issue with babel-jest dependency when running npm start in a React app</a> , didn't do anything to help my situation.  I want to start a completely blank project, so I tried</p>
+
+<pre><code>npx create-react-app client
+cd client
+</code></pre>
+
+<p>However when I attempt to start things, I get this error</p>
+
+<pre><code>localhost:client davea$ npm start
+
+&gt; client@0.1.0 start /Users/davea/Documents/workspace/chicommons/maps/client
+&gt; react-scripts start
+
+
+There might be a problem with the project dependency tree.
+It is likely not a bug in Create React App, but something you need to fix locally.
+
+The react-scripts package provided by Create React App requires a dependency:
+
+  ""babel-jest"": ""^24.9.0""
+
+Don't try to install it manually: your package manager does it automatically.
+However, a different version of babel-jest was detected higher up in the tree:
+
+  /Users/davea/Documents/workspace/node_modules/babel-jest (version: 22.4.1) 
+
+Manually installing incompatible versions is known to cause hard-to-debug issues.
+
+If you would prefer to ignore this check, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project.
+That will permanently disable this message but you might encounter other issues.
+
+To fix the dependency tree, try following the steps below in the exact order:
+
+  1. Delete package-lock.json (not package.json!) and/or yarn.lock in your project folder.
+  2. Delete node_modules in your project folder.
+  3. Remove ""babel-jest"" from dependencies and/or devDependencies in the package.json file in your project folder.
+  4. Run npm install or yarn, depending on the package manager you use.
+
+In most cases, this should be enough to fix the problem.
+If this has not helped, there are a few other things you can try:
+
+  5. If you used npm, install yarn (http://yarnpkg.com/) and repeat the above steps with it instead.
+     This may help because npm has known issues with package hoisting which may get resolved in future versions.
+
+  6. Check if /Users/davea/Documents/workspace/node_modules/babel-jest is outside your project directory.
+     For example, you might have accidentally installed something in your home folder.
+
+  7. Try running npm ls babel-jest in your project folder.
+     This will tell you which other package (apart from the expected react-scripts) installed babel-jest.
+
+If nothing else helps, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project.
+That would permanently disable this preflight check in case you want to proceed anyway.
+
+P.S. We know this message is long but please read the steps above :-) We hope you find them helpful!
+
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! client@0.1.0 start: `react-scripts start`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the client@0.1.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/davea/.npm/_logs/2020-02-11T19_49_36_594Z-debug.log
+</code></pre>
+
+<p>What else am I supposed to do to get this off the ground?</p>
+",<reactjs><npm><babel-jest><npm-start>,0.0,0,0,0,0,1
+32425,31897,61862533,1,0,3587229,2.0,12.0,0.0,0.0,2020-05-18T04:36:30.553,5.0,7770.0,Why does `npm test` take so long on only one test?,"<p>After <code>npx create-react-app my-app</code> I run <code>npm test</code> and I get the following:</p>
+
+<pre><code> PASS  src/App.test.js
+  ✓ renders learn react link (48ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        2.555s
+Ran all test suites.
+
+Watch Usage: Press w to show more.
+</code></pre>
+
+<p>Why does it take <code>2.5s</code> to run the entire suite, but only <code>48ms</code> to run the test?
+How can I speed up this process?
+Thanks!</p>
+
+<p><strong>UPDATE</strong>: I'm running this computer:</p>
+
+<p><a href=""https://i.stack.imgur.com/aEQvl.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/aEQvl.png"" alt=""enter image description here""></a></p>
+",<reactjs><npm><jestjs><create-react-app><babel-jest>,0.0,0,1,0,0,1
+38526,37998,67269799,1,0,8252883,1.0,0.0,0.0,0.0,2021-04-26T15:48:36.317,0.0,255.0,The command line threw an error while installing JEST with NPM,"<p>I just used Vite to initialize a Vue3 + TypeScript project, and then I didn't do anything else. I didn't write a line of code, I didn't modify any files.</p>
+<p>I just used this command <code>npm i jest -D</code>  directly to install JEST.</p>
+<p>But the command line throws an error like this:</p>
+<pre><code>$ npm i jest -D    
+
+                                            
+npm WARN deprecated har-validator@5.1.5: this library is no longer supported
+npm WARN deprecated node-pre-gyp@0.15.0: Please upgrade to @mapbox/node-pre-gyp: the non-scoped node-pre-gyp package is deprecated and only the @mapbox scoped package will recieve updates in the future
+npm ERR! code 1
+npm ERR! path /Users/apple/Desktop/project/vue3-jest/node_modules/canvas
+npm ERR! command failed
+npm ERR! command sh -c node-gyp rebuild
+npm ERR! gyp info it worked if it ends with ok
+npm ERR! gyp info using node-gyp@7.1.2
+npm ERR! gyp info using node@12.16.1 | darwin | x64
+npm ERR! gyp info find Python using Python version 3.9.0 found at &quot;/usr/local/bin/python3&quot;
+npm ERR! gyp info spawn /usr/local/bin/python3
+npm ERR! gyp info spawn args [
+npm ERR! gyp info spawn args   '/usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py',
+npm ERR! gyp info spawn args   'binding.gyp',
+npm ERR! gyp info spawn args   '-f',
+npm ERR! gyp info spawn args   'make',
+npm ERR! gyp info spawn args   '-I',
+npm ERR! gyp info spawn args   '/Users/apple/Desktop/project/vue3-jest/node_modules/canvas/build/config.gypi',
+npm ERR! gyp info spawn args   '-I',
+npm ERR! gyp info spawn args   '/usr/local/lib/node_modules/npm/node_modules/node-gyp/addon.gypi',
+npm ERR! gyp info spawn args   '-I',
+npm ERR! gyp info spawn args   '/Users/apple/Library/Caches/node-gyp/12.16.1/include/node/common.gypi',
+npm ERR! gyp info spawn args   '-Dlibrary=shared_library',
+npm ERR! gyp info spawn args   '-Dvisibility=default',
+npm ERR! gyp info spawn args   '-Dnode_root_dir=/Users/apple/Library/Caches/node-gyp/12.16.1',
+npm ERR! gyp info spawn args   '-Dnode_gyp_dir=/usr/local/lib/node_modules/npm/node_modules/node-gyp',
+npm ERR! gyp info spawn args   '-Dnode_lib_file=/Users/apple/Library/Caches/node-gyp/12.16.1/&lt;(target_arch)/node.lib',
+npm ERR! gyp info spawn args   '-Dmodule_root_dir=/Users/apple/Desktop/project/vue3-jest/node_modules/canvas',
+npm ERR! gyp info spawn args   '-Dnode_engine=v8',
+npm ERR! gyp info spawn args   '--depth=.',
+npm ERR! gyp info spawn args   '--no-parallel',
+npm ERR! gyp info spawn args   '--generator-output',
+npm ERR! gyp info spawn args   'build',
+npm ERR! gyp info spawn args   '-Goutput_dir=.'
+npm ERR! gyp info spawn args ]
+npm ERR! /bin/sh: pkg-config: command not found
+npm ERR! gyp: Call to 'pkg-config pixman-1 --libs' returned exit status 127 while in binding.gyp. while trying to load binding.gyp
+npm ERR! gyp ERR! configure error 
+npm ERR! gyp ERR! stack Error: `gyp` failed with exit code: 1
+npm ERR! gyp ERR! stack     at ChildProcess.onCpExit (/usr/local/lib/node_modules/npm/node_modules/node-gyp/lib/configure.js:351:16)
+npm ERR! gyp ERR! stack     at ChildProcess.emit (events.js:311:20)
+npm ERR! gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:275:12)
+npm ERR! gyp ERR! System Darwin 18.7.0
+npm ERR! gyp ERR! command &quot;/usr/local/bin/node&quot; &quot;/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js&quot; &quot;rebuild&quot;
+npm ERR! gyp ERR! cwd /Users/apple/Desktop/project/vue3-jest/node_modules/canvas
+npm ERR! gyp ERR! node -v v12.16.1
+npm ERR! gyp ERR! node-gyp -v v7.1.2
+npm ERR! gyp ERR! not ok
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/apple/.npm/_logs/2021-04-26T15_35_01_442Z-debug.log
+</code></pre>
+<p>It makes me helpless. I don't know what the problem is.</p>
+",<npm><jestjs><ts-jest><vite>,0.0,0,0,0,0,1
+38806,38278,67496943,1,0,14100150,1.0,0.0,0.0,0.0,2021-05-12T03:25:03.803,-1.0,106.0,Unable to install jest using npm i jest,"<p>npm WARN deprecated urix@0.1.0: Please see <a href=""https://github.com/lydell/urix#deprecated"" rel=""nofollow noreferrer"">https://github.com/lydell/urix#deprecated</a></p>
+<p>This is the warning, I am getting. Can you help ?</p>
+",<jestjs><automated-tests><node-modules><npm-install><ts-jest>,0.0,0,0,0,0,1
+39456,38928,68012814,1,68076880,3070192,1.0,0.0,0.0,0.0,2021-06-17T04:11:45.120,4.0,3558.0,Gitlab - jest test - Segmentation fault (core dumped),"<p>In the GitLab Runner,<br />
+After all the npm modules are installed,<br />
+Jest is ran for all the unit tests that are in Typescript.</p>
+<p>The Jest Command is:</p>
+<pre><code>jest ./API/* --verbose --coverage --detectOpenHandles --bail --ci
+</code></pre>
+<p>This is the error:</p>
+<pre><code>Test Suites: 6 passed, 6 total
+Tests:       10 passed, 10 total
+Snapshots:   1 passed, 1 total
+Time:        22.953 s
+Ran all test suites matching ./API/**.
+Segmentation fault (core dumped)
+
+Cleaning up file based variables
+ERROR: Job failed: exit code 1
+
+</code></pre>
+<p>Thats the end of the script, So the tests pass, but then it fails afterwards because of the <code>Segmentation fault (core dumped)</code></p>
+<p>Just before the test start, the memory is this:</p>
+<pre><code>MEMORY UPDATE
+              total        used        free      shared  buff/cache   available
+Mem:           3693         519         338         199        2836        2695
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          22G  6.9G   15G  33% /
+CPU(s):              1
+</code></pre>
+<p>How would I fix this?</p>
+",<npm><jestjs><gitlab-ci><gitlab-ci-runner><ts-jest>,0.0,0,0,0,0,1
+40966,40219,69038797,1,0,16452376,2.0,0.0,0.0,0.0,2021-09-03T02:18:34.780,-1.0,182.0,"Sorry, name can only contain URL-friendly characters. Error - for NPM Install Jest","<p>Hello I am not sure what is wrong with installing Jest.</p>
+<p><a href=""https://jestjs.io/docs/getting-started"" rel=""nofollow noreferrer"">https://jestjs.io/docs/getting-started</a></p>
+<p>But here is my issue with my terminal. Please help. I am new to this.</p>
+<p><a href=""https://i.stack.imgur.com/8BCWM.png"" rel=""nofollow noreferrer"">Terminal screenshot</a></p>
+",<terminal><jestjs><npm-install><ts-jest>,0.0,0,0,0,0,1
+42600,41853,70283652,1,71070096,13801417,1.0,2.0,0.0,0.0,2021-12-09T01:20:09.040,0.0,453.0,Jest + Typescript Unable to Import Library (tiny-secp256k1),"<p>I am currently using the npm package <code>tiny-secp256k1</code>.</p>
+<p>It provides non-default exports of many functions (with type declaration).</p>
+<p>No matter how I try to import it, running my test suite. Jest throws:</p>
+<pre><code>    /pathToProject/node_modules/tiny-secp256k1/lib/index.js:1
+    ({&quot;Object.&lt;anonymous&gt;&quot;:function(module,exports,require,__dirname,__filename,jest){import { compare } from &quot;uint8array-tools&quot;;
+                                                                                      ^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+</code></pre>
+<p>I cannot tell if this issue is isolated to the library, or is caused by my configuration.
+I can import other libraries without complication.</p>
+<p><code>jest.config.ts</code></p>
+<pre class=""lang-js prettyprint-override""><code>export default {
+    verbose: true,
+    transform: {
+        '^.+\\.(ts|tsx)?$': 'ts-jest',
+    },
+    testPathIgnorePatterns: ['__tests__/helpers'],
+};
+</code></pre>
+<p><code>tsconfig.json</code></p>
+<pre class=""lang-json prettyprint-override""><code>{
+    &quot;compilerOptions&quot;: {
+        &quot;target&quot;: &quot;ES2020&quot;,
+        &quot;module&quot;: &quot;commonjs&quot;,
+        &quot;outDir&quot;: &quot;dist&quot;,
+        &quot;allowJs&quot;: false,
+        &quot;sourceMap&quot;: true,
+        &quot;resolveJsonModule&quot;: true,
+        &quot;esModuleInterop&quot;: true,
+        &quot;allowSyntheticDefaultImports&quot;: true
+    },
+    &quot;exclude&quot;: [&quot;__tests__/&quot;]
+}
+</code></pre>
+",<typescript><npm><jestjs><ts-jest>,0.0,0,0,0,0,1
+42906,42159,70508539,1,70508682,16532264,1.0,0.0,0.0,0.0,2021-12-28T14:37:09.550,-1.0,630.0,Cannot use import statement outside a module calling values from another file,"<p>Unable to Resolve the Import issue, already have type = module added in package.json file</p>
+<p><div class=""snippet"" data-lang=""js"" data-hide=""false"" data-console=""true"" data-babel=""false"">
+<div class=""snippet-code"">
+<pre class=""snippet-code-html lang-html prettyprint-override""><code>import { env, username, password, panel } from ""../DemoAutomationProject/config"";
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at wrapSafe (internal/modules/cjs/loader.js:1001:16)
+    at Module._compile (internal/modules/cjs/loader.js:1049:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12)
+    at internal/main/run_main_module.js:17:47</code></pre>
+</div>
+</div>
+</p>
+<p>[![testcase.jsfile][1]][1]</p>
+<p><a href=""https://i.stack.imgur.com/7jgL4.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/7jgL4.png"" alt=""configjs file"" /></a></p>
+<p>Unable to solve this import error</p>
+<p><a href=""https://i.stack.imgur.com/I0XTu.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/I0XTu.png"" alt=""dependencies"" /></a></p>
+",<javascript><node.js><npm><puppeteer><jest-puppeteer>,1.0,0,0,0,0,1
+44685,43938,71781215,1,0,18735826,1.0,1.0,0.0,0.0,2022-04-07T11:18:50.120,5.0,6229.0,TypeError: Failed to load plugin 'jest' declared in '.eslintrc': Class extends value undefined is not a constructor or null,"<p>I was updating react-scripts to latest version i.e. 5.0.0 and started seeing above error.
+One article suggested to upgrade @typescript-eslint to version ^5.0.0 in order to be compatible with eslint version ^8.3.0 which comes by default by updating react-scripts to 5.0.0, which I did but error still exists.
+Please help as it is a critical issue as build is failing.</p>
+",<reactjs><npm><eslint><babel-jest><react-scripts>,0.0,0,1,0,0,1
+45543,44796,72395114,1,0,19036060,1.0,3.0,0.0,0.0,2022-05-26T16:32:20.420,1.0,816.0,Mocking in Jest (Typescript - Mock chrome namespace),"<p>I have a <strong>chrome extension in react</strong>.
+I started to add some test, but i am having a hard with some tests.</p>
+<p>I want to test my <strong><code>&lt;App/&gt;</code> component</strong>, but i get an error in any way i have tried it.</p>
+<p>By doing this:</p>
+<pre><code>import React from &quot;react&quot;;
+import { render, fireEvent } from &quot;@testing-library/react&quot;;
+import App from &quot;../../App&quot;;
+import { BMEUtils } from &quot;../../app/helpers/utils/BMEUtils&quot;;
+import { FormContainerID } from &quot;../../app/dom-elements/_components/forms/AbsoluteContainer&quot;;
+import renderer from 'react-test-renderer';
+
+
+describe(&quot;tests &quot;, () =&gt; {
+
+  it(&quot;test App&quot;, () =&gt; {
+    const component = renderer.create(
+      &lt;App /&gt;,
+    );
+    const b = document.getElementById(FormContainerID)
+    const a =  document.getElementById(&quot;login-btn&quot;);
+    
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+    
+    expect(a).not.toBeNull();
+    expect(b).not.toBeNull();
+   
+  });
+});
+
+</code></pre>
+<p>I get a error during the test</p>
+<pre><code>ReferenceError: chrome is not defined
+</code></pre>
+<p>Because one of the components calls this namespace to add a listener (<code>chrome.runtime.onMessage.addListener</code>)</p>
+<p>I have tried:</p>
+<pre><code>global.chrome = jest.fn() as any;
+jest.mock('chrome');
+</code></pre>
+<pre><code>import chrome from &quot;sinon-chrome&quot;;
+ beforeAll(function () {
+    global.chrome = chrome as any;
+ });
+</code></pre>
+<pre><code>const chrome = require('sinon-chrome/extensions');
+beforeAll(function () {
+    global.chrome = chrome ;
+});
+</code></pre>
+<pre><code>var globalRef:any =global;
+globalRef.chrome = jest.fn().mockImplementation();
+const component = renderer.create(
+   &lt;App /&gt;,
+);
+</code></pre>
+<pre><code>import { mount } from 'enzyme';
+const wrapper = mount(
+   &lt;App/&gt;
+);
+const p = wrapper.find('#login-btn');
+</code></pre>
+<p><strong>But none of them worked for me</strong>.</p>
+<p>This is my main problem.</p>
+<p>Other problem that i have, and may be related to the previous, is that i dont know how to mock the implementation of some functions that are executed inside the method i am calling, and are not modules.</p>
+<p>For example</p>
+<pre><code>// Test as Base64 Image
+// Utils is a namespace
+test('base64Image', () =&gt; {
+  ...
+  const file = ...;
+  let base64Image = Utils.asBase64Image(file);
+  expect(base64Image).not.toEqual(&quot;&quot;);
+  ...
+});
+</code></pre>
+<pre><code>function asBase64Image(file:File) {
+  ...
+  canvas.getContext(&quot;2d&quot;);
+  img.onload
+  ...
+}
+</code></pre>
+<p>The workaround that i came up with is to use Modules to replace those functions and mock them, for example instead of <code>img.onload</code> -&gt; <code>module.loadImage(img).then(...)</code>
+but i want to learn the correct way to do it if it is possible.</p>
+<p>Anyway my real problem now is that i can not test my <code>&lt;App/&gt;</code> component.</p>
+",<typescript><npm><google-chrome-extension><jestjs><babel-jest>,0.0,0,0,0,0,1
+46293,45546,72921321,1,0,306347,1.0,2.0,0.0,0.0,2022-07-09T12:22:43.987,0.0,757.0,"npm install not installing nested dependency, but does install them when installing explicitly","<p>I have a package (<a href=""https://github.com/Voitanos/jest-preset-spfx"" rel=""nofollow noreferrer"">https://github.com/Voitanos/jest-preset-spfx</a>) with the a few <code>dependencies</code>:</p>
+<pre class=""lang-json prettyprint-override""><code>&quot;dependencies&quot;: {
+  &quot;@types/jest&quot;: &quot;28.1.4&quot;,
+  &quot;identity-obj-proxy&quot;: &quot;3.0.0&quot;,
+  &quot;jest-junit&quot;: &quot;14.0.0&quot;,
+  &quot;ts-jest&quot;: &quot;28.0.5&quot;
+}
+</code></pre>
+<p>The package includes a shrinkwrap file. The intention of this package is to install it in another project where it installs these specific version dependencies.</p>
+<p>Now... when I install this package, there are no errors/warnings &amp; it completes successfully, yetI see three inconsistent things happening that's confusing:</p>
+<ul>
+<li>two dependencies (identity-obj-proxy &amp; jest-junit) are installed with the expected versions</li>
+<li>one dependency (@types/jest) was already present as an older version (by another dependency in the original project), but the version I'm specifying isn't installed</li>
+<li>one dependency (ts-jest) isn't installed at all</li>
+</ul>
+<p>Looking at the verbose NPM install logs, I can see all the expected versions listed for all three types of behaviors above... 75% of them have only my version listed:</p>
+<pre><code>71 silly audit   '@types/jest': [ '25.2.1', '28.1.4' ],
+..
+71 silly audit   'identity-obj-proxy': [ '3.0.0' ],
+71 silly audit   'jest-junit': [ '14.0.0' ],
+..
+71 silly audit   'ts-jest': [ '28.0.5' ]
+</code></pre>
+<p>I can get around this by explicitly installing each dependency, but that defeats the purpose of this package as the whole point of it is:</p>
+<ol>
+<li>install specific versions of dependencies so the consumer doesn't have to figure out the correct versions to use</li>
+<li>run a postinstall script to make a few tweaks to the project</li>
+</ol>
+<p>I've used two versions of the latest NPM (v8), both 8.5.5 &amp; 8.13.2 have the same behavior. At a loss as to why this would happen... no errors, warnings, or other stuff in the logs are giving clues as to why this is happening. Ideas?</p>
+",<node.js><npm><jestjs><npm-install><ts-jest>,0.0,0,0,0,0,1
+46306,45559,72928355,1,0,6116008,1.0,0.0,0.0,0.0,2022-07-10T12:06:37.270,0.0,795.0,How to pass an argument to 2nd command when using `concurrently` with npm?,"<p>I have 2 npm scripts: <code>tsc -w</code> and <code>jest --watch</code> that I want to execute concurrently. I know there is a tool called <code>concurrently</code> that could be used for this.</p>
+<pre class=""lang-json prettyprint-override""><code>&quot;test:watch&quot;: &quot;concurrently -P --kill-others \&quot;npm run watch\&quot;  \&quot;jest --watchAll -- {@} \&quot;&quot;,
+</code></pre>
+<p>Problem is I want to pass a param to the Jest command, and not to the <code>concurrently</code> command.</p>
+<p>How to pass an argument to the 2nd command when using <code>concurrently</code> with <code>npm</code>?</p>
+",<npm><jestjs><ts-jest><concurrently>,0.0,0,0,0,0,1
+47339,46592,73704722,1,0,12478069,0.0,1.0,0.0,0.0,2022-09-13T14:27:51.287,1.0,66.0,How do I write a Jest test case in TypeScript to check if any required dependency is missing from package.json,"<p>I have a Node project where I have all the required dependencies listed in package.json. I use Docker to deploy the project and Jenkins for continuous deployment.</p>
+<p>I want to write a Jest test case such that if any required dependency is removed from package.json (accidentally), I should be able to catch the error during Jenkins build.</p>
+<p>It is not necessarily to be a test case, it can be anything, with that I should be able to catch the error during Jenkins build, and the build should fail if any dependency is missing.</p>
+",<node.js><typescript><jenkins><npm><ts-jest>,0.0,0,0,0,0,1
+48061,47314,74304217,1,0,13311173,0.0,0.0,0.0,0.0,2022-11-03T13:51:45.593,2.0,132.0,Jest coverage test does not include 'rewired' files,"<p>I am including my non-exported function (let's say A) to the Jest unit tests with the 'rewire' function. When I run the coverage test, the A function is not included to the coverage test. Is there any way to include rewired files to the coverage test?</p>
+<p>Is there any configurations which should be provided to the babel.config.json?</p>
+<pre><code>{
+  &quot;presets&quot;: [&quot;@babel/preset-env&quot;],
+  &quot;plugins&quot;: [&quot;babel-plugin-rewire&quot;]
+}
+</code></pre>
+",<npm><jestjs><babel-jest><rewire>,0.0,0,0,0,0,1
+48692,47945,74751919,1,0,519836,0.0,1.0,0.0,0.0,2022-12-10T09:56:48.213,7.0,796.0,Jest cannot find module in workspace,"<p>I have an NPM project structured in workspaces:</p>
+<pre><code>proj/
++-node_modules/
++-packages/
+  +-pkg1/
+    +-src/
+      |-c1.ts
+      |-c1.test.ts
+    |-package.json
+    |-jest.config.js
+  +-pkg2/
+    +-src/
+      |-c2.ts
+    |-package.json
++-apps/
+|-package.json
+</code></pre>
+<p>The project's <code>package.json</code>:</p>
+<pre><code>{
+  &quot;name&quot;: &quot;proj&quot;,
+  &quot;scripts&quot;: {
+    ...
+    &quot;test:pkg1&quot;: &quot;npm test -w packages/pkg1&quot;,
+  },
+  &quot;workspaces&quot;: [
+    &quot;packages/*&quot;,
+    &quot;apps/*&quot;
+  ]
+}
+</code></pre>
+<p>The <code>package.json</code> inside <code>pkg1</code>:</p>
+<pre><code>{
+  &quot;name&quot;: &quot;@proj/pkg1&quot;,
+  &quot;scripts&quot;: {
+    ...
+    &quot;test&quot;: &quot;jest --config=jest.config.js&quot;,
+  },
+  &quot;devDependencies&quot;: {
+    &quot;@types/pegjs&quot;: &quot;0.10.3&quot;,
+    &quot;@types/jest&quot;: &quot;29.1.1&quot;,
+    &quot;ts-loader&quot;: &quot;9.3.1&quot;,
+    &quot;typescript&quot;: &quot;4.8.3&quot;,
+    &quot;webpack&quot;: &quot;5.74.0&quot;,
+    &quot;webpack-cli&quot;: &quot;4.10.0&quot;,
+    &quot;jest&quot;: &quot;29.1.2&quot;,
+    &quot;ts-jest&quot;: &quot;29.0.3&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;@proj/pkg2&quot;: &quot;1.0.0&quot;
+  }
+}
+</code></pre>
+<p>The test file <code>c1.test.ts</code> is:</p>
+<pre><code>import { Component1 } from &quot;@proj/pkg2&quot;;
+
+describe(&quot;some tests&quot;, () =&gt; {
+    test(&quot;a test case&quot;, () =&gt; {
+        // Arrange ...
+        // Act ...
+        // Assert ...
+    });
+});
+
+</code></pre>
+<h3>The problem</h3>
+<p>When, from the project's root, I run: <code>npm run test:pkg1</code>, I get:</p>
+<pre><code>    &gt; 1 | import { Component1 } from &quot;@proj/pkg2&quot;;
+        | ^
+      3 | describe(&quot;some tests&quot;, () =&gt; {
+      4 | test(&quot;a test case&quot;, () =&gt; {
+      5 | // Arrange
+
+      at Resolver._throwModNotFoundError (../../node_modules/jest-resolve/build/resolver.js:487:11)
+</code></pre>
+<p>Jest cannot find <code>&quot;@proj/pkg2&quot;</code>. It makes sense as it cannot understand workspaces and Jest compiles all files before running the tests. How to solve this?</p>
+",<npm><jestjs><ts-jest><npm-workspaces>,0.0,0,0,0,0,1
+49179,48432,75022915,1,0,19656462,2.0,0.0,0.0,0.0,2023-01-05T18:34:40.957,0.0,400.0,Problem with Project Dependency Tree (babel-jest/reactjs),"<p>I am fairly new to ReactJS and was messing around with Material UI in a build I'm working on. I installed the package and it completely messed up my build and the ability to open the server.</p>
+<p>When I do</p>
+<p><code>npm start</code></p>
+<p>I get the following error:</p>
+<p>`&gt; react-scripts start</p>
+<p>There might be a problem with the project dependency tree.
+It is likely not a bug in Create React App, but something you need to fix locally.</p>
+<p>The react-scripts package provided by Create React App requires a dependency:</p>
+<p>&quot;babel-jest&quot;: &quot;23.6.0&quot;</p>
+<p>Don't try to install it manually: your package manager does it automatically.
+However, a different version of babel-jest was detected higher up in the tree:</p>
+<p>/Users/peter/node_modules/babel-jest (version: 27.5.1)</p>
+<p>Manually installing incompatible versions is known to cause hard-to-debug issues.</p>
+<p>If you would prefer to ignore this check, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project.
+That will permanently disable this message but you might encounter other issues.</p>
+<p>To fix the dependency tree, try following the steps below in the exact order:</p>
+<ol>
+<li>Delete package-lock.json (not package.json!) and/or yarn.lock in your project folder.</li>
+<li>Delete node_modules in your project folder.</li>
+<li>Remove &quot;babel-jest&quot; from dependencies and/or devDependencies in the package.json file in your project folder.</li>
+<li>Run npm install or yarn, depending on the package manager you use.</li>
+</ol>
+<p>In most cases, this should be enough to fix the problem.
+If this has not helped, there are a few other things you can try:</p>
+<ol start=""5"">
+<li><p>If you used npm, install yarn (<a href=""http://yarnpkg.com/"" rel=""nofollow noreferrer"">http://yarnpkg.com/</a>) and repeat the above steps with it instead.
+This may help because npm has known issues with package hoisting which may get resolved in future versions.</p>
+</li>
+<li><p>Check if /Users/peter/node_modules/babel-jest is outside your project directory.
+For example, you might have accidentally installed something in your home folder.</p>
+</li>
+<li><p>Try running npm ls babel-jest in your project folder.
+This will tell you which other package (apart from the expected react-scripts) installed babel-jest.</p>
+</li>
+</ol>
+<p>If nothing else helps, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project.
+That would permanently disable this preflight check in case you want to proceed anyway.`</p>
+<p>When I follow the directions, nothing changes. I did clean install of npm and I created the .env file that it asked.</p>
+<p>Is my build just completely ruined?</p>
+",<reactjs><npm><node-modules><babel-jest>,0.0,0,0,0,0,1
+49363,48616,75136140,1,75141359,8659363,1.0,0.0,0.0,0.0,2023-01-16T15:08:30.287,0.0,491.0,npm install hangs on specific package only (ts-jest),"<p><a href=""https://i.stack.imgur.com/Cvon1.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/Cvon1.png"" alt=""enter image description here"" /></a></p>
+<p>I am just trying to install <code>ts-jest</code> on new project like:</p>
+<pre class=""lang-bash prettyprint-override""><code>$ mkdir test &amp;&amp; cd test
+$ npm init -y
+$ npm install ts-jest
+</code></pre>
+<p>All other packages can be installed with no error or hanging but only <code>ts-jest</code> never be installed and keep stuck at <code>sill idealTree buildDeps</code></p>
+<p>If I try to install from github directly it allows me to install package</p>
+<pre class=""lang-bash prettyprint-override""><code>$ npm install git+https://github.com/kulshekhar/ts-jest.git
+</code></pre>
+<p><strong>Here's what I have tried:</strong></p>
+<ol>
+<li>Remove package-lock and node_modules</li>
+<li>Reinstall node</li>
+<li>Change node version (16, 17, 18, etc...)</li>
+<li>Restart Mac (M1)</li>
+<li>Set registry <a href=""http://registry.npmjs.org/"" rel=""nofollow noreferrer"">http://registry.npmjs.org/</a></li>
+<li>ssh-add</li>
+<li>Install another version of tsjest (v29.0.5, v26.5.3, v25 ...)</li>
+<li>Test on another mac (Intel)</li>
+<li>Test on another Wifi</li>
+<li>Test on LAN</li>
+</ol>
+<p>But none of them did work for me.</p>
+<p><strong>Current Environment:</strong></p>
+<ul>
+<li>Mac M1 Ventura 13.0</li>
+<li>Node v16.13.2</li>
+<li>Npm 9.3.0</li>
+</ul>
+",<typescript><npm><ts-jest>,0.0,0,0,0,0,1
+49375,48628,75141686,1,0,13377063,0.0,4.0,0.0,0.0,2023-01-17T03:19:13.330,2.0,216.0,ts jest socket timeout error occurred in aws cdk init,"<p>I'm trying to install ts-jest package but a socket time error occurred.<br />
+I can't execute aws cdk init with this error.</p>
+<p>Versions:</p>
+<pre><code>npm 8.19.3
+cdk 2.60.0
+nodejs 18.13.0
+</code></pre>
+<p>I tried to:</p>
+<pre><code>1) cdk init sample-app --language typescript
+2) npm i -D ts-jest@&quot;&lt;23.10.0&quot;
+</code></pre>
+<ul>
+<li>both failed with an error message below.</li>
+</ul>
+<p>Error:</p>
+<pre><code>npm ERR! code FETCH_ERROR
+npm ERR! errno FETCH_ERROR
+npm ERR! invalid json response body at https://registry.npmjs.org/ts-jest reason: Invalid response body while trying to fetch https://registry.npmjs.org/ts-jest: aborted
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/{user}/.npm/_logs/2023-01-17T03_04_26_593Z-debug-0.log`
+</code></pre>
+<p>in log:</p>
+<pre><code> 1268 1267 verbose stack FetchError: invalid json response body at https://registry.npmjs.org/ts-jest reason: Invalid response body while trying to fetch https://registry.npmjs.org/ts-jest:       Socket timeout
+ 1269 1267 verbose stack     at Response.json (/opt/homebrew/Cellar/node@18/18.13.0_1/lib/node_modules/npm/node_modules/minipass-fetch/lib/body.js:79:13)
+ 1270 1267 verbose stack     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ 1271 1267 verbose stack     at async RegistryFetcher.packument (/opt/homebrew/Cellar/node@18/18.13.0_1/lib/node_modules/npm/node_modules/pacote/lib/registry.js:99:25)
+ 1272 1267 verbose stack     at async RegistryFetcher.manifest (/opt/homebrew/Cellar/node@18/18.13.0_1/lib/node_modules/npm/node_modules/pacote/lib/registry.js:124:23)
+ 1273 1267 verbose stack     at async [nodeFromEdge] (/opt/homebrew/Cellar/node@18/18.13.0_1/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1061:19)
+ 1274 1267 verbose stack     at async [buildDepStep] (/opt/homebrew/Cellar/node@18/18.13.0_1/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:930:11)
+ 1275 1267 verbose stack     at async Arborist.buildIdealTree (/opt/homebrew/Cellar/node@18/18.13.0_1/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:211:      7)
+ 1276 1267 verbose stack     at async Promise.all (index 1)
+ 1277 1267 verbose stack     at async Arborist.reify (/opt/homebrew/Cellar/node@18/18.13.0_1/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:154:5)
+ 1278 1267 verbose stack     at async Install.exec (/opt/homebrew/Cellar/node@18/18.13.0_1/lib/node_modules/npm/lib/commands/install.js:145:5)
+</code></pre>
+<p>Additional:
+cdk init stopped in this status:
+<code>idealTree:cdktest: sill idealTree buildDeps</code></p>
+<p>What am I missing?</p>
+<p>I also tried to:</p>
+<pre><code>npm cache clean --force
+
+npm config rm proxy
+
+npm config rm https-proxy
+
+npm cache verify
+</code></pre>
+",<npm><aws-cdk><ts-jest>,0.0,0,0,0,0,1
+49520,48773,75222226,1,0,15493878,0.0,1.0,0.0,0.0,2023-01-24T13:33:29.503,0.0,21.0,Non working repositories that are older than half a year,"<p>I have a problem that when I clone a Github repository that is older more then half a year I am not able to run it with neither <code>npm start</code> nor <code>yarn start</code>. I have been successful with one repository only and it was only a few months old. I think it might be because of the new React version. I am quite new to React so I don't know for sure.</p>
+<p>I always get an error message that looks something like this</p>
+<pre><code>There might be a problem with the project dependency tree.
+It is likely not a bug in Create React App, but something you need to fix locally.
+
+The react-scripts package provided by Create React App requires a dependency:
+
+  &quot;babel-jest&quot;: &quot;^26.6.0&quot;
+
+Don't try to install it manually: your package manager does it automatically.
+However, a different version of babel-jest was detected higher up in the tree:
+
+  /Users/username/node_modules/babel-jest (version: 27.5.1) 
+
+Manually installing incompatible versions is known to cause hard-to-debug issues.
+
+If you would prefer to ignore this check, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project.
+That will permanently disable this message but you might encounter other issues.
+
+To fix the dependency tree, try following the steps below in the exact order:
+
+  1. Delete package-lock.json (not package.json!) and/or yarn.lock in your project folder.
+  2. Delete node_modules in your project folder.
+  3. Remove &quot;babel-jest&quot; from dependencies and/or devDependencies in the package.json file in your project folder.
+  4. Run npm install or yarn, depending on the package manager you use.
+
+In most cases, this should be enough to fix the problem.
+If this has not helped, there are a few other things you can try:
+
+  5. If you used npm, install yarn (http://yarnpkg.com/) and repeat the above steps with it instead.
+     This may help because npm has known issues with package hoisting which may get resolved in future versions.
+
+  6. Check if /Users/username/node_modules/babel-jest is outside your project directory.
+     For example, you might have accidentally installed something in your home folder.
+
+  7. Try running npm ls babel-jest in your project folder.
+     This will tell you which other package (apart from the expected react-scripts) installed babel-jest.
+
+If nothing else helps, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project.
+That would permanently disable this preflight check in case you want to proceed anyway.
+
+P.S. We know this message is long but please read the steps above :-) We hope you find them helpful!
+
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+</code></pre>
+<p>Even after following all 7 steps, I am still getting the same result. What should I do??</p>
+",<reactjs><npm><create-react-app><yarnpkg><babel-jest>,0.0,0,1,0,0,1
+51031,50284,76052964,1,0,4741847,0.0,4.0,0.0,0.0,2023-04-19T09:36:31.407,5.0,285.0,Jest locking with EBUSY for every test,"<h1>Summarise the problem</h1>
+<p>I'm hitting the following issue whenever running tests in Jest for an angular project:</p>
+<pre><code>EBUSY: resource busy or locked, open 'C:\Users\&lt;username&gt;\AppData\Local\Temp\jest\ts-jest\1b\56fbb16412d9bba7787f9ba7186e4b9972adfb\e9a8ee471bc676fe755c57379268f21a1390a7a4
+
+    &gt; 1 | import 'jest-preset-angular/setup-jest';
+        | ^
+      2 |
+
+      at NgJestTransformer.TsJestTransformer.getCacheKey (../../node_modules/ts-jest/dist/legacy/ts-jest-transformer.js:341:40)
+      at Object.&lt;anonymous&gt; (../../node_modules/rxjs/dist/cjs/index.js:33:14)
+      at Object.&lt;anonymous&gt; (../../node_modules/@angular/core/fesm2015/core.mjs:7:69)
+      at Object.&lt;anonymous&gt; (../../node_modules/@angular/core/fesm2015/testing.mjs:7:1159)
+      at Object.&lt;anonymous&gt; (../../node_modules/jest-preset-angular/setup-jest.mjs:2:28)
+      at Object.&lt;anonymous&gt; (src/setup-jest.ts:1:1)
+</code></pre>
+<p>...run via the command: <code>nx run &lt;project&gt;:test</code></p>
+<p>These were working up until Monday.</p>
+<p>The tests <strong>do</strong> run if I run either:</p>
+<ul>
+<li>A individual test/test suite in rider</li>
+<li>A single test suite in the terminal via: <code>nx run &lt;project&gt;:test --project=&lt;project&gt; --testFile=src/app/services/plotly-layout.service.spec.ts</code></li>
+</ul>
+<h1>Describe what you've tried</h1>
+<p>I see these EBUSY issues a fair amount, but usually, one of the following works:</p>
+<ul>
+<li>Closing the terminal I'm working in</li>
+<li>Closing Rider</li>
+<li>Restarting my computer</li>
+</ul>
+<p>None of these are working.</p>
+<p>Given that the lock was on the <code>Temp</code> folder, I've tried deleting the entire <code>Temp/jest</code> folder, but it just regenerates the <code>56fbb16412d9bba7787f9ba7186e4b9972adfb\e9a8ee471bc676fe755c57379268f21a1390a7a4</code> file and locks immediately on the next test run.</p>
+<p>Has anyone come across this before? My assumption is that <code>jest</code> is parallelizing test suites where it shouldn't be, but I don't know why it would have suddenly started.</p>
+",<angular><typescript><npm><ts-jest>,0.0,0,0,0,0,1
+52392,51645,76763599,1,0,22282718,1.0,0.0,0.0,0.0,2023-07-25T14:10:52.633,0.0,21.0,How to test non-exported Typescript modules?,"<p>The compiler accepts my current solution, so nothing is marked red, but the tests still fail: &quot;ReferenceError: myFunction is not defined&quot;.</p>
+<p>I would like to test the following module in TypeScript:
+File1.ts:</p>
+<pre><code>module MyModule {
+  export function myFunction(): string {
+    return &quot;Hello, World!&quot;;
+  }
+}
+</code></pre>
+<p>This is how the test currently looks:
+File1.test.ts:</p>
+<pre><code>module MyModule {
+  describe('Test1', () =&gt; {
+    test('equal', () =&gt; {
+      expect(myFunction()).toBe(&quot;Hello, World!&quot;);
+    });
+  });
+}
+</code></pre>
+<p>Both files are specified in the tsconfig.json:</p>
+<pre><code>&quot;files&quot;:[
+  &quot;File1.test.ts&quot;,
+  &quot;File1.ts&quot;
+]
+</code></pre>
+<p>I would be very grateful for any advice and help!</p>
+",<typescript><unit-testing><npm><babel-jest>,0.0,0,0,0,0,1
+53331,52584,77282707,1,0,5598038,2.0,0.0,0.0,0.0,2023-10-12T17:29:03.613,0.0,63.0,How to mock console.log in Jest JS,"<p>I am doing testing using JEST in npm. Below is scenarios</p>
+<p>I have a TestScript.js file</p>
+<pre><code>function someComplexFunction() {
+  console.log(&quot;some important message&quot;);
+}
+
+module.exports = someComplexFunction
+</code></pre>
+<p>to test this function in there in TestScript.test.js file</p>
+<pre><code>const someComplexFunction = require(&quot;./TestScript&quot;)
+
+
+test('Console log should have been called', () =&gt; {
+    const logSpy = jest.spyOn(console, 'log');
+
+    someComplexFunction();
+    
+    expect(logSpy).toHaveBeenCalledWith('some important message');
+    
+    logSpy.mockRestore();
+});
+</code></pre>
+<p>when I am runnig the test I getting failure</p>
+<blockquote>
+<p>npm test</p>
+</blockquote>
+<p>Console log should have been called</p>
+<pre><code>    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: &quot;some important message&quot;
+
+    Number of calls: 0
+
+      32 |      someComplexFunction();
+      33 |
+    &gt; 34 |      expect(logSpy).toHaveBeenCalledWith('some important message');
+         |                     ^
+      35 |
+      36 |      logSpy.mockRestore();
+      37 | });
+
+      at Object.toHaveBeenCalledWith (src/test/TestScript.test.js:34:17)
+</code></pre>
+<p>Please let me know what I am making mistake, why mocking is not working.</p>
+<p>I tried changing the spyOn function but still not working, also tried with warn but still no luck.</p>
+",<npm><jestjs><jest-mock-extended>,0.0,0,0,0,0,1
